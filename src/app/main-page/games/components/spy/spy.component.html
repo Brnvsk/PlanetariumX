@@ -1,0 +1,59 @@
+<div class="wrapper">
+    <div class="info">
+        <button id="exit" (click)="forwardGames()">
+        <img src="assets/images/log-out.png" alt="#">
+      </button>
+        <div class="content">
+            <h3>Игра: Инопланетянин шпион</h3>
+            <span>Как играть?</span>
+            <p>Эта игра, где вам небходимо найти инопланетянина, который попытался походить на других. Как только заметите его - нажмите, чтобы он исчез</p>
+        </div>
+    </div>
+
+    <div class="game" *ngIf="stage == Stages.first">
+        <div class="stars">
+            <img src="assets/images/AlienStar.png" alt="#">
+            <img src="assets/images/AlienStarStroke.png" alt="#">
+            <img src="assets/images/AlienStarStroke.png" alt="#">
+        </div>
+        <div class="aliens" (click)="findSpy($event)">
+            <ng-container *ngFor="let item of numberAliens">
+                <img *ngIf="item === 3;else elseBlock" src="assets/images/greenAlienSpy.png" alt="">
+                <ng-template #elseBlock></ng-template>
+                <img class="whithout-spy" src="assets/images/greenAlien.png" alt="">
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="game" *ngIf="stage == Stages.second">
+        <div class="stars">
+            <img src="assets/images/AlienStar.png" alt="#">
+            <img src="assets/images/AlienStar.png" alt="#">
+            <img src="assets/images/AlienStarStroke.png" alt="#">
+        </div>
+        <div class="aliens" (click)="findSpy($event)">
+            <ng-container *ngFor="let item of numberAliens">
+                <img *ngIf="item === 10;else elseBlock" src="assets/images/orangeAlienSpy.png" alt="">
+                <ng-template #elseBlock></ng-template>
+                <img class="whithout-spy" src="assets/images/orangeAlien.png" alt="">
+            </ng-container>
+        </div>
+    </div>
+    <div class="game" *ngIf="stage === Stages.third">
+        <div class="stars">
+            <img src="assets/images/AlienStar.png" alt="#">
+            <img src="assets/images/AlienStar.png" alt="#">
+            <img src="assets/images/AlienStar.png" alt="#">
+        </div>
+        <div class="aliens" (click)="findSpy($event)">
+            <ng-container *ngFor="let item of numberAliens">
+                <img *ngIf="item === 15;else elseBlock" src="assets/images/purpleAlienSpy.png" alt="">
+                <ng-template #elseBlock></ng-template>
+                <img class="whithout-spy" src="assets/images/purpleAlien.png" alt="">
+            </ng-container>
+        </div>
+    </div>
+
+
+
+</div>

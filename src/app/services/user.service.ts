@@ -1,0 +1,44 @@
+import { ObserversModule } from '@angular/cdk/observers';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, filter, map, of, shareReplay } from 'rxjs';
+import { User } from '../shared/types/user.type';
+import { ApiRoutes } from '../config/network.config';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {  
+  private userStore$ = new BehaviorSubject<User | null>(null)
+  public user$: Observable<User | null>
+
+  constructor(private http: HttpClient) {
+    this.user$ = this.userStore$.asObservable().pipe(shareReplay(1))
+  }
+
+  public getUserByToken(token: string | null) {
+    if (!token) {
+      this.setUser(null)
+      return;
+    }
+    this.http.post<{ user: User | null }>(`${ApiRoutes.users.login}/token`, {
+      token
+    })
+    .pipe(map(res => res.user), shareReplay(1))
+    .subscribe(res => {
+      this.setUser(res)
+    })
+  }
+
+  public setUser(user: User | null) {
+    this.userStore$.next(user);
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+
+  public logout() {
+    this.setUser(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    return of(null)
+  }
+}

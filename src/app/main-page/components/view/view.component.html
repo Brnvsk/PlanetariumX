@@ -1,0 +1,132 @@
+<section>
+    <div class="view-wrapper">
+
+        <div class="leftside">
+            <h3>Мобильный планетарий<br/> в <span>Минске</span></h3>
+            <span>Полет к звездам — реальность</span>
+            <button mat-flat-button color="primary" (click)="forwardSession()">Выбрать сеанс</button>
+        </div>
+
+        <div class="rightside">
+            <img src="/assets/images/humanOnPlanet.png" alt="">
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="info-wrapper">
+        <span class="info-wrapper-title">В нашем учебном центре можно:</span>
+        <div class="info-cards">
+            <div class="info-card UFO">
+                <img src="assets/images/UFO.png" alt="">
+                <span>Посетить музей НЛО</span>
+            </div>
+
+            <div class="info-card Human">
+                <img id="RunningHuman" src="assets/images/RunningHuman.png" alt="">
+                <span>Ощутить себя настоящим космонавтом</span>
+            </div>
+
+
+            <div class="info-card Telescope">
+                <img src="assets/images/Telescope.png" alt="">
+                <span>Увидеть звезды</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="rental-wrapper">
+        <span class="rental-wrapper-title">Сейчас в планетарии</span>
+        <div class="rental-more">
+            <img src="assets/images/calendar.png" alt="">
+            <span>Расписание сеансов</span>
+        </div>
+        <div class="rental-slides">
+            <div class="rental-slide">
+                <img src="assets/images/interstellarPict.png" alt="">
+                <h3>Интерстеллар</h3>
+                <span>Фантастика, драма, приключения</span>
+                <button mat-flat-button color="primary">Купить билет</button>
+            </div>
+            <div class="rental-slide">
+                <img src="assets/images/starWarsPict.png" alt="">
+                <h3>Интерстеллар</h3>
+                <span>Фантастика, драма, приключения</span>
+                <button mat-flat-button color="primary">Купить билет</button>
+            </div>
+            <div class="rental-slide">
+                <img src="assets/images/oblivionPict.png" alt="">
+                <h3>Интерстеллар</h3>
+                <span>Фантастика, драма, приключения</span>
+                <button mat-flat-button color="primary">Купить билет</button>
+            </div>
+            <div class="rental-slide">
+                <img src="assets/images/littlePrincePict.png" alt="">
+                <h3>Интерстеллар</h3>
+                <span>Фантастика, драма, приключения</span>
+                <button mat-flat-button color="primary">Купить билет</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="news-wrapper">
+        <span class="news-wrapper-title">Новости планетария</span>
+        <div class="news"></div>
+        <div class="more-news">
+            <a (click)="news()">Больше новостей</a>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="questions-wrapper">
+        <span class="questions-wrapper-title">Часто задаваемые вопросы:</span>
+        <div class="questions-content">
+            <div class="questions-content-accordion">
+                <mat-accordion>
+                    <ng-container *ngFor="let item of questionsView">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    {{item.ask}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p>{{item.content}}</p>
+                        </mat-expansion-panel>
+                    </ng-container>
+                </mat-accordion>
+            </div>
+            <div class="nearAccordion"><img src="assets/images/nearAccordion.png" alt=""></div>
+
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="wrapper-customQuestion">
+        <div class="customQuestion-content">
+            <h3>Остались вопросы?</h3>
+            <mat-form-field appearance="outline">
+                <mat-label>Ваша почта</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Вопрос</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="text">
+                <mat-label>Опишите вашу проблему</mat-label>
+                <textarea matInput></textarea>
+            </mat-form-field>
+            <button mat-flat-button color="primary">Отправить</button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,33 @@
+:host {
+
+  .wrapper {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 160px;
+    .header {
+      padding-left: 50px;
+      color: #6858DC;
+
+    }
+    .wrapper-content {
+      display: flex;
+      flex-direction: row;
+      padding-top: 50px;
+      .workStation {
+        width: 50%;
+        height: 80%;
+        padding-right: 50px;
+      }
+      .text {
+        padding-top: 50px;
+        p {
+          padding-top: 20px;
+          line-height: 30px;
+        }
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

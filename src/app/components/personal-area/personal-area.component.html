@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <h3>/ Личный кабинет</h3>
+    <div *ngIf="user$ | async as user" class="wrapper-view">
+        <div class="text">
+            <h3>Добро пожаловать, {{user.login}} !</h3>
+            <p>Текущая скидка — <span>{{ 20 }}%</span></p>
+        </div>
+        <img [src]="getAvatar(user)" alt="">
+
+        <div class="btn">
+            <button mat-flat-button color="primary" (click)="logout()">Выйти</button>
+        </div>
+    </div>
+</div>

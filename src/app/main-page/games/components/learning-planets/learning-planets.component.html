@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <div class="info">
+        <button id="exit" (click)="forwardGames()">
+      <img src="assets/images/log-out.png" alt="#">
+    </button>
+        <div class="content">
+            <h3>Игра: Учим Планеты</h3>
+            <span>Как играть?</span>
+            <p>Эта игра, где вам небходимо по картинке, определить, что это за планета и перетащить блок с названием в пустой блок под ней. Если вы ошибетесь, придется начинаться с самого начала.</p>
+        </div>
+    </div>
+
+    <div class="game">
+        <div class="planets">
+            <div class="planet" *ngFor="let item of namePlanets">
+                <img *ngIf="item.name === saturn;else elseBlock" (click)="selectedPlanet($event)" [ngClass]="{'saturn': true}" src="{{item.img}}" alt="">
+                <ng-template #elseBlock>
+                    <img (click)="selectedPlanet($event)" src="{{item.img}}" alt="">
+                </ng-template>
+                <button class="names-all" [ngClass]="{'btnHidden': true}" disabled mat-raised-button color="primary">{{item.name}}</button>
+            </div>
+        </div>
+
+        <div class="names">
+            <button *ngFor="let item of numberNames" [ngClass]="{'btnHidden': false}" [disabled]="btnDisabled" mat-raised-button [style.backgroundColor]="item.status === colorBtn.selected ?  '#82ED2E' : (item.status === colorBtn.fail ? '#ED2E2E' : '#494949')" [style.color]="item.status === colorBtn.selected ? '#000000' : '#FFFFFF'"
+                (click)="selectedName($event)">
+      {{item.name}}
+      </button>
+        </div>
+    </div>
+
+</div>

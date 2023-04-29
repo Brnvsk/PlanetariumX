@@ -1,0 +1,81 @@
+<div class="wrapper" *ngIf="show$ | async as show">
+    <div class="leftside">
+        <img [src]="'assets/images/' + show.posterSrc" alt="">
+        <div class="leftside-description">
+            <div class="text">
+                <h4>Описание</h4>
+                <span>{{ show.descr }}</span>
+            </div>
+            <div class="text">
+                <h4>Режиссер</h4>
+                <span>Кристофер Нолан</span>
+            </div>
+            <div class="text">
+                <h4>Жанр</h4>
+                <span>{{show.tags}}</span>
+            </div>
+            <div class="text">
+                <h4>Страна</h4>
+                <span>США, Великобритания, Канада</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="rightside">
+        <div class="rightside-header">
+            <span class="title">{{show.title}}</span>
+            <div class="header-info">
+                <div class="time">
+                    <img src="assets/images/clock.png" alt="">
+                    <span>169 мин.</span>
+                </div>
+                <div class="room">
+                    <span>зал 1</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filters" [formGroup]="filtersForm">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Выберите дату</mat-label>
+                <input formControlName="date" matInput [matDatepicker]="picker">
+                <mat-hint>ММ/ДД/ГГ</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-radio-group class="timeslots" formControlName="time" *ngIf="timeSlotsForDate.length > 0; else noTimeSlots">
+                <mat-radio-button class="timeslot" *ngFor="let timeSlot of timeSlotsForDate" [value]="timeSlot.time">
+                    {{ timeSlot.time }}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class="seat-map">
+
+            <!-- <div class="seat-map-svg" #circleContainer (click)="onMapClick($event)"></div> -->
+
+            <svg class="seat-map-svg" #circleContainer (click)="onMapClick($event)"></svg>
+
+        </div>
+
+        <div class="booking-submit">
+            <div class="seat-examples">
+
+            </div>
+
+            <div class="price">
+                <span>{{ 50 }} р.</span>
+            </div>
+
+            <button (click)="onBook()">Забронировать</button>
+        </div>
+
+    </div>
+
+</div>
+
+<ng-template #noTimeSlots>
+    <span>Нет доступного времени для выбранной даты.</span>
+</ng-template>

@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="title">
+        <span>На каждой планете тебя ждет особенное задание!<br> Выбери любую, которая тебе понравилась больше всего!</span>
+    </div>
+    <div class="select-games" (mouseover)="showAvatar($event)" (mouseout)="hideAvatar($event)">
+        <a routerLink="solarSystem" class="planet solarSystemGame">
+            <img src="assets/images/solarSystemGame.png" data-tag="solar" alt="#">
+        </a>
+        <a routerLink="barleyBreak" class="planet barleyBreakGame">
+            <img class="" src="assets/images/barleyBreakGame.png" data-tag="barley">
+        </a>
+        <a routerLink="cardMemory" class="planet memoGame">
+            <img class="" src="assets/images/memoGame.png" data-tag="memo">
+        </a>
+        <a routerLink="spy" class="planet visualGame">
+            <img class="" src="assets/images/visualGame.png" data-tag="visual">
+        </a>
+        <a routerLink="learningPlanets" class="planet learnPlanetsGame">
+            <img class="" src="assets/images/learnPlanetsGame.png" data-tag="learn" alt="#">
+        </a>
+
+        <img [style.left.px]="bonstickPos.left" [style.top.px]="bonstickPos.top" class="bonstick" #bonstick [src]="bonstickSrc">
+    </div>
+</div>

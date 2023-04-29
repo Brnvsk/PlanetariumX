@@ -1,0 +1,41 @@
+<div class="login-container">
+    <div class="wrapper">
+        <h3>/ Вход</h3>
+        <form class="create-account-form" [formGroup]="form">
+            <mat-form-field appearance="fill">
+                <mat-label>E-mail</mat-label>
+                <input matInput [formControl]="form.controls.email">
+                <mat-error *ngIf="form.controls.email.hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls.email.hasError('maxlength')">
+                    Password length must be less then 19 chars
+                </mat-error>
+                <mat-error *ngIf="form.controls.email.hasError('invalid')">
+                    Password can include latin letters numbers
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Пароль</mat-label>
+                <input matInput [formControl]="form.controls.password" [type]="showPaswword ? 'text' : 'password'" visibility>
+                <mat-icon matSuffix (click)="togglePasswordVisibility()" class="material-symbols-outlined">
+                    {{showPaswword?'visibility_off':'visibility'}}
+                </mat-icon>
+                <mat-error *ngIf="form.controls.password.hasError('required')">
+                    Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls.password.hasError('minlength')">
+                    Password length must be at list 8 chars
+                </mat-error>
+                <mat-error *ngIf="form.controls.password.hasError('invalid')">
+                    Password must include latin letters, numbers and special chars
+                </mat-error>
+            </mat-form-field>
+        </form>
+        <div class="btn-AndRegistr">
+            <button type="submit" mat-flat-button color="primary" (click)="login()">Далее</button>
+            <span>У вас нет аккаунта?<a (click)="goToRegistration()"> Регистрация</a></span>
+        </div>
+        <img id="loginAndRegisterPicture" src="assets/images/loginAndRegisterPicture.png" alt="">
+    </div>
+</div>

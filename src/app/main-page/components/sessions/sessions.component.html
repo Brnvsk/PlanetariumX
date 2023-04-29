@@ -1,0 +1,66 @@
+<div class="sessions">
+    <!--
+  <p>Selected date: {{selected}}</p> -->
+    <h3>/ Сеансы</h3>
+    <div class="sessions-content">
+        <div class="filter-sessions">
+            <span>Дата</span>
+            <div class="filter-sessions-calendar">
+                <div class="calendar-content">
+                    <ul class="filter-list">
+                        <li>ПН</li>
+                        <li>ВТ</li>
+                        <li>СР</li>
+                        <li>ЧТ</li>
+                        <li>ПТ</li>
+                        <li>СБ</li>
+                        <li>ВС</li>
+                    </ul>
+                    <ul class="filter-list number" (click)="chooseDay($event)">
+                        <li>19</li>
+                        <li>20</li>
+                        <li>21</li>
+                        <li>22</li>
+                        <li>23</li>
+                        <li>24</li>
+                        <li>25</li>
+                    </ul>
+                </div>
+                <img src="assets/images/ArrowDown.png" alt="" [matMenuTriggerFor]="menu">
+
+                <mat-menu #menu="matMenu" overlapTrigger="false">
+                    <mat-card class="demo-inline-calendar-card" (click)="$event.stopPropagation()">
+                        <mat-calendar></mat-calendar>
+                    </mat-card>
+                </mat-menu>
+
+            </div>
+            <div class="filter-sessions-time" *ngIf="chooseSessions.length !== 0">
+                <span>Время</span>
+
+                <ng-container *ngFor="let date of allDate">
+                    <mat-checkbox (change)="choiceTime($event)">
+                        {{date.item.toLocaleTimeString([], {hour: 'numeric' , minute: '2-digit'})}}
+                    </mat-checkbox>
+                </ng-container>
+
+
+            </div>
+
+        </div>
+        <div class="choice-sessions">
+
+            <div class="rental-slides">
+                <ng-container *ngFor="let show of shows$ | async">
+                    <div class="rental-slide">
+                        <img [src]="'assets/images/' + show.posterSrc" alt="Poster picture">
+                        <span class="title">{{show.title}}</span>
+                        <span>{{show.tags}}</span>
+                        <a [routerLink]="['show', show.id]" mat-flat-button color="primary">Купить билет</a>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="endgame" *ngIf="!cardMemory;else elseBlock">
+  <h1 mat-dialog-title>Ура! Ты победил!</h1>
+  <div mat-dialog-content>
+    <button mat-raised-button (click)="forwardGames()" color="primary">Вернуться к играм</button>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div class="startGame">
+    <h3 mat-dialog-title>Карточки будут видны 2 секунды</h3>
+    <div mat-dialog-content>
+      <span>До начала игры</span>
+      <span class="number" >{{seconds}}</span>
+      <mat-spinner class="load"></mat-spinner>
+    </div>
+  </div>
+</ng-template>
+
+

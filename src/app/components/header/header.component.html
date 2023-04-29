@@ -1,0 +1,61 @@
+<header class="wrapper">
+    <div class="logo"><img routerLink="/app" src="assets/images/logo.png" alt="#"></div>
+    <div class="header-progress-navigation">
+        <div class="header-progress">
+            <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar>
+            <img src="assets/images/Vector.png" alt="" class="star" color="#1F232E">
+        </div>
+
+        <div class="header-navigation">
+            <a id="first" routerLink="/app/sessions" (click)="changeProgress($event)">Сеансы</a>
+            <a routerLink="/app/about" (click)="changeProgress($event)">О нас</a>
+            <a routerLink="/app/news" (click)="changeProgress($event)">Новости</a>
+            <a routerLink="/app/games" id="last" (click)="changeProgress($event)">Игры</a>
+        </div>
+        <!-- <div class="header-navigation" >
+      <a id="first" (click)="forwardSession()"  (click)="changeProgress($event)" >Сеансы</a>
+      <a (click)="forwardContacts()" (click)="changeProgress($event)">О нас</a>
+      <a (click)="forwardNews()" (click)="changeProgress($event)">Новости</a>
+      <a (click)="forwardGames()" id="last" (click)="changeProgress($event)">Игры</a>
+    </div> -->
+    </div>
+    <div class="logIn">
+
+        <a class="login-button" *ngIf="user$ | async as user; else noUser" routerLink="/personal">
+            Кабинет
+        </a>
+        <ng-template #noUser>
+            <a class="login-button" routerLink="/login">Вход</a>
+        </ng-template>
+
+    </div>
+    <div class="burger">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+
+        <a id="first"  routerLink="/app/sessions" (click)="changeProgress($event)" >Сеансы</a>
+      </button>
+            <button mat-menu-item>
+
+        <a routerLink="/app/about" (click)="changeProgress($event)">О нас</a>
+      </button>
+            <button mat-menu-item>
+
+        <a routerLink="/app/news" (click)="changeProgress($event)">Новости</a>
+      </button>
+            <button mat-menu-item>
+
+        <a id="last" (click)="changeProgress($event)">Игры</a>
+      </button>
+            <button mat-menu-item *ngIf="userRoles === roleUsers.NONAME; else flagLogin" (click)="login()">Вход</button>
+            <ng-template #flagLogin>
+                <button mat-menu-item (click)="personal()">Кабинет</button>
+            </ng-template>
+        </mat-menu>
+    </div>
+
+
+</header>

@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <div class="info">
+    <button (click)="forwardGames()">
+      <img src="assets/images/log-out.png" alt="#">
+    </button>
+    <div class="content">
+      <h3>Игра Солнечная система</h3>
+      <span>Как играть?</span>
+      <p>Игроку нужно перемещать планеты в свободные ячейки в правильном порядке, чтобы собрать Солнечную систему.</p>
+    </div>
+  </div>
+
+  <div class="game" >
+    <div class="sun-system">
+      <img id="sun" src="assets/images/sun.png" alt="">
+
+    </div>
+    <div class="planets" >
+
+      <div cdkDropListGroup class="dragAndDrop">
+        <div class="example-container">
+          <div
+          cdkDropListOrientation="horizontal"
+          cdkDropList
+          [cdkDropListData]="basket"
+          class="example-list first"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box end"  *ngFor="let item of basket" cdkDrag >
+            <img [ngClass]="{'fail': item.visibility}" src="{{item.img}}" alt="" >
+          </div>
+        </div>
+        <div class="example-container ">
+
+          <div
+            cdkDropListOrientation="horizontal"
+            cdkDropList
+            [cdkDropListData]="items"
+            class="example-list second"
+            cdkDropListSortingDisabled
+            [cdkDropListEnterPredicate]="noReturnPredicate"
+            >
+            <div class="example-box start" *ngFor="let item of tempPlanets"  >
+              <img src="{{item.img}}" [cdkDragDisabled]="tt" (mouseover)="checkBeforeDrag($event)" cdkDrag >
+              <span >{{item.name}}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

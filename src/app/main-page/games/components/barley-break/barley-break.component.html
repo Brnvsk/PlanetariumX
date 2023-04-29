@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <div class="info">
+    <button (click)="forwardGames()">
+      <img src="assets/images/log-out.png" alt="#">
+    </button>
+    <div class="content">
+      <h3>Игра Пятнашки: Космос</h3>
+      <span>Как играть?</span>
+      <p>Игроку нужно перемещать блоки с места на место, менять местами и вытворять разные чудеса, чтобы картинка снова стала цельной и правильной.</p>
+    </div>
+  </div>
+  <div class="game">
+    <table>
+      <tr *ngFor="let item of items">
+        <td *ngFor="let i of item.tr" >
+          <div *ngIf="i !== 404; else elseBlock">
+            <img class="pazle" (click)="delEl($event)" src="assets/images/pazle{{i}}.png" alt="">
+          </div>
+          <ng-template #elseBlock><div><img class="pazle" (click)="delEl($event)" src="" alt=""></div></ng-template>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
