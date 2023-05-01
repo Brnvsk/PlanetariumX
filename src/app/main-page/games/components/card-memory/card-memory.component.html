@@ -1,34 +1,34 @@
 <div class="wrapper">
-  <div class="info">
-    <button id="exit" (click)="forwardGames()">
+    <div class="info">
+        <button (click)="forwardGames()" class="logOut">
+
       <img src="assets/images/log-out.png" alt="#">
     </button>
-    <div class="content">
-      <h3>Игра Карточки Памяти: Космос</h3>
-      <span>Как играть?</span>
-      <p>Эта игра показывает огромное множество космических тел, существующих в нашем уголке вселенной.Исследуйте пространство, не вставая с кресла. Ваша задача открыть все карточки. На них будут изображены астероиды, планеты, звезды, юные астронавты, космические станции и так далее. Вы должны открыть картинки, только обязательно две одинаковые, тогда они вернутся в прежнее положение.</p>
-      <button mat-button (click)="startGame()" >Начать игру</button>
+        <div class="content">
+            <h3>Игра Карточки Памяти: Космос</h3>
+            <span>Как играть? 
+        <span>Как играть? <button (click)="playAudio();" class="sound"> <img src=" assets/icons/play.svg" alt=""></button></span></span>
+            <p>Эта игра показывает огромное множество космических тел, существующих в нашем уголке вселенной.Исследуйте пространство, не вставая с кресла. Ваша задача открыть все карточки. На них будут изображены астероиды, планеты, звезды, юные астронавты,
+                космические станции и так далее. Вы должны открыть картинки, только обязательно две одинаковые, тогда они вернутся в прежнее положение.</p>
+            <button mat-button (click)="startGame()">Начать игру</button>
+        </div>
     </div>
-  </div>
 
-  <div class="game">
-    <table>
-      <tr *ngFor="let item of items">
-        <td *ngFor="let i of item.tr">
-          <div *ngIf="!tempSeconds;else elseBlock">
-            <img class="cards" (click)="turnCard($event)"  src="{{i.mystery}}" alt="">
-          </div>
-          <ng-template #elseBlock>
-            <div>
-              <img class="cards"  src="{{i.value}}" alt="">
-            </div>
-          </ng-template>
-        </td>
-      </tr>
-    </table>
-  </div>
+    <div class="game">
+        <table>
+            <tr *ngFor="let item of items">
+                <td *ngFor="let i of item.tr">
+                    <div *ngIf="!tempSeconds;else elseBlock">
+                        <img class="cards" (click)="turnCard($event)" src="{{i.mystery}}" alt="">
+                    </div>
+                    <ng-template #elseBlock>
+                        <div>
+                            <img class="cards" src="{{i.value}}" alt="">
+                        </div>
+                    </ng-template>
+                </td>
+            </tr>
+        </table>
+    </div>
 
 </div>
-
-
-

@@ -8,25 +8,15 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 const routes: Routes = [
   {
+    path: 'solar', 
+    loadChildren: () => import('./solar/solar.module').then(m => m.SolarModule) 
+  },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'main', loadChildren: () => import('./main/main.module').then(m => m.MainModule) },
+  {
     path: '',
-    redirectTo: 'app',
+    redirectTo: 'main',
     pathMatch: 'full'
-  },
-  {
-    path: 'app',
-    loadChildren: () => import('./main-page/main-page.module').then(m => m.MainPageModule)
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'registration',
-    component: RegistrationComponent
-  },
-  {
-    path: 'personal',
-    component: PersonalAreaComponent
   },
   {
     path: '**',

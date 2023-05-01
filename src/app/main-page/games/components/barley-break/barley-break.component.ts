@@ -10,7 +10,7 @@ import { DialogWindowComponent } from '../dialog-window/dialog-window.component'
 })
 export class BarleyBreakComponent {
 
-
+  private audio = new Audio("assets/audio/barley.mp3");
   public numberPazles = [1,2,3,4,5,6,7,8].sort(()=>Math.random()-0.5);
   public items = [
     {
@@ -108,5 +108,12 @@ export class BarleyBreakComponent {
   endGame() {
     this.openDialog();
   }
+  playAudio(){ 
+    this.audio.pause();
+    this.audio.currentTime = 0;
+    this.audio.play();
+
+  }
+ 
 
 }

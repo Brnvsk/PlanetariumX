@@ -1,5 +1,5 @@
 <header class="wrapper">
-    <div class="logo"><img routerLink="/app" src="assets/images/logo.png" alt="#"></div>
+    <div class="logo"><img routerLink="/main/app" src="assets/images/logo.png" alt="#"></div>
     <div class="header-progress-navigation">
         <div class="header-progress">
             <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar>
@@ -7,9 +7,9 @@
         </div>
 
         <div class="header-navigation">
-            <a id="first" routerLink="/app/sessions" (click)="changeProgress($event)">Сеансы</a>
-            <a routerLink="/app/about" (click)="changeProgress($event)">О нас</a>
-            <a routerLink="/app/news" (click)="changeProgress($event)">Новости</a>
+            <a id="first" routerLink="app/sessions" (click)="changeProgress($event)">Сеансы</a>
+            <a routerLink="app/news" (click)="changeProgress($event)">Новости</a>
+            <a routerLink="/solar" (click)="changeProgress($event)">Солнечная система</a>
             <a routerLink="/app/games" id="last" (click)="changeProgress($event)">Игры</a>
         </div>
         <!-- <div class="header-navigation" >
@@ -21,11 +21,11 @@
     </div>
     <div class="logIn">
 
-        <a class="login-button" *ngIf="user$ | async as user; else noUser" routerLink="/personal">
+        <a class="login-button" *ngIf="user$ | async as user; else noUser" routerLink="./personal">
             Кабинет
         </a>
         <ng-template #noUser>
-            <a class="login-button" routerLink="/login">Вход</a>
+            <a class="login-button" routerLink="./login">Вход</a>
         </ng-template>
 
     </div>

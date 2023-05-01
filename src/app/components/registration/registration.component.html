@@ -39,10 +39,11 @@
                     Password must include latin letters, numbers and special chars
                 </mat-error>
             </mat-form-field>
+
         </form>
         <div class="btn-AndRegistr">
             <button mat-flat-button color="primary" (click)="next($event)">Далее</button>
-            <span>Уже есть аккаунт?<a (click)="login()"> Войти</a></span>
+            <span>Уже есть аккаунт?<a routerLink="../login"> Войти</a></span>
         </div>
         <img id="loginAndRegisterPicture" src="assets/images/loginAndRegisterPicture.png" alt="">
     </div>
@@ -61,7 +62,7 @@
             <button [disabled]="activeAvatarIndex === null" [class.disabled]="activeAvatarIndex === null" mat-flat-button color="primary" (click)="next($event)">
               Далее
             </button>
-            <span>Уже есть аккаунт?<a (click)="login()"> Войти</a></span>
+            <span>Уже есть аккаунт?<a routerLink="../login"> Войти</a></span>
         </div>
         <img id="chooseAvatarPicture" src="assets/images/LookingHuman.png" alt="">
     </div>
@@ -83,7 +84,7 @@
 
         <div class="btn-AndLogin">
             <button mat-flat-button color="primary" (click)="next($event)">Зарегистрироваться</button>
-            <span>Уже есть аккаунт?<a (click)="login()"> Войти</a></span>
+            <span>Уже есть аккаунт?<a routerLink="../login"> Войти</a></span>
 
         </div>
         <img id="chooseNewsPicture" src="assets/images/waitingHuman.png" alt="">

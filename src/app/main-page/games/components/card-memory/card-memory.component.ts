@@ -9,6 +9,7 @@ import { DialogWindowComponent } from '../dialog-window/dialog-window.component'
   styleUrls: ['./card-memory.component.scss']
 })
 export class CardMemoryComponent implements AfterViewInit {
+  private audio = new Audio("assets/audio/solar.mp3");
 
   public tempSeconds: boolean = false;
   public numberCards = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].sort(()=>Math.random()-0.5);
@@ -95,7 +96,13 @@ export class CardMemoryComponent implements AfterViewInit {
     })
     dialogRef.afterOpened().subscribe(result => this.forward.change())
   }
+  playAudio(){ 
+    this.audio.pause();
+    this.audio.currentTime = 0;
+    this.audio.play();
 
+  }
+ 
   finishGame() {
     let cards = document.querySelectorAll('.cards');
     let result = Array.from(cards).find(val => val.getAttribute('src') === 'assets/images/mysteryCard.png');
