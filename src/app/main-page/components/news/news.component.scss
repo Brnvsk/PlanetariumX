@@ -1,66 +1,111 @@
 :host {
-
-  .wrapper {
-    width: 80%;
-    margin: 0 auto;
-    h3 {
-      padding-left: 50px;
-      color: #6858DC;
-      padding-bottom: 50px;
-    }
-    .wrapper-content {
-
-      .wrapper-content-view {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        max-height: 400px;
-        padding-bottom: 50px;
-        .newsSpace {
-          width: 55%;
-          border-radius: 30px 0 0 0;
-        }
-        .title {
-          width: 40%;
-          background-color: #131617;
-          font-size: 12px;
-          border-radius: 0 20px 0 0;
-          padding: 10px 15px 15px 15px;
-          position: relative;
-          .more {
+    .wrapper {
+        width: 80%;
+        margin: 0 auto;
+        position: relative;
+        .read-more {
+            top: 0;
             position: absolute;
-            bottom: 15px;
-            font-size: 14px;
-            cursor: pointer;
-            color: #6858DC;
-          }
-          .more:hover {
-            border-bottom: 1px solid #6858DC;
-          }
-          .new-tags {
-            color: #E7D795;
-            padding: 10px 0;
-            font-size: 12px;
-            img {
-              padding-right: 5px;
+            width: 900px;
+            height: 700px;
+            left: 10%;
+            background-color: #131617;
+            padding: 50px 50px 50px 50px;
+            .exit {
+                right: 10px;
+                top: 10px;
+                position: absolute;
+                cursor: pointer;
             }
-          }
+            .picture-more {
+                width: 650px;
+                height: 400px;
+                float: left;
+                margin: 7px 20px 20px 0;
+            }
+            .title {
+                padding-left: 0;
+                color: #FFFFFF;
+                font-style: 20px;
+            }
         }
-      }
-      .newsA {
-        display: flex;
-        flex-direction: row;
-        gap: 2%;
-        padding-bottom: 40px;
-        flex-wrap: wrap;
-
-      }
+        h3 {
+            padding-left: 50px;
+            color: #6858DC;
+            padding-bottom: 50px;
+        }
+        .wrapper-content {
+            .wrapper-content-view {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                max-height: 400px;
+                padding-bottom: 50px;
+                .newsSpace {
+                    width: 55%;
+                    border-radius: 30px 0 0 0;
+                }
+                .title {
+                    width: 40%;
+                    background-color: #131617;
+                    font-size: 12px;
+                    border-radius: 0 20px 0 0;
+                    padding: 10px 15px 15px 15px;
+                    position: relative;
+                    .more {
+                        position: absolute;
+                        bottom: 15px;
+                        font-size: 14px;
+                        cursor: pointer;
+                        color: #6858DC;
+                    }
+                    .more:hover {
+                        border-bottom: 1px solid #6858DC;
+                    }
+                }
+            }
+            .newsA {
+                display: flex;
+                flex-direction: row;
+                gap: 2%;
+                padding-bottom: 40px;
+                flex-wrap: wrap;
+                .new {
+                    width: 23%;
+                    display: flex;
+                    flex-direction: column;
+                    padding-bottom: 50px;
+                    .new-tags {
+                        padding: 10px 0;
+                        span {
+                            padding-left: 5px;
+                            color: #E7D795;
+                        }
+                    }
+                    img {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
     }
-  }
+    .new-tags {
+        color: #E7D795;
+        padding: 10px 0;
+        font-size: 12px;
+        img {
+            padding-right: 5px;
+        }
+        .add {
+            padding-left: 20px;
+            color: #82ED2E;
+            cursor: pointer;
+        }
+    }
 }
 
 @media (max-width: 950px) {
-  .wrapper-content-view {
-    display: none !important;
-  }
+    .wrapper-content-view {
+        display: none !important;
+    }
 }

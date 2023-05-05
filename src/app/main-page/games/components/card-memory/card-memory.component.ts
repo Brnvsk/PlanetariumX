@@ -9,7 +9,7 @@ import { DialogWindowComponent } from '../dialog-window/dialog-window.component'
   styleUrls: ['./card-memory.component.scss']
 })
 export class CardMemoryComponent implements AfterViewInit {
-  private audio = new Audio("assets/audio/solar.mp3");
+  private audio = new Audio("assets/audio/2.mp3");
 
   public tempSeconds: boolean = false;
   public numberCards = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].sort(()=>Math.random()-0.5);

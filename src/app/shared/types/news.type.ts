@@ -3,3 +3,9 @@ export interface News {
   picture?: string[],
   content?: string[]
 }
+
+export interface OneNews {
+  header: string,
+  picture?: string,
+  content?: string
+}

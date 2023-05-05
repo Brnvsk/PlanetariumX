@@ -1,11 +1,11 @@
 <div class="wrapper">
     <div class="info">
-        <button id="exit" (click)="forwardGames()">
+        <button id="exit" (click)="forwardGames()" class="logOut">
       <img src="assets/images/log-out.png" alt="#">
     </button>
         <div class="content">
             <h3>Игра: Учим Планеты</h3>
-            <span>Как играть?</span>
+            <span>Как играть? <button (click)="playAudio();" class="sound"> <img src=" assets/icons/play.svg" alt=""></button></span>
             <p>Эта игра, где вам небходимо по картинке, определить, что это за планета и перетащить блок с названием в пустой блок под ней. Если вы ошибетесь, придется начинаться с самого начала.</p>
         </div>
     </div>

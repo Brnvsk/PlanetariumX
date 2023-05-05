@@ -37,7 +37,7 @@ export class ForwardsService {
   }
 
   forwardView() {
-    this.router.navigate(['app']);
+    this.router.navigate(['main/app/view']);
   }
 
   forwardContacts(activatedRoute: ActivatedRoute) {
@@ -53,7 +53,7 @@ export class ForwardsService {
   forwardGames(activatedRoute?: ActivatedRoute) {
 
     activatedRoute?.parent ? this.router.navigate(['games'], {relativeTo: activatedRoute.parent})
-    : this.router.navigate(['app/games']);
+    : this.router.navigate(['main/app/games']);
   }
   forwardSolarGame(router: Router) {
     this.router.navigate([`${router.url}/solarSystem`]);

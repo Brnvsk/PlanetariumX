@@ -12,6 +12,7 @@ import { DialogWindowComponent } from '../dialog-window/dialog-window.component'
 
 
 export class LearningPlanetsComponent {
+  private audio = new Audio("assets/audio/3.mp3");
 
   public namePlanets = [
     {name:'Марс', img: 'assets/images/marsLearn.png'},
@@ -50,7 +51,13 @@ export class LearningPlanetsComponent {
   forwardGames(): void {
     this.forward.forwardGames();
   }
+  playAudio(){ 
+    this.audio.pause();
+    this.audio.currentTime = 0;
+    this.audio.play();
 
+  }
+ 
   selectedPlanet(event: any): void {
     this.numberNames.forEach(val => val.status = colorBtn.selected);
     this.btnDisabled = false;

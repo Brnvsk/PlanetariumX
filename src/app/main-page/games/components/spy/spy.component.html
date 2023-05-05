@@ -1,11 +1,11 @@
 <div class="wrapper">
     <div class="info">
-        <button id="exit" (click)="forwardGames()">
+        <button id="exit" (click)="forwardGames()" class="logOut">
         <img src="assets/images/log-out.png" alt="#">
       </button>
         <div class="content">
             <h3>Игра: Инопланетянин шпион</h3>
-            <span>Как играть?</span>
+            <span>Как играть? <button (click)="playAudio();" class="sound"> <img src=" assets/icons/play.svg" alt=""></button></span>
             <p>Эта игра, где вам небходимо найти инопланетянина, который попытался походить на других. Как только заметите его - нажмите, чтобы он исчез</p>
         </div>
     </div>

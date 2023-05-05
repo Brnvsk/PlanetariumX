@@ -9,6 +9,7 @@ import { DialogWindowComponent } from '../dialog-window/dialog-window.component'
   styleUrls: ['./spy.component.scss']
 })
 export class SpyComponent {
+  private audio = new Audio("assets/audio/4.mp3");
 
   public numberAliens = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23].sort(()=>Math.random()-0.5);
   public stage: Stages = Stages.first;
@@ -58,7 +59,12 @@ export class SpyComponent {
     }
   }
 
+  playAudio(){ 
+    this.audio.pause();
+    this.audio.currentTime = 0;
+    this.audio.play();
 
+  }
 }
 
 enum Stages {

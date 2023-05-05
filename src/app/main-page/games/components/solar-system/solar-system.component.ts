@@ -18,6 +18,7 @@ export interface DialogData {
   styleUrls: ['./solar-system.component.scss']
 })
 export class SolarSystemComponent  {
+  private audio = new Audio("assets/audio/1.mp3");
   public tt = false;
   public namePlanets = [
     {name: 'Меркурий', ref: 'assets/images/mercury.png'},
@@ -126,6 +127,12 @@ export class SolarSystemComponent  {
 
   noReturnPredicate() {
     return false;
+  }
+  playAudio(){ 
+    this.audio.pause();
+    this.audio.currentTime = 0;
+    this.audio.play();
+
   }
 
 }
