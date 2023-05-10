@@ -1,15 +1,14 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { BookedTicket, DATE, Ticket } from 'src/app/shared/types/ticket.type';
-import { ChooseSessionsService } from '../../services/choose-sessions.service';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { DATE, Ticket } from 'src/app/shared/types/ticket.type';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from 'src/app/services/booking.service';
-import { Observable, filter, map, share, shareReplay, switchMap, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, combineLatest, filter, map, of, shareReplay, switchMap, tap, withLatestFrom } from 'rxjs';
 import { IShow, IShowTimeslot } from 'src/app/types/show.types';
 import { FormBuilder } from '@angular/forms';
 import { isEqualDates } from 'src/app/helpers/time.helper';
 import { getSeatsMap } from 'src/app/config/seats.config';
 import { createSeatFromDataset } from 'src/app/helpers/seats-map.helper';
-import { IBooking, IBookingInfo } from 'src/app/types/booking.types';
+import { IBooking, IBookingCreate } from 'src/app/types/booking.types';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BookingPopupComponent } from '../booking-popup/booking-popup.component';
@@ -29,6 +28,9 @@ const pickedSeatColor = '#6858DC'
   styleUrls: ['./booking-page.component.scss']
 })
 export class BookingPageComponent implements OnInit {
+  private bookingRefresh$ = new BehaviorSubject<void>(undefined)
+  private seatmapSvgEl: SVGSVGElement | null = null
+  
   public filtersForm;
   public selectedSession!: Ticket;
   public allDate: DATE[] = [];
@@ -56,19 +58,24 @@ export class BookingPageComponent implements OnInit {
     'Воскресенье'
   ]
 
-  @ViewChild('circleContainer') public circleContainer!: ElementRef<SVGSVGElement>
-  public isLoadingBookings = true;
+  @ViewChild('seatMapContainer') public set seatMapContainer(el: ElementRef<SVGSVGElement>) {
+    this.seatmapSvgEl = el && el.nativeElement ? el.nativeElement : null
+  }
+
+  public isMapBlocked = false;
 
   public show$!: Observable<IShow | null>
   public timeslots$!: Observable<IShowTimeslot[]>
+  public showAddresses: string[] = []
   public timeSlotsForDate: IShowTimeslot[] = []
   public seatsStr = ''
   public showBookings$!: Observable<IBooking[]>
+  public showSeatsMap = false;
   
   private initialDate = new Date()
-  // private showTimeSlots: IShowTimeslot[] = []
+
   private seatsCollection!: NodeListOf<SVGGElement>
-  private pickedSeats: ISeatOptions[] = []
+  public pickedSeats: ISeatOptions[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -78,32 +85,21 @@ export class BookingPageComponent implements OnInit {
     private dialog: MatDialog,
   ) {
     this.filtersForm = this.fb.group({
-      date: this.initialDate,
+      date: new Date(),
       time: '',
       address: ''
     })
 
     this.filtersForm.valueChanges.subscribe(value => {
-      const { date } = value;
-
-      // if (date) {
-      //   this.timeSlotsForDate = this.getShowTimeSlotsForDate(date)
-      //   this.filtersForm.controls.time.setValue(
-      //     this.timeSlotsForDate[0] ?? null, 
-      //     { onlySelf: true }
-      //   )
-      // }
-
+      const { date } = value
     })
   }
 
   ngOnInit(): void {
-    this.show$ = this.bookingService.shows$.pipe(
-      withLatestFrom(this.activatedRoute.paramMap),
-      map(([shows, params]) => {
-        const showId = Number(params.get('id'));
-        const show = shows.find(show => show.id === showId) ?? null;
-        return show
+    this.show$ = this.activatedRoute.paramMap.pipe(
+      switchMap(params => {
+        const showId = String(params.get('id'));
+        return this.bookingService.getShowById(showId)
       }),
       shareReplay(1)
     );
@@ -116,42 +112,79 @@ export class BookingPageComponent implements OnInit {
       shareReplay(1),
     )
 
-    this.showBookings$ = this.show$.pipe(
-      filter(Boolean),
-      switchMap((show) => {
+    this.showBookings$ = combineLatest([
+      this.bookingRefresh$,
+      this.show$.pipe(filter(Boolean)),
+    ])
+    .pipe(
+      switchMap(([_, show]) => {
         return this.bookingService.getShowBookings(show.id)
       })
     )
 
-    // this.filtersForm.valueChanges.subscribe(res => {
-    //   console.log(res);
-    // })
+    const addresses$ = this.timeslots$.pipe(
+      map((timeslots) => {
+        const addresses = timeslots
+          .map(slot => slot.address)
+          .filter((slot, i, arr) => {
+            return arr.indexOf(slot) === i
+          })
 
-    this.filtersForm.valueChanges.pipe(
-      withLatestFrom(this.showBookings$, this.timeslots$),
-    ).subscribe(([model, bookings, timeslots]) => {
-      const { date } = model
-      this.timeSlotsForDate = this.getTimeOptionsForDate(date ?? this.initialDate, timeslots)
-      this.filtersForm.controls.time.setValue(this.timeSlotsForDate[0].time, {
-        onlySelf: true
+        this.showAddresses = addresses
+        return addresses
       })
+    )
+
+    const dateTimeslots$ = combineLatest([
+      this.filtersForm.controls.date.valueChanges,
+      this.timeslots$,
+    ]).pipe(
+      map(([date, timeslots]) => {
+        const timeSlotsForDate = this.getTimeOptionsForDate(date ?? this.initialDate, timeslots)
+
+        if (timeSlotsForDate.length > 0) {
+          this.filtersForm.controls.time.setValue(timeSlotsForDate[0].time, {
+            onlySelf: true
+          })
+        }
+
+        this.timeSlotsForDate = timeSlotsForDate
+      })
+    )
+
+    combineLatest([
+      this.filtersForm.valueChanges,
+      this.showBookings$, 
+      dateTimeslots$,
+      addresses$,
+    ])
+    .subscribe(([model, bookings, _, addresses]) => {
+      const { date, time, address } = this.filtersForm.value
+      // console.log('filters', model);
       
-      console.log(bookings);
-      this.renderSeatsMap(bookings)
+      if (!date || !time || !address) {
+        // console.warn('Wrong form data');
+        this.showSeatsMap = false
+        this.clearSeatmap()
+        return
+      }
+
+      const bookingsForFilters = this.getBookingsForFilters(bookings, date, time, address)
+      
+      this.renderSeatsMap(bookingsForFilters)
+      this.showSeatsMap = true
+      this.isMapBlocked = false;
     })
 
-    this.timeslots$.subscribe(timeslots => {
-      if (timeslots) {
-        console.log(timeslots);
-        
-        this.timeSlotsForDate = this.getTimeOptionsForDate(this.initialDate, timeslots)
-      }
-    })
+    this.filtersForm.controls.date.setValue(this.initialDate)
   }
 
   public onBook() {
-    const { date, time } = this.filtersForm.value
-    if (!date || !time || this.pickedSeats.length < 1) {
+    this.isMapBlocked = true
+    const { date, time, address } = this.filtersForm.value
+    if (!date || !time || !address || this.pickedSeats.length < 1) {
+      console.warn('Not full form data.');
+      this.isMapBlocked = false
       return;
     }
 
@@ -159,25 +192,26 @@ export class BookingPageComponent implements OnInit {
       filter(Boolean),
       withLatestFrom(this.userService.user$),
     ).subscribe(([ show, user ]) => {
-      const booking: IBookingInfo = {
-        date: date.toString(),
+      const newBooking: IBookingCreate = {
+        date: date.toUTCString(),
         time,
+        address,
         places: this.pickedSeats,
         show: show,
         userId: user ? user.id : undefined
       }
 
       const ref = this.dialog.open(BookingPopupComponent, {
-        data: { booking }
+        data: { booking: newBooking }
       })
 
-      ref.afterClosed().pipe(
-        tap(result => {
-          if (result.booking) {
-            this.saveBooking(result.booking)
-          }
-        })
-      ).subscribe()
+      ref.afterClosed().subscribe(result => {
+        if (result.booking) {
+          this.saveBooking(result.booking)
+        } else {
+          this.isMapBlocked = false;
+        }
+      })
     })
   }
 
@@ -193,33 +227,51 @@ export class BookingPageComponent implements OnInit {
     }
   }
 
-  private saveBooking(bookingRequest: IBookingInfo){
+  private getBookingsForFilters(bookings: IBooking[], date: Date, timeslot: string, address: string) {
+    return bookings.filter(booking => {
+      const isDatesSame = isEqualDates(new Date(booking.date), date)
+      const isTimeSame = booking.time === timeslot
+      const isSameAddress = booking.address === address
+      
+      return isDatesSame && isTimeSame && isSameAddress
+    })
+  }
+
+  private saveBooking(bookingRequest: IBookingCreate){
     this.bookingService.saveBooking({
       date: bookingRequest.date,
       time: bookingRequest.time,
+      address: bookingRequest.address,
       userId: bookingRequest.userId,
       showId: bookingRequest.show.id,
-      places: JSON.stringify(bookingRequest.places),
-    }).subscribe(res => {
-      console.log('create booking', res);
+      places: bookingRequest.places,
+      email: bookingRequest.email
+    })
+    .pipe(
+      catchError(err => {
+        this.isMapBlocked = false
+        console.error(err.message)
+        return of(null)
+      })
+    )
+    .subscribe(res => {
+      if (res) {
+        this.bookingRefresh$.next()
+      }
     })
   }
 
   private renderSeatsMap(bookings: IBooking[]) {
-    const { date, time, address } = this.filtersForm.value
-    // console.log('render', this.filtersForm.value);
-    const mapPlaces = bookings.filter(booking => {
-      const isSameDates = new Date(booking.date).getTime() === date?.getTime()
-      const isSameTime = booking.time === time
-      if (isSameDates && isSameTime) {
-        return true;
-      }
-      return false;
-    }).map(booking => JSON.parse(booking.places) as ISeatOptions[])
+    const seatMap = getSeatsMap({
+      bookedPlaces: bookings
+    })
 
-    const seatMap = getSeatsMap(mapPlaces.flat())
-    this.circleContainer.nativeElement.append(...seatMap)
-    this.seatsCollection = this.circleContainer.nativeElement.querySelectorAll('g.seat-item')
+    if (this.seatmapSvgEl) {
+      this.seatmapSvgEl.innerHTML = ''
+      this.pickedSeats = []
+      this.seatmapSvgEl.append(...seatMap)
+      this.seatsCollection = this.seatmapSvgEl.querySelectorAll('g.seat-item')
+    }
   }
 
   private handleSeatClick(seat: HTMLElement) {
@@ -246,6 +298,12 @@ export class BookingPageComponent implements OnInit {
     })
   }
 
+  private clearSeatmap() {
+    if (this.seatmapSvgEl && this.seatmapSvgEl.innerHTML !== '') {
+      this.seatmapSvgEl.innerHTML = ''
+    }
+  }
+
   private findSeatIndex(seat: ISeatOptions | null) {
     if (seat === null) {
       return -1;
@@ -262,9 +320,12 @@ export class BookingPageComponent implements OnInit {
   private highlightSeats() {
     this.seatsCollection.forEach(seat => {
       const params = seat.dataset;
+      if (params['booked']) {
+        return;
+      }
       const seatItem = createSeatFromDataset(params)
-      const seatIndexInPicked = this.findSeatIndex(seatItem)
-      if (seatIndexInPicked >= 0) {
+      const isPicked = this.findSeatIndex(seatItem) > -1
+      if (isPicked) {
         seat.style.fill = pickedSeatColor
       } else {
         seat.style.fill = defaulSeatColor
@@ -273,27 +334,12 @@ export class BookingPageComponent implements OnInit {
   }
 
   private getTimeOptionsForDate(date: Date, timeslots: IShowTimeslot[]) {
-    const timeSlots = timeslots
+    const timeSlots = timeslots.slice()
       .filter(slot => isEqualDates(new Date(slot.date), date))
       .filter((slot, i, arr) => arr.indexOf(slot) === i)
-console.log(timeSlots);
+      .sort((a, b) => Number(a.time.split(':')[0]) - Number(b.time.split(':')[0]))
 
     return timeSlots
   }
-
-  // private initTimeOptions(date: Date, timeslots: IShowTimeslot[]) {
-  //   const time = this.getShowTimeSlotsForDate(date, timeslots)[0] ?? null
-  //   console.log(time, timeslots);
-  //   this.filtersForm.controls.time.setValue(time, {
-  //     onlySelf: true
-  //   })
-  // }
-
-  // public getShowTimeSlotsForDate(date: Date, timeslots: IShowTimeslot[]): string[] {
-  //   const dateSlot = timeslots.filter(slot => isEqualDates(new Date(slot.date), date))
-  //   const timeOptions = dateSlot.map(slot => slot.time).filter((time, i, arr) => arr.indexOf(time) === i)
-    
-  //   return timeOptions
-  // }
 
 }

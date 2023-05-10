@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, shareReplay } from 'rxjs';
 import { IShow, IShowTimeslot } from '../types/show.types';
-import { ShowsMock } from '../types/mocData';
 import { HttpClient } from '@angular/common/http';
 import { ApiRoutes } from '../config/network.config';
 import { IBooking } from '../types/booking.types';
@@ -21,19 +20,19 @@ export class BookingService {
   }
 
   public loadAllShows() {
-    this.http.get<{ data: IShow[] }>(`${ApiRoutes.shows.list}`).subscribe(res => {
+    this.http.get<{ data: IShow[] }>(`${ApiRoutes.shows}`).subscribe(res => {
       this.showsStore$.next(res.data)
     })
+  }
+
+  public getShowById(id: string) {
+    return this.http.get<IShow | null>(`${ApiRoutes.shows}/${id}`)
   }
 
   public getShowTimeslots(showId: number) {
     return this.http.get<{ data: IShowTimeslot[] }>(`${ApiRoutes.shows.timeslots}/${showId}`).pipe(
       map(res => res.data)
     )
-  }
-
-  public getShowById(id: number) {
-    return this.showsStore$.value.find(show => show.id === id) ?? null;
   }
 
   public saveBooking(booking: IBooking) {

@@ -318,16 +318,9 @@
         width: 800px;
         height: 700px;
     }
-}
 
-// .seat-map-svg {
-//     & path {
-//         fill: green;
-//     }
-//     & .seat-item {
-//         fill: #fff;
-//     }
-//     & .seat-item.picked {
-//         fill: #6858DC;
-//     }
-// }
+    &.blocked {
+        opacity: 0.4;
+        pointer-events: none;
+    }
+}

@@ -1,6 +1,6 @@
 <div class="wrapper" *ngIf="show$ | async as show">
     <div class="leftside">
-        <img [src]="'assets/images/' + show.posterSrc" alt="">
+        <img [src]="'assets/images/' + show.poster_src" alt="">
         <div class="leftside-description">
             <div class="text">
                 <h4>Описание</h4>
@@ -37,6 +37,15 @@
 
         <div class="filters" [formGroup]="filtersForm">
 
+            <mat-form-field class="address-select" appearance="fill">
+                <mat-label>Адрес</mat-label>
+                <mat-select formControlName="address">
+                  <mat-option *ngFor="let addr of showAddresses" [value]="addr">
+                    {{ addr }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+
             <mat-form-field appearance="fill">
                 <mat-label>Выберите дату</mat-label>
                 <input formControlName="date" matInput [matDatepicker]="picker">
@@ -52,24 +61,25 @@
             </mat-radio-group>
         </div>
 
-        <div class="seat-map">
+        <div class="seat-map" [class.blocked]="isMapBlocked">
 
-            <!-- <div class="seat-map-svg" #circleContainer (click)="onMapClick($event)"></div> -->
-
-            <svg class="seat-map-svg" #circleContainer (click)="onMapClick($event)"></svg>
+            <svg class="seat-map-svg" #seatMapContainer (click)="onMapClick($event)"></svg>
 
         </div>
 
-        <div class="booking-submit">
-            <div class="seat-examples">
-
+        <div class="booking-submit" *ngIf="showSeatsMap">
+            <div class="seat-examples">    
             </div>
 
             <div class="price">
-                <span>{{ 50 }} р.</span>
+                <span *ngFor="let seat of pickedSeats">
+                    <span>
+                        {{ seat.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{ seat.row }}, место {{ seat.place }}.
+                    </span>
+                </span>
             </div>
 
-            <button (click)="onBook()">Забронировать</button>
+            <button (click)="onBook()" [disabled]="pickedSeats.length === 0">Забронировать</button>
         </div>
 
     </div>

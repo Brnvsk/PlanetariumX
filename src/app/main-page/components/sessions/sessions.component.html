@@ -53,7 +53,7 @@
             <div class="rental-slides">
                 <ng-container *ngFor="let show of shows$ | async">
                     <div class="rental-slide">
-                        <img [src]="'assets/images/' + show.posterSrc" alt="Poster picture">
+                        <img [src]="'assets/images/' + show.poster_src" alt="Poster picture">
                         <span class="title">{{show.title}}</span>
                         <span>{{show.tags}}</span>
                         <a [routerLink]="['show', show.id]" mat-flat-button color="primary">Купить билет</a>

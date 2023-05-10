@@ -2,20 +2,24 @@ import { ISeatOptions } from "../main-page/components/booking-page/booking-page.
 import { User } from "../shared/types/user.type";
 import { IShow } from "./show.types";
 
-export interface IBookingInfo {
+// booking request
+export interface IBookingCreate {
     date: string
     time: string
+    address: string
     userId?: number
     show: IShow
     email?: string
     places: ISeatOptions[]
 }
 
+// booking record
 export interface IBooking {
+    address: string
     date: string
     time: string
     userId?: number
     showId: number
     email?: string
-    places: string
+    places: ISeatOptions[]
 }

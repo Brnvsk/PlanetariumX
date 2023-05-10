@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSelectModule } from '@angular/material/select'
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
     MatRadioModule,
     MatFormFieldModule,
     MatIconModule,
+    MatSelectModule,
   ],
   exports: [
     MatProgressBarModule,
@@ -27,7 +29,8 @@ import { MatFormFieldModule } from '@angular/material/form-field'
     MatIconModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSelectModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

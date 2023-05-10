@@ -9,8 +9,8 @@ export const ApiRoutes = {
         tags: `${baseUrl}/api/news/tags`
     },
     shows: {
-        list: `${baseUrl}/api/shows`,
         timeslots: `${baseUrl}/api/shows/timeslots`,
+        toString: () => `${baseUrl}/api/shows`,
     },
     booking: {
         save: `${baseUrl}/api/booking`,

@@ -4,7 +4,7 @@ export interface IShow {
     title: string
     descr: string
     tags: string
-    posterSrc: string
+    poster_src: string
     price: number
     // timeSlots: IShowTimeslot[]
 }

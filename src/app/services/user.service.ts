@@ -24,7 +24,12 @@ export class UserService {
     this.http.post<{ user: User | null }>(`${ApiRoutes.users.login}/token`, {
       token
     })
-    .pipe(map(res => res.user), shareReplay(1))
+    .pipe(
+      map(res => {
+        return res ? res.user : null
+      }), 
+      shareReplay(1)
+    )
     .subscribe(res => {
       this.setUser(res)
     })

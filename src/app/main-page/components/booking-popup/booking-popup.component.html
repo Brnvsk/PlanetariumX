@@ -1,25 +1,34 @@
 <div class="wrapper">
     <h3>/ Оплата</h3>
     <div class="content">
-        <img [src]="'assets/images/' + booking.show.posterSrc" alt="">
+        <img [src]="'assets/images/' + booking.show.poster_src" alt="">
         <div class="content-text">
             <span class="title">{{booking.show.title}}</span>
-            <!-- <span class="text">{{booking.show.descr}}</span> -->
-            <span class="date">{{ date }}</span>
+            <span class="date">Дата и время: {{ datetime }}</span>
+            <span class="address">Адрес: {{ address }}</span>
         </div>
     </div>
     <div class="add-info">
         <span class="add-info-number">Номер заказа: ???</span>
         <div class="price">
             <span>БИЛЕТОВ: {{booking.places.length}}</span>
-            <span>{{booking.show.price * booking.places.length}} BYN</span>
+            <p>{{booking.show.price * booking.places.length}} BYN</p>
+        </div>
+        <div class="check">
+            <p *ngFor="let seat of booking.places">
+                {{ seat.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{ seat.row }}, место {{ seat.place }}.
+            </p>
         </div>
     </div>
     <form class="create-account-form">
         <mat-form-field appearance="fill">
             <mat-label>Введите вашу почту</mat-label>
-            <input (change)="onChangeEmail($event)" matInput visibility>
+            <input (input)="onChangeEmail($event)" matInput visibility>
         </mat-form-field>
+        <p class="error-message" *ngIf="noEmailError">
+            <span>Необходимо указать e-mail</span>
+            <button (click)="goToLogin()">либо выполнить вход</button>
+        </p>
     </form>
     <div class="btn">
         <button type="submit" mat-flat-button color="primary" (click)="makeBooking()">Оформить</button>

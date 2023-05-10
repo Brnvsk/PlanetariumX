@@ -93,7 +93,7 @@ export const ShowsMock: IShow[] = [
     title: 'Интерстеллар',
     descr: '',
     tags: 'фантастика, драма, приключения',
-    posterSrc: 'assets/images/interstellarPict.png',
+    poster_src: 'assets/images/interstellarPict.png',
     price: 15,
     
   },
@@ -102,7 +102,7 @@ export const ShowsMock: IShow[] = [
     title: 'Звездные войны',
     descr: '',
     tags: 'фантастика, драма, приключения',
-    posterSrc: 'assets/images/starWarsPict.png',
+    poster_src: 'assets/images/starWarsPict.png',
     price: 15,
     
   },
@@ -111,7 +111,7 @@ export const ShowsMock: IShow[] = [
     title: 'Обливион',
     descr: '',
     tags: 'фантастика, драма, приключения',
-    posterSrc: 'assets/images/oblivionPict.png',
+    poster_src: 'assets/images/oblivionPict.png',
     price: 15,
     
   },
@@ -120,7 +120,7 @@ export const ShowsMock: IShow[] = [
     title: 'Маленький принц',
     descr: '',
     tags: 'фантастика, драма, приключения',
-    posterSrc: 'assets/images/littlePrincePict.png',
+    poster_src: 'assets/images/littlePrincePict.png',
     price: 15,
     
   },
@@ -129,7 +129,7 @@ export const ShowsMock: IShow[] = [
     title: 'Чужой',
     descr: '',
     tags: 'фантастика, драма, приключения',
-    posterSrc: 'assets/images/stranger.png',
+    poster_src: 'assets/images/stranger.png',
     price: 15,
     
   },
