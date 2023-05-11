@@ -7,9 +7,6 @@ import { planets } from 'src/app/types/mocData';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { DialogWindowComponent } from '../dialog-window/dialog-window.component';
 
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
-}
 
 
 @Component({

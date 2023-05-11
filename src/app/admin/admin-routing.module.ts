@@ -14,6 +14,10 @@ const routes: Routes = [{
       component: AdminShowsComponent,
     },
     {
+      path: 'sessions',
+      component: AdminShowsComponent,
+    },
+    {
       path: 'bookings',
       component: AdminBookingsComponent,
     },

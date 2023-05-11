@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForwardsService } from 'src/app/shared/services/forwards.service';
-import { DialogData } from '../solar-system/solar-system.component';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,7 +15,6 @@ export class DialogWindowComponent {
   public seconds$: Observable<number> = this.forward.seconds$;
   constructor(
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private forward: ForwardsService,
     ) {
       forward.seconds$.subscribe(value => {

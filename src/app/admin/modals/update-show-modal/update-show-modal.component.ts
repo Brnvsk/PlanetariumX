@@ -1,30 +1,36 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiRoutes } from 'src/app/config/network.config';
 import { IShow } from 'src/app/types/show.types';
+import { CreateShowModalComponent } from '../create-show-modal/create-show-modal.component';
 
+interface DialogData {
+  show: IShow
+}
 
 @Component({
-  selector: 'app-create-show-modal',
-  templateUrl: './create-show-modal.component.html',
-  styleUrls: ['./create-show-modal.component.scss'],
+  selector: 'app-update-show-modal',
+  templateUrl: './update-show-modal.component.html',
+  styleUrls: ['./update-show-modal.component.scss']
 })
-export class CreateShowModalComponent implements OnInit {
+export class UpdateShowModalComponent {
   public form;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CreateShowModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private http: HttpClient,
   ) {
+    const { show } = data;
     this.form = this.fb.group({
-      title: ['', Validators.required],
-      descr: ['', Validators.required],
-      price: ['', Validators.required],
+      title: [show.title, Validators.required],
+      descr: [show.descr, Validators.required],
+      price: [show.price, Validators.required],
       // add multiselect for tags
-      posterPath: ['', Validators.required],
+      posterPath: [show.poster_src, Validators.required],
     });
   }
 
@@ -65,10 +71,12 @@ export class CreateShowModalComponent implements OnInit {
       return;
     }
 
-    this.http.post<{ created: IShow }>(`${ApiRoutes.shows}`, this.form.value)
+    this.http.patch<{ updated: IShow }>(`${ApiRoutes.shows}/${this.data.show.id}`, {
+      update: this.form.value
+    })
       .subscribe({
         next: res => {
-          this.dialogRef.close({ result: 'success', show: res.created })
+          this.dialogRef.close({ result: 'success', show: res.updated })
         },
         error: err => {
           console.error(err);

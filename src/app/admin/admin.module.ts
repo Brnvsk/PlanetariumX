@@ -10,6 +10,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreateShowModalComponent } from './modals/create-show-modal/create-show-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateShowModalComponent } from './modals/update-show-modal/update-show-modal.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminShowsComponent,
     AdminBookingsComponent,
     AdminNewsComponent,
-    CreateShowModalComponent
+    CreateShowModalComponent,
+    UpdateShowModalComponent
   ],
   imports: [
     CommonModule,

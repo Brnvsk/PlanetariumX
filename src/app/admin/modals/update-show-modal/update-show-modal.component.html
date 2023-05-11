@@ -1,0 +1,35 @@
+<form [formGroup]="form" class="form">
+
+	<input 
+	formControlName="title"
+	type="text" placeholder="Название">
+
+	<textarea 
+	formControlName="descr"
+	rows="12" cols="30" placeholder="Описание"></textarea>
+
+	<input 
+	formControlName="price"
+	type="number" placeholder="Цена билета" 
+	step="5"
+	min="0" 
+	max="1000">
+
+	<ng-container *ngIf="form.value.posterPath">
+		<img class="poster-preview" [src]="'http://localhost:5050/posters/' + form.value.posterPath" alt="">
+	</ng-container>
+
+	<div class="file-upload">
+		<p>Drag & drop photos here or <span class="browse">Browse</span></p>
+		<input
+		(change)="onAddImage($event)" 
+		type="file" 
+		class="file-input" 
+		accept="image/jpeg, image/png, image/jpg, image/gif"/>
+	</div>
+
+	<div class="footer">
+		<button (click)="cancel()">Отмена</button>
+		<button (click)="submit()">Обновить</button>
+	</div>
+</form>
