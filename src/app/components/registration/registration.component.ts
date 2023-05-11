@@ -41,8 +41,8 @@ export class RegistrationComponent {
         ]),
         password: new FormControl<string>('qwe@123D', [
             Validators.required,
-            Validators.minLength(8),
-            ValidationService.passwordValidator()
+            // Validators.minLength(8),
+            // ValidationService.passwordValidator()
         ])
     });
     public get steps(): typeof StepRegistration {
@@ -100,7 +100,7 @@ export class RegistrationComponent {
                         login: this.form.value.login!,
                         password: this.form.value.password!,
                         email: this.form.value.email!,
-                        role: RoleUsers.USER,
+                        role: 'user', // сделать регистрацию админа через чекбокс?
                         avatarId: null,
                         interested: []
                     }
@@ -124,7 +124,7 @@ export class RegistrationComponent {
                             console.log(user);
                             this.userService.setUser(user)
                             localStorage.setItem('token', email);
-                            this.router.navigateByUrl('/app')
+                            this.router.navigateByUrl('/main/app')
                         })
                     }
                     

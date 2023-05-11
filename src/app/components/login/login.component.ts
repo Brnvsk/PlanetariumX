@@ -48,7 +48,7 @@ export class LoginComponent {
         if (user) {
           const { email } = user;
           localStorage.setItem('token', email)
-          this.router.navigateByUrl('/app')
+          this.router.navigateByUrl('/main/app')
         }
         
         this.userService.setUser(user)

@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AdminComponent {
 
+  constructor(
+    private location: Location,
+  ) {}
+
+  public goBack() {
+    this.location.back()
+  }
 }

@@ -1,6 +1,6 @@
 <div class="wrapper" *ngIf="show$ | async as show">
     <div class="leftside">
-        <img [src]="'assets/images/' + show.poster_src" alt="">
+        <img [src]="'http://localhost:5050/posters/' + show.poster_src" alt="">
         <div class="leftside-description">
             <div class="text">
                 <h4>Описание</h4>

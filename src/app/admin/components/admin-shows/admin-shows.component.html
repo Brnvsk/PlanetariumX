@@ -1,0 +1,47 @@
+
+<div class="title-wrapper container">
+	<span class="subtitle">Управление</span>
+	<h1 class="title">Представления</h1>
+</div>
+
+<div class="main container">
+
+	<button (click)="createShow()">Добавить представление</button>
+
+	<table mat-table [dataSource]="shows" class="mat-elevation-z8">
+	  
+		<ng-container matColumnDef="id">
+		  <th mat-header-cell *matHeaderCellDef>No.</th>
+		  <td mat-cell *matCellDef="let show"> {{show.id}} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="poster">
+			<th mat-header-cell *matHeaderCellDef>Постер</th>
+			<td mat-cell *matCellDef="let show">
+				<img class="poster-img" [src]="'http://localhost:5050/posters/' + show.poster_src" alt="">
+			</td>
+		</ng-container>
+	  
+		<ng-container matColumnDef="title">
+		  <th mat-header-cell *matHeaderCellDef>Название</th>
+		  <td mat-cell *matCellDef="let show"> {{show.title}} </td>
+		</ng-container>
+	  
+		<ng-container matColumnDef="price">
+		  <th mat-header-cell *matHeaderCellDef>Цена билета</th>
+		  <td mat-cell *matCellDef="let show">{{show.price}} BYN</td>
+		</ng-container>
+	  
+		<ng-container matColumnDef="actions">
+		  <th mat-header-cell *matHeaderCellDef class="right">Управление</th>
+		  <td mat-cell *matCellDef="let show" class="right">
+			<button (click)="editShow(show)">Редактировать</button>
+			<button (click)="deleteShow(show)">Удалить</button>
+		  </td>
+		</ng-container>
+	  
+		<tr mat-header-row *matHeaderRowDef="columns"></tr>
+		<tr mat-row *matRowDef="let row; columns: columns;"></tr>
+	</table>
+
+</div>

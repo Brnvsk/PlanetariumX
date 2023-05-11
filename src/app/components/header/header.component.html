@@ -21,9 +21,14 @@
     </div>
     <div class="logIn">
 
-        <a class="login-button" *ngIf="user$ | async as user; else noUser" routerLink="./personal">
-            Кабинет
-        </a>
+        <ng-container *ngIf="user$ | async as user; else noUser">
+            <a class="login-button" routerLink="./personal">
+                Кабинет
+            </a>
+            <a routerLink="/admin/shows">
+                Администрация
+            </a>
+        </ng-container>
         <ng-template #noUser>
             <a class="login-button" routerLink="./login">Вход</a>
         </ng-template>

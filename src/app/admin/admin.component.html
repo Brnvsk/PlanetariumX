@@ -1,1 +1,27 @@
-<p>admin works!</p>
+<div class="header">
+	<button (click)="goBack()">Назад</button>
+
+	<p>Административная панель</p>
+</div>
+
+<main class="main">
+
+	<div class="tabs">
+		<a routerLink="shows" [skipLocationChange]="true">
+			Представления
+		</a>
+		<a routerLink="bookings" [skipLocationChange]="true">
+			Билеты
+		</a>
+		<a routerLink="news" [skipLocationChange]="true">
+			Новости
+		</a>
+	</div>
+
+	<div class="tab-content">
+
+		<router-outlet></router-outlet>
+
+	</div>
+
+</main>

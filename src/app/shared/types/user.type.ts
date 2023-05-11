@@ -1,12 +1,14 @@
 import { News } from "./news.type";
 import { RoleUsers } from "./role-users.enum";
 
+type UserRole = 'user' | 'admin'
+
 export interface User {
   id: number,
   login: string,
   password: string,
   email: string,
-  role: RoleUsers,
+  role: UserRole,
   avatarId: number | null,
   interested: News[],
   discount: number
@@ -17,7 +19,7 @@ export interface TempUser {
   password: string,
   email: string,
   avatarId: number | null,
-  role: RoleUsers,
+  role: UserRole,
   interested: News[],
 }
 
