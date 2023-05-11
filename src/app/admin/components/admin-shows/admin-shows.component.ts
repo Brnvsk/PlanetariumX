@@ -32,8 +32,11 @@ export class AdminShowsComponent implements OnInit {
 
     })
 
-    dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
+    dialogRef.afterClosed().subscribe((res: { result: 'success' | 'error' | 'cancel', show?: IShow }) => {
+      const { result } = res
+      if (result === 'success' && res.show) {
+        this.shows = [...this.shows, res.show]
+      }
     })
   }
 

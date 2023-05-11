@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiRoutes } from 'src/app/config/network.config';
 import { DialogData } from 'src/app/main-page/games/components/solar-system/solar-system.component';
+import { IShow } from 'src/app/types/show.types';
 
 @Component({
   selector: 'app-create-show-modal',
@@ -20,11 +21,11 @@ export class CreateShowModalComponent implements OnInit {
     private http: HttpClient,
   ) {
     this.form = this.fb.group({
-      title: '',
-      descr: '',
-      price: '',
-      poster: '',
-      file: new File([], '')
+      title: ['', Validators.required],
+      descr: ['', Validators.required],
+      price: ['', Validators.required],
+      // add multiselect for tags
+      posterPath: ['', Validators.required],
     });
   }
 
@@ -36,29 +37,43 @@ export class CreateShowModalComponent implements OnInit {
 
   public onAddImage(e: Event) {
     const files = (e.target as HTMLInputElement).files
-    if (files && files.length > 0) {
-      const file = files[0];
-      this.form.patchValue({
-        file,
-      });
-    }
+
+    const file = files && files[0];
 
     const formData = new FormData();
-    const fileValue = this.form.controls.file.value
-    if (fileValue) {
+    if (file) {
       formData.append('path', 'posters');
-      formData.append('file', fileValue);
+      formData.append('file', file);
+    } else {
+      console.warn('No file.');
+      return;
     }
    
-    this.http.post(`${ApiRoutes.upload}`, formData)
+    this.http.post<{ filename: string }>(`${ApiRoutes.upload}`, formData)
       .subscribe(res => {
-        console.log(res);
+        this.form.controls.posterPath.setValue(res.filename)
       })
   }
 
   public cancel() {
-    this.dialogRef.close('cancel');
+    this.dialogRef.close({
+      result: 'cancel',
+    });
   }
 
-  public submit() {}
+  public submit() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.http.post<{ created: IShow }>(`${ApiRoutes.shows}`, this.form.value)
+      .subscribe({
+        next: res => {
+          this.dialogRef.close({ result: 'success', show: res.created })
+        },
+        error: err => {
+          console.error(err);
+        }
+      })
+  }
 }

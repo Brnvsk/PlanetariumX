@@ -10,12 +10,18 @@
 
 	<input 
 	formControlName="price"
-	type="number" placeholder="Цена билета" min="0" max="1000">
+	type="number" placeholder="Цена билета" 
+	step="5"
+	min="0" 
+	max="1000">
+
+	<ng-container *ngIf="form.value.posterPath">
+		<img class="poster-preview" [src]="'http://localhost:5050/posters/' + form.value.posterPath" alt="">
+	</ng-container>
 
 	<div class="file-upload">
 		<p>Drag & drop photos here or <span class="browse">Browse</span></p>
 		<input
-		formControlName="poster"
 		(change)="onAddImage($event)" 
 		type="file" 
 		class="file-input" 

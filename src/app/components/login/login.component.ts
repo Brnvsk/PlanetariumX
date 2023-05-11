@@ -22,8 +22,8 @@ export class LoginComponent {
     ]),
     password: new FormControl<string>('', [
       Validators.required,
-      Validators.minLength(8),
-      ValidationService.passwordValidator()
+      // Validators.minLength(8),
+      // ValidationService.passwordValidator()
     ])
   })
 
