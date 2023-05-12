@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApiRoutes } from 'src/app/config/network.config';
 import { IShow, IShowSession } from 'src/app/types/show.types';
-import { CreateShowModalComponent } from '../create-show-modal/create-show-modal.component';
 import { sessionsTime } from '../../config/admin.config';
 
 interface DialogData {
@@ -29,7 +28,7 @@ export class CreateSessionModalComponent {
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private dialogRef: MatDialogRef<CreateShowModalComponent>,
+    private dialogRef: MatDialogRef<CreateSessionModalComponent>,
     private http: HttpClient,
   ) {
     const { shows } = data

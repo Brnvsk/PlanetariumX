@@ -1,35 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApiRoutes } from 'src/app/config/network.config';
-import { IShow } from 'src/app/types/show.types';
+import { INews, INewsTag } from 'src/app/types/news.types';
+import { NewsService } from 'src/app/services/news.service';
 
 interface DialogData {
-  show: IShow
+  tags: INewsTag[]
 }
 
+
 @Component({
-  selector: 'app-update-show-modal',
-  templateUrl: './update-show-modal.component.html',
-  styleUrls: ['./update-show-modal.component.scss']
+  selector: 'app-create-news-modal',
+  templateUrl: './create-news-modal.component.html',
+  styleUrls: ['./create-news-modal.component.scss']
 })
-export class UpdateShowModalComponent {
+export class CreateNewsModalComponent {
   public form;
+
+  public tags: INewsTag[]
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<UpdateShowModalComponent>,
+    private dialogRef: MatDialogRef<CreateNewsModalComponent>,
+    private newsService: NewsService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private http: HttpClient,
   ) {
-    const { show } = data;
+    this.tags = data.tags
     this.form = this.fb.group({
-      title: [show.title, Validators.required],
-      descr: [show.descr, Validators.required],
-      price: [show.price, Validators.required],
-      // add multiselect for tags
-      posterPath: [show.poster_src, Validators.required],
+      title: ['', Validators.required],
+      text: ['', Validators.required],
+      photo: ['', Validators.required],
+      tags: [['']]
     });
   }
 
@@ -46,7 +50,7 @@ export class UpdateShowModalComponent {
 
     const formData = new FormData();
     if (file) {
-      formData.append('path', 'posters');
+      formData.append('path', 'news');
       formData.append('file', file);
     } else {
       console.warn('No file.');
@@ -55,7 +59,7 @@ export class UpdateShowModalComponent {
    
     this.http.post<{ filename: string }>(`${ApiRoutes.upload}`, formData)
       .subscribe(res => {
-        this.form.controls.posterPath.setValue(res.filename)
+        this.form.controls.photo.setValue(res.filename)
       })
   }
 
@@ -70,12 +74,19 @@ export class UpdateShowModalComponent {
       return;
     }
 
-    this.http.patch<{ updated: IShow }>(`${ApiRoutes.shows}/${this.data.show.id}`, {
-      update: this.form.value
+    const { title, text, photo, tags } = this.form.value
+
+    this.http.post<{ created: INews }>(`${ApiRoutes.news}`, {
+      title, text, photo,
+      tags: tags?.join('-')
     })
       .subscribe({
         next: res => {
-          this.dialogRef.close({ result: 'success', show: res.updated })
+          const item = {
+            ...res.created,
+            tags: tags?.map(tagId => this.tags.find(tag => tag.id === Number(tagId)))
+          }
+          this.dialogRef.close({ result: 'success', news: item })
         },
         error: err => {
           console.error(err);

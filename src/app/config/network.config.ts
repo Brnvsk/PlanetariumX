@@ -6,7 +6,8 @@ export const ApiRoutes = {
         login: `${baseUrl}/api/users/login`,
     },
     news: {
-        tags: `${baseUrl}/api/news/tags`
+        tags: `${baseUrl}/api/news/tags`,
+        toString: () => `${baseUrl}/api/news`,
     },
     shows: {
         timeslots: `${baseUrl}/api/shows/timeslots`,

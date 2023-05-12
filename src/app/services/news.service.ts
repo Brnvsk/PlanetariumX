@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { INewsTag } from '../types/news.types';
+import { INews, INewsTag } from '../types/news.types';
 import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { ApiRoutes } from '../config/network.config';
 
@@ -24,5 +24,9 @@ export class NewsService {
     return this.http.get<{ data: INewsTag[] }>(`${ApiRoutes.news.tags}`).subscribe(res => {
       this.tagsStore$.next(res.data);
     })
+  }
+
+  public getNews() {
+    return this.http.get<{ data: INews[] }>(`${ApiRoutes.news}`)
   }
 }

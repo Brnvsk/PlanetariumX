@@ -1,0 +1,16 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+textarea {
+	resize: none;
+	min-height: 150px;
+}
+
+.poster-preview {
+	width: 400px;
+	height: 400px;
+	object-fit: contain;
+}

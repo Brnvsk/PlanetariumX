@@ -1,0 +1,24 @@
+.container {
+	margin: 0 auto;
+	max-width: 1600px;
+}
+
+.poster-img {
+	height: 60px;
+}
+
+.right {
+	text-align: right;
+}
+
+.tags-col {
+	display: flex;
+
+	& span {
+		padding: 5px 8px;
+		margin: 0 6px;
+		background-color: #efefef;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+}

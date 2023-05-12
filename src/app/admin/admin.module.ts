@@ -19,6 +19,8 @@ import { UpdateSessionModalComponent } from './modals/update-session-modal/updat
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CreateNewsModalComponent } from './modals/create-news-modal/create-news-modal.component';
+import { UpdateNewsModalComponent } from './modals/update-news-modal/update-news-modal.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { MatInputModule } from '@angular/material/input';
     UpdateShowModalComponent,
     AdminSessionsComponent,
     CreateSessionModalComponent,
-    UpdateSessionModalComponent
+    UpdateSessionModalComponent,
+    CreateNewsModalComponent,
+    UpdateNewsModalComponent
   ],
   imports: [
     CommonModule,
