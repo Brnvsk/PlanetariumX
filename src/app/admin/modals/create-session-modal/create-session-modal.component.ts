@@ -5,12 +5,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApiRoutes } from 'src/app/config/network.config';
 import { IShow, IShowSession } from 'src/app/types/show.types';
 import { CreateShowModalComponent } from '../create-show-modal/create-show-modal.component';
+import { sessionsTime } from '../../config/admin.config';
 
 interface DialogData {
   shows: IShow[]
 }
-
-const sessionsTime = ['10:00', '10:30', '11:00', '11:30', '12:00']
 
 @Component({
   selector: 'app-create-session-modal',

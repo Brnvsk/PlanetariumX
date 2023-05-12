@@ -6,7 +6,7 @@ import { BookingService } from 'src/app/services/booking.service';
 import { IShow, IShowSession } from 'src/app/types/show.types';
 import { CreateSessionModalComponent } from '../../modals/create-session-modal/create-session-modal.component';
 import { UpdateSessionModalComponent } from '../../modals/update-session-modal/update-session-modal.component';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-admin-sessions',
@@ -15,9 +15,10 @@ import { Observable } from 'rxjs';
 })
 export class AdminSessionsComponent {
   public shows$: Observable<IShow[]> = this.bookingService.shows$
+  public disableBtn = false
   
   public sessions: IShowSession[] = []
-  public columns = ['id', 'showId', 'date', 'time', 'address']
+  public columns = ['id', 'showId', 'date', 'time', 'address', 'actions']
 
   constructor(
     private bookingService: BookingService,
@@ -29,7 +30,6 @@ export class AdminSessionsComponent {
   
   ngOnInit(): void {
     this.bookingService.getAllSessions().subscribe(sessions => {
-      console.log(sessions);
       this.sessions = sessions
     })
 
@@ -58,19 +58,25 @@ export class AdminSessionsComponent {
     })
   }
 
-  public edit(show: IShowSession) {
+  public edit(session: IShowSession, shows: IShow[]) {
+    this.disableBtn = true
     const dialogRef = this.dialogService.open(UpdateSessionModalComponent, {
-      data: { show }
+      data: { session, shows }
     })
-    const indexUpdated = this.sessions.findIndex(s => s.id === show.id)
+    const indexUpdated = this.sessions.findIndex(s => s.id === session.id)
 
-    dialogRef.afterClosed().subscribe((res?: { result: 'success' | 'error' | 'cancel', session?: IShowSession, message?: string }) => {
+    dialogRef.afterClosed()
+    .pipe(
+      finalize(() => this.disableBtn = false)
+    )
+    .subscribe((res?: { result: 'success' | 'error' | 'cancel', session?: IShowSession, message?: string }) => {
       if (!res) {
         return;
       }
 
       const { result } = res
       if (result === 'success' && res.session) {
+        res.session.showTitle = session.showTitle
         const newItems = this.sessions.slice()
         newItems.splice(indexUpdated, 1, res.session)
         this.sessions = newItems.slice()
@@ -78,11 +84,14 @@ export class AdminSessionsComponent {
     })
   }
 
-  public delete(show: IShowSession, e: Event) {
-    (e.target as HTMLButtonElement).disabled = true
-    const { id } = show
+  public delete(session: IShowSession, e: Event) {
+    this.disableBtn = true
+    const { id } = session
 
     this.http.delete<{ created: IShowSession }>(`${ApiRoutes.sessions}/${id}`)
+      .pipe(
+        finalize(() => this.disableBtn = false)
+      )
       .subscribe({
         next: res => {
           this.sessions = this.sessions.filter(s => s.id !== id)

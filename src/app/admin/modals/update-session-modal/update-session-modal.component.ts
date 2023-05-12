@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiRoutes } from 'src/app/config/network.config';
 import { IShow, IShowSession } from 'src/app/types/show.types';
-import { CreateShowModalComponent } from '../create-show-modal/create-show-modal.component';
+import { sessionsTime } from '../../config/admin.config';
 
 interface DialogData {
   session: IShowSession,
@@ -17,19 +17,28 @@ interface DialogData {
   styleUrls: ['./update-session-modal.component.scss']
 })
 export class UpdateSessionModalComponent {
+  public session: IShowSession;
+  
   public form;
+  public shows: IShow[];
+  public timeslots = sessionsTime
+  public messageText: string | null = null
+
+  public get today() {
+    return new Date()
+  }
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<CreateShowModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private dialogRef: MatDialogRef<UpdateSessionModalComponent>,
     private http: HttpClient,
   ) {
-    const { session, shows } = data;
-    console.log('update session modal shows:', shows);
+    const { shows, session } = data
+    this.session = session
+    this.shows = shows
     
     this.form = this.fb.group({
-      showId: [session.showId, Validators.required],
       date: [session.date, Validators.required],
       time: [session.time, Validators.required],
       address: [session.address, Validators.required],
@@ -38,6 +47,7 @@ export class UpdateSessionModalComponent {
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
+      this.messageText = null
       // console.log(res);
     });
   }
@@ -53,15 +63,17 @@ export class UpdateSessionModalComponent {
       return;
     }
 
-    this.http.patch<{ updated: IShowSession }>(`${ApiRoutes.sessions}/${this.data.session.id}`, {
+    this.http.patch<{ updated: IShowSession }>(`${ApiRoutes.sessions}/${this.session.id}`, {
       update: this.form.value
     })
       .subscribe({
         next: res => {
-          this.dialogRef.close({ result: 'success', show: res.updated })
+          this.dialogRef.close({ result: 'success', session: res.updated })
         },
         error: err => {
           console.error(err);
+          const { message } = err.error;
+          this.messageText = message ?? 'Ошибка'
         }
       })
   }

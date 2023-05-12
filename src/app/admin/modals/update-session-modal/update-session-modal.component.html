@@ -1,13 +1,49 @@
+<h1>Обновление сеанса</h1>
 <form [formGroup]="form" class="form">
 
-	<select formControlName="showId">
-		<option value="">Show 1</option>
-		<option value="">Show 2</option>
-	</select>
+	<!-- No change show in update -->
+	<!-- <mat-form-field appearance="fill">
+		<mat-label>Выберите представление</mat-label>
+		<mat-select formControlName="showId">
+		  <mat-option *ngFor="let show of shows" [value]="show.id">
+			{{ show.title }}
+		  </mat-option>
+		</mat-select>
+	</mat-form-field> -->
 
-	<input 
-	formControlName="title"
-	type="text" placeholder="Дата">
+	<div>
+		<h2>Показ: {{ session.showTitle }}</h2>
+	</div>
+
+	<mat-form-field appearance="fill">
+		<mat-label>Укажите дату</mat-label>
+		<input 
+		matInput 
+		[min]="today" 
+		[matDatepicker]="picker" 
+		formControlName="date">
+		<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+		<mat-datepicker #picker></mat-datepicker>
+	</mat-form-field>
+
+	<mat-form-field appearance="fill">
+		<mat-label>Выберите время</mat-label>
+		<mat-select formControlName="time">
+		  <mat-option *ngFor="let time of timeslots" [value]="time">
+			{{ time }}
+		  </mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input 
+		formControlName="address"
+		matInput placeholder="Адрес">
+	</mat-form-field>
+
+	<div class="message-box">
+		<span *ngIf="messageText">{{ messageText }}</span>
+	</div>
 
 	<div class="footer">
 		<button (click)="cancel()">Отмена</button>
