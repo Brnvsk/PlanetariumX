@@ -40,11 +40,11 @@ export class BookingService {
   }
 
   public saveBooking(booking: IBooking) {
-    return this.http.post<{ message: string }>(`${ApiRoutes.booking.save}`, booking)
+    return this.http.post<{ message: string }>(`${ApiRoutes.booking}`, booking)
   }
 
   public getShowBookings(showId: number) {
-    return this.http.get<{ data: IBooking[] }>(`${ApiRoutes.booking.bookings}/${showId}`).pipe(map(res => res.data))
+    return this.http.get<{ data: IBooking[] }>(`${ApiRoutes.booking}/${showId}`).pipe(map(res => res.data))
   }
 
   public getAllSessions() {

@@ -16,8 +16,7 @@ export const ApiRoutes = {
         toString: () => `${baseUrl}/api/sessions`,
     },
     booking: {
-        save: `${baseUrl}/api/booking`,
-        bookings: `${baseUrl}/api/booking/bookings`,
+        toString: () => `${baseUrl}/api/booking`,
     },
     upload: {
         toString: () => `${baseUrl}/api/upload`,

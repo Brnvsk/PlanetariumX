@@ -23,3 +23,17 @@ export interface IBooking {
     email?: string
     places: ISeatOptions[]
 }
+
+// admin booking table
+export interface IBookingTableRow {
+    booking_id: number,
+    user_email: string,
+    email: string | null,
+    show_id: number,
+    session_id: number,
+    title: string,
+    date: string,
+    time: string,
+    address: string
+    places: ISeatOptions[]
+}
