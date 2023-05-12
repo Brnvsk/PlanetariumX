@@ -17,8 +17,8 @@ export class LoginComponent {
   public form = this.fb.group({
     email: new FormControl<string>('', [
       Validators.required,
-      Validators.maxLength(19),
-      ValidationService.loginValidator()
+      // Validators.maxLength(19),
+      // ValidationService.loginValidator()
     ]),
     password: new FormControl<string>('', [
       Validators.required,

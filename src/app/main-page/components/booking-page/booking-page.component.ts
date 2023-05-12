@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DATE, Ticket } from 'src/app/shared/types/ticket.type';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from 'src/app/services/booking.service';
-import { BehaviorSubject, Observable, catchError, combineLatest, filter, map, of, shareReplay, switchMap, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, combineLatest, debounceTime, filter, map, of, shareReplay, switchMap, take, tap, withLatestFrom } from 'rxjs';
 import { IShow, IShowSession } from 'src/app/types/show.types';
 import { FormBuilder } from '@angular/forms';
 import { isEqualDates } from 'src/app/helpers/time.helper';
@@ -63,11 +63,12 @@ export class BookingPageComponent implements OnInit {
   }
 
   public isMapBlocked = false;
+  public hasSession = true;
 
   public show$!: Observable<IShow | null>
   public timeslots$!: Observable<IShowSession[]>
   public showAddresses: string[] = []
-  public timeSlotsForDate: IShowSession[] = []
+  public availableTimeslots: IShowSession[] = []
   public seatsStr = ''
   public showBookings$!: Observable<IBooking[]>
   public showSeatsMap = false;
@@ -122,7 +123,34 @@ export class BookingPageComponent implements OnInit {
       })
     )
 
-    const addresses$ = this.timeslots$.pipe(
+    combineLatest([
+      this.filtersForm.controls.date.valueChanges,
+      this.filtersForm.controls.address.valueChanges,
+      this.timeslots$,
+    ])
+    .subscribe(([date, address, timeslots]) => {
+      if (!date || !address) {
+        return
+      }
+
+      const availableTimeslots = this.getTimeOptionsForDate(timeslots, date, address)
+
+      if (availableTimeslots.length > 0) {
+        this.filtersForm.controls.time.setValue(availableTimeslots[0].time, {
+          onlySelf: true
+        })
+      } else {
+        this.filtersForm.controls.time.setValue(null, {
+          onlySelf: true
+        })
+      }
+
+      this.availableTimeslots = availableTimeslots
+      return availableTimeslots
+    })
+
+    const addresses$ = this.timeslots$
+    .pipe(
       map((timeslots) => {
         const addresses = timeslots
           .map(slot => slot.address)
@@ -131,36 +159,23 @@ export class BookingPageComponent implements OnInit {
           })
 
         this.showAddresses = addresses
+        const addressValue = timeslots && timeslots.length > 0 ? timeslots[0].address : ''
+        this.filtersForm.controls.address.setValue(addressValue)
         return addresses
-      })
-    )
-
-    const dateTimeslots$ = combineLatest([
-      this.filtersForm.controls.date.valueChanges,
-      this.timeslots$,
-    ]).pipe(
-      map(([date, timeslots]) => {
-        const timeSlotsForDate = this.getTimeOptionsForDate(date ?? this.initialDate, timeslots)
-
-        if (timeSlotsForDate.length > 0) {
-          this.filtersForm.controls.time.setValue(timeSlotsForDate[0].time, {
-            onlySelf: true
-          })
-        }
-
-        this.timeSlotsForDate = timeSlotsForDate
       })
     )
 
     combineLatest([
       this.filtersForm.valueChanges,
       this.showBookings$, 
-      dateTimeslots$,
       addresses$,
     ])
-    .subscribe(([model, bookings, _, addresses]) => {
+    .pipe(
+      debounceTime(300),
+    )
+    .subscribe(([model, bookings, addresses]) => {
       const { date, time, address } = this.filtersForm.value
-      // console.log('filters', model);
+      console.log('filters', model);
       
       if (!date || !time || !address) {
         // console.warn('Wrong form data');
@@ -191,9 +206,12 @@ export class BookingPageComponent implements OnInit {
     this.show$.pipe(
       filter(Boolean),
       withLatestFrom(this.userService.user$),
-    ).subscribe(([ show, user ]) => {
+    )
+    .pipe(take(1))
+    .subscribe(([ show, user ]) => {
+      
       const newBooking: IBookingCreate = {
-        date: date.toUTCString(),
+        date: date.toISOString(),
         time,
         address,
         places: this.pickedSeats,
@@ -250,7 +268,7 @@ export class BookingPageComponent implements OnInit {
     .pipe(
       catchError(err => {
         this.isMapBlocked = false
-        console.error(err.message)
+        console.error(err.error.message)
         return of(null)
       })
     )
@@ -333,9 +351,11 @@ export class BookingPageComponent implements OnInit {
     })
   }
 
-  private getTimeOptionsForDate(date: Date, timeslots: IShowSession[]) {
+  private getTimeOptionsForDate(timeslots: IShowSession[], date: Date, address: string) {    
     const timeSlots = timeslots.slice()
-      .filter(slot => isEqualDates(new Date(slot.date), date))
+      .filter(slot => {
+        return isEqualDates(new Date(slot.date), date) && slot.address === address
+      })
       .filter((slot, i, arr) => arr.indexOf(slot) === i)
       .sort((a, b) => Number(a.time.split(':')[0]) - Number(b.time.split(':')[0]))
 

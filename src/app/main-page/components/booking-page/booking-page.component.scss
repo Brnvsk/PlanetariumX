@@ -314,6 +314,7 @@
 .seat-map {
     width: 100%;
     overflow: auto;
+    position: relative;
     &-svg {
         width: 800px;
         height: 700px;
@@ -323,4 +324,20 @@
         opacity: 0.4;
         pointer-events: none;
     }
+}
+
+// .address-select {
+//     margin-left: auto;
+// }
+
+.filters {
+    display: flex;
+}
+
+.map-message {
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -38,7 +38,7 @@ export class CreateSessionModalComponent {
     
     this.form = this.fb.group({
       showId: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [new Date(), Validators.required],
       time: ['', Validators.required],
       address: ['', Validators.required],
     });
@@ -47,7 +47,6 @@ export class CreateSessionModalComponent {
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
       this.messageText = null
-      // console.log(res);
     });
   }
 
@@ -61,8 +60,15 @@ export class CreateSessionModalComponent {
     if (this.form.invalid) {
       return;
     }
+    
+    const { date, time, address, showId } = this.form.value
 
-    this.http.post<{ created: IShowSession }>(`${ApiRoutes.sessions}`, this.form.value)
+    this.http.post<{ created: IShowSession }>(`${ApiRoutes.sessions}`, {
+      date: date?.toDateString(),
+      time,
+      address,
+      showId
+    })
       .subscribe({
         next: res => {
           this.dialogRef.close({ result: 'success', session: res.created })

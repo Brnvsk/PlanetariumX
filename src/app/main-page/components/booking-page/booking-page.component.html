@@ -54,9 +54,9 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            <mat-radio-group class="timeslots" formControlName="time" *ngIf="timeSlotsForDate.length > 0; else noTimeSlots">
-                <mat-radio-button class="timeslot" *ngFor="let timeSlot of timeSlotsForDate" [value]="timeSlot.time">
-                    {{ timeSlot.time }}
+            <mat-radio-group class="timeslots" formControlName="time" *ngIf="availableTimeslots.length > 0">
+                <mat-radio-button class="timeslot" *ngFor="let timeslot of availableTimeslots" [value]="timeslot.time">
+                    {{ timeslot.time }}
                 </mat-radio-button>
             </mat-radio-group>
         </div>
@@ -64,7 +64,9 @@
         <div class="seat-map" [class.blocked]="isMapBlocked">
 
             <svg class="seat-map-svg" #seatMapContainer (click)="onMapClick($event)"></svg>
-
+            <ng-container *ngIf="!showSeatsMap"
+                [ngTemplateOutlet]="noTimeslots">
+            </ng-container>
         </div>
 
         <div class="booking-submit" *ngIf="showSeatsMap">
@@ -86,6 +88,6 @@
 
 </div>
 
-<ng-template #noTimeSlots>
-    <span>Нет доступного времени для выбранной даты.</span>
+<ng-template #noTimeslots>
+    <p class="map-message">Нет доступного времени для выбранного места и даты.</p>
 </ng-template>
