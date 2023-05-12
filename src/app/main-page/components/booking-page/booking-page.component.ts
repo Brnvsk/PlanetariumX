@@ -3,7 +3,7 @@ import { DATE, Ticket } from 'src/app/shared/types/ticket.type';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from 'src/app/services/booking.service';
 import { BehaviorSubject, Observable, catchError, combineLatest, filter, map, of, shareReplay, switchMap, tap, withLatestFrom } from 'rxjs';
-import { IShow, IShowTimeslot } from 'src/app/types/show.types';
+import { IShow, IShowSession } from 'src/app/types/show.types';
 import { FormBuilder } from '@angular/forms';
 import { isEqualDates } from 'src/app/helpers/time.helper';
 import { getSeatsMap } from 'src/app/config/seats.config';
@@ -65,9 +65,9 @@ export class BookingPageComponent implements OnInit {
   public isMapBlocked = false;
 
   public show$!: Observable<IShow | null>
-  public timeslots$!: Observable<IShowTimeslot[]>
+  public timeslots$!: Observable<IShowSession[]>
   public showAddresses: string[] = []
-  public timeSlotsForDate: IShowTimeslot[] = []
+  public timeSlotsForDate: IShowSession[] = []
   public seatsStr = ''
   public showBookings$!: Observable<IBooking[]>
   public showSeatsMap = false;
@@ -333,7 +333,7 @@ export class BookingPageComponent implements OnInit {
     })
   }
 
-  private getTimeOptionsForDate(date: Date, timeslots: IShowTimeslot[]) {
+  private getTimeOptionsForDate(date: Date, timeslots: IShowSession[]) {
     const timeSlots = timeslots.slice()
       .filter(slot => isEqualDates(new Date(slot.date), date))
       .filter((slot, i, arr) => arr.indexOf(slot) === i)

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, shareReplay } from 'rxjs';
-import { IShow, IShowTimeslot } from '../types/show.types';
+import { IShow, IShowSession } from '../types/show.types';
 import { HttpClient } from '@angular/common/http';
 import { ApiRoutes } from '../config/network.config';
 import { IBooking } from '../types/booking.types';
@@ -14,6 +14,10 @@ export class BookingService {
   public shows$ = this.showsStore$.asObservable().pipe(
     shareReplay(1)
   )
+
+  public set shows(value: IShow[]) {
+    this.showsStore$.next(value)
+  }
 
   constructor(private http: HttpClient) {
     this.loadAllShows()
@@ -30,7 +34,7 @@ export class BookingService {
   }
 
   public getShowTimeslots(showId: number) {
-    return this.http.get<{ data: IShowTimeslot[] }>(`${ApiRoutes.shows.timeslots}/${showId}`).pipe(
+    return this.http.get<{ data: IShowSession[] }>(`${ApiRoutes.shows.timeslots}/${showId}`).pipe(
       map(res => res.data)
     )
   }
@@ -41,5 +45,9 @@ export class BookingService {
 
   public getShowBookings(showId: number) {
     return this.http.get<{ data: IBooking[] }>(`${ApiRoutes.booking.bookings}/${showId}`).pipe(map(res => res.data))
+  }
+
+  public getAllSessions() {
+    return this.http.get<{ data: IShowSession[] }>(`${ApiRoutes.sessions}`).pipe(map(res => res.data))
   }
 }

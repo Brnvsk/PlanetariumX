@@ -36,10 +36,14 @@ export class AdminShowsComponent implements OnInit {
 
     })
 
-    dialogRef.afterClosed().subscribe((res: { result: 'success' | 'error' | 'cancel', show?: IShow }) => {
+    dialogRef.afterClosed().subscribe((res?: { result: 'success' | 'error' | 'cancel', show?: IShow }) => {
+      if (!res) {
+        return;
+      }
       const { result } = res
       if (result === 'success' && res.show) {
         this.shows = [...this.shows, res.show]
+        this.bookingService.shows = this.shows
       }
     })
   }
@@ -50,7 +54,10 @@ export class AdminShowsComponent implements OnInit {
     })
     const indexUpdated = this.shows.findIndex(s => s.id === show.id)
 
-    dialogRef.afterClosed().subscribe((res: { result: 'success' | 'error' | 'cancel', show?: IShow }) => {
+    dialogRef.afterClosed().subscribe((res?: { result: 'success' | 'error' | 'cancel', show?: IShow }) => {
+      if (!res) {
+        return;
+      }
       const { result } = res
       if (result === 'success' && res.show) {
         const newItems = this.shows.slice()

@@ -25,7 +25,7 @@
             <a class="login-button" routerLink="./personal">
                 Кабинет
             </a>
-            <a routerLink="/admin/shows">
+            <a *ngIf="user.role === 'admin'" routerLink="/admin/shows">
                 Администрация
             </a>
         </ng-container>

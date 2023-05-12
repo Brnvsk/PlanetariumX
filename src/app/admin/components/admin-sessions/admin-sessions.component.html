@@ -1,0 +1,57 @@
+
+<ng-container *ngIf="shows$ | async as shows; else loader">
+
+	<div class="title-wrapper container">
+		<span class="subtitle">Управление</span>
+		<h1 class="title">Представления</h1>
+	</div>
+	
+	<div class="main container">
+	
+		<button (click)="create(shows)">Добавить сеанс</button>
+	
+		<table mat-table [dataSource]="sessions" class="mat-elevation-z8">
+		  
+			<ng-container matColumnDef="id">
+			  <th mat-header-cell *matHeaderCellDef>No.</th>
+			  <td mat-cell *matCellDef="let session"> {{session.id}} </td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="showId">
+			  <th mat-header-cell *matHeaderCellDef>Представление</th>
+			  <td mat-cell *matCellDef="let session">{{session.showTitle}}</td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="date">
+			  <th mat-header-cell *matHeaderCellDef>Дата</th>
+			  <td mat-cell *matCellDef="let session"> {{session.date | date : 'dd.MM.yy'}} </td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="time">
+			  <th mat-header-cell *matHeaderCellDef>Время</th>
+			  <td mat-cell *matCellDef="let session"> {{session.time}} </td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="address">
+			  <th mat-header-cell *matHeaderCellDef>Улица</th>
+			  <td mat-cell *matCellDef="let session">{{session.address}}</td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="actions">
+			  <th mat-header-cell *matHeaderCellDef class="right">Управление</th>
+			  <td mat-cell *matCellDef="let session" class="right">
+				<button (click)="edit(session)">Редактировать</button>
+				<button (click)="delete(session, $event)">Удалить</button>
+			  </td>
+			</ng-container>
+		  
+			<tr mat-header-row *matHeaderRowDef="columns"></tr>
+			<tr mat-row *matRowDef="let row; columns: columns;"></tr>
+		</table>
+	
+	</div>
+</ng-container>
+
+<ng-template #loader>
+	<p>Loading...</p>
+</ng-template>

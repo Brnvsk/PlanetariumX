@@ -1,0 +1,16 @@
+<form [formGroup]="form" class="form">
+
+	<select formControlName="showId">
+		<option value="">Show 1</option>
+		<option value="">Show 2</option>
+	</select>
+
+	<input 
+	formControlName="title"
+	type="text" placeholder="Дата">
+
+	<div class="footer">
+		<button (click)="cancel()">Отмена</button>
+		<button (click)="submit()">Обновить</button>
+	</div>
+</form>

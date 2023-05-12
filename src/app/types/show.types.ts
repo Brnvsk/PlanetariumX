@@ -9,10 +9,11 @@ export interface IShow {
     // timeSlots: IShowTimeslot[]
 }
 
-export interface IShowTimeslot {
+export interface IShowSession {
     id: number,
     showId: number,
     date: string,
     time: string,
     address: string
+    showTitle?: string
 }
