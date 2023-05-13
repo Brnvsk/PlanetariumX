@@ -4,6 +4,7 @@ export const ApiRoutes = {
     users: {
         register: `${baseUrl}/api/users/register`,
         login: `${baseUrl}/api/users/login`,
+        toString: () => `${baseUrl}/api/users`,
     },
     news: {
         tags: `${baseUrl}/api/news/tags`,

@@ -20,10 +20,12 @@
     <div class="tags">
         <h2 class="section-title">Мои интересы</h2>
         <div class="tags-list">
-            <span *ngFor="let tag of user.tags" class="tag-item">
+            <ng-container *ngIf="user.tags.length > 0">
+              <span *ngFor="let tag of user.tags" class="tag-item">
                 {{ tag.name }}
-            </span>
-            <button (click)="editTags(user.tags)" class="tag-item-add">
+              </span>
+            </ng-container>
+            <button (click)="editTags(user)" class="tag-item-add">
                 Изменить
             </button>
         </div>

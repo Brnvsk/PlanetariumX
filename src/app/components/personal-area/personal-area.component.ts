@@ -1,16 +1,16 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable, combineLatest, filter, map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, of, switchMap } from 'rxjs';
 import { AvatarsMap } from 'src/app/config/avatars.config';
-import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
-import { NewsService } from 'src/app/services/news.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/types/user.type';
-import { IBooking, IUserBooking } from 'src/app/types/booking.types';
+import { IUserBooking } from 'src/app/types/booking.types';
 import { INewsTag } from 'src/app/types/news.types';
 import { EditNewsTagsModalComponent } from '../modals/edit-news-tags-modal/edit-news-tags-modal.component';
+import { HttpClient } from '@angular/common/http';
+import { ApiRoutes } from 'src/app/config/network.config';
 
 
 @Component({
@@ -19,8 +19,9 @@ import { EditNewsTagsModalComponent } from '../modals/edit-news-tags-modal/edit-
   styleUrls: ['./personal-area.component.scss']
 })
 export class PersonalAreaComponent implements OnInit {
-  public user$ = this.userService.user$;
-  public userTags: INewsTag[] = [];
+  private user$$ = new BehaviorSubject<User | null>(null)
+  
+  public user$ = this.user$$.asObservable()
 
   public bookings: IUserBooking[] = []
 
@@ -31,15 +32,18 @@ export class PersonalAreaComponent implements OnInit {
   }
 
   constructor(
-    private authService: AuthService,
     private userService: UserService,
-    private newsService: NewsService,
     private dialog: MatDialog,
     private bookingService: BookingService,
+    private http: HttpClient,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.userService.user$.subscribe(user => [
+      this.user$$.next(user)
+    ])
+
     this.user$.pipe(
       switchMap(user => {
         if (user) {
@@ -50,6 +54,7 @@ export class PersonalAreaComponent implements OnInit {
     ).subscribe(res => {
       this.bookings = res ? res : []
     })
+
   }
 
   logout() {
@@ -63,16 +68,23 @@ export class PersonalAreaComponent implements OnInit {
     return `assets/images/user-bonsticks/${avatar.src}`
   }
 
-  public editTags(userTags: INewsTag[]) {
+  public editTags(user: User) {
+    const { tags: userTags } = user
     const dialogRef = this.dialog.open(EditNewsTagsModalComponent, {
       data: { userTags }
     })
 
     dialogRef.afterClosed().subscribe((res?: { result: 'cancel' | 'success' | 'error', tags?: ( INewsTag & { checked: boolean } )[] }) => {
-      // console.log(res);
       if (res && res.result === 'success' && res.tags != null) {
         const tagsStr = res.tags.length > 0 ? res.tags.filter(t => t.checked).map(t => t.id).join('-') : ''
-        console.log(tagsStr);
+
+        this.http.patch<{ updated: User }>(`${ApiRoutes.users}/${user.id}`, {
+          update: {
+            news_tags: tagsStr
+          }
+        }).subscribe(res => {
+          this.user$$.next(res.updated)
+        })
       }
     })
   }
