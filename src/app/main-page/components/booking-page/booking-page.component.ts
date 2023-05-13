@@ -257,6 +257,7 @@ export class BookingPageComponent implements OnInit {
 
   private saveBooking(bookingRequest: IBookingCreate){
     this.bookingService.saveBooking({
+      id: -1,
       date: bookingRequest.date,
       time: bookingRequest.time,
       address: bookingRequest.address,

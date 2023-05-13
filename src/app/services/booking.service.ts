@@ -3,7 +3,7 @@ import { BehaviorSubject, map, shareReplay } from 'rxjs';
 import { IShow, IShowSession } from '../types/show.types';
 import { HttpClient } from '@angular/common/http';
 import { ApiRoutes } from '../config/network.config';
-import { IBooking } from '../types/booking.types';
+import { IBooking, IUserBooking } from '../types/booking.types';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +45,10 @@ export class BookingService {
 
   public getShowBookings(showId: number) {
     return this.http.get<{ data: IBooking[] }>(`${ApiRoutes.booking}/${showId}`).pipe(map(res => res.data))
+  }
+
+  public getUserBookings(userId: number) {
+    return this.http.get<{ data: IUserBooking[] }>(`${ApiRoutes.booking}/user/${userId}`).pipe(map(res => res.data))
   }
 
   public getAllSessions() {

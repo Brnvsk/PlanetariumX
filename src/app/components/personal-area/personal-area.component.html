@@ -1,14 +1,65 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="user$ | async as user">
+  <div class="wrapper-view">
     <h3>/ Личный кабинет</h3>
-    <div *ngIf="user$ | async as user" class="wrapper-view">
-        <div class="text">
-            <h3>Добро пожаловать, {{user.login}} !</h3>
-            <p>Текущая скидка — <span>{{ 20 }}%</span></p>
-        </div>
-        <img [src]="getAvatar(user)" alt="">
 
-        <div class="btn">
-            <button mat-flat-button color="primary" (click)="logout()">Выйти</button>
-        </div>
+    <div class="header">
+      <div class="row">
+        <h2 class="title">Добро пожаловать, {{ user.login }} !</h2>
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="logout()"
+          class="logout-btn"
+        >
+          Выйти
+        </button>
+      </div>
+      <div class="tags"></div>
     </div>
+
+    <div class="bookings">
+      <h2>Мои билеты</h2>
+
+      <mat-accordion class="bookings-list">
+
+        <mat-expansion-panel *ngFor="let booking of bookings">
+            <mat-expansion-panel-header class="booking-item-header">
+                <mat-panel-title>Билет #{{ booking.booking_id }}</mat-panel-title>
+
+                <mat-panel-description>
+
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <h4 class="booking-show">{{ booking.title }}</h4>
+
+            <div class="booking-details">
+                <p>
+                    Дата: {{ booking.date | date : 'dd.MM.yyyy' }}
+                </p>
+                <p>
+                    Адрес: {{ booking.address }}
+                </p>
+                <p>
+                    Время: {{ booking.time }}
+                </p>
+                <p>
+                    Билет отправлен: {{ booking.email ?? booking.user_email }}
+                </p>
+            </div>
+
+            <div class="booking-places">
+                <p>Места:</p>
+                <p *ngFor="let place of booking.places">
+                    {{ place.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{ place.row }}, место {{ place.place }}
+                </p>
+            </div>
+          
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </div>
+
+    <img class="avatar-img" [src]="getAvatar(user)" />
+  </div>
 </div>

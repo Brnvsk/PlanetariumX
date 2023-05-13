@@ -15,6 +15,7 @@ export interface IBookingCreate {
 
 // booking record
 export interface IBooking {
+    id: number,
     address: string
     date: string
     time: string
@@ -26,6 +27,20 @@ export interface IBooking {
 
 // admin booking table
 export interface IBookingTableRow {
+    booking_id: number,
+    user_email: string,
+    email: string | null,
+    show_id: number,
+    session_id: number,
+    title: string,
+    date: string,
+    time: string,
+    address: string
+    places: ISeatOptions[]
+}
+
+// user profile booking
+export interface IUserBooking {
     booking_id: number,
     user_email: string,
     email: string | null,

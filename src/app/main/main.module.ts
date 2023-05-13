@@ -18,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from '../components/login/login.component';
 import { PersonalAreaComponent } from '../components/personal-area/personal-area.component';
 import { RegistrationComponent } from '../components/registration/registration.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { RegistrationComponent } from '../components/registration/registration.c
     MatSidenavModule,
     MatChipsModule,
     MatIconModule,
+    MatExpansionModule,
   ]
 })
 export class MainModule { }

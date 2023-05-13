@@ -1,58 +1,53 @@
-:host {
+.wrapper {
+  margin: 0 auto;
+  max-width: calc(100% - 100px);
+  background-color: #E7D795;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
 
-  .wrapper {
-    width: 80%;
-    height: 100%;
-    margin: 0 auto;
-    h3 {
-      color: #6858DC;
-    }
-    .wrapper-view {
-      height: 35%;
-      background-color: #E7D795;
-      border-radius: 40px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      color: #000000;
-      position: relative;
-      img {
-        position: absolute;
-        width: 250px;
-        left: 55%;
-        bottom: 0;
-      }
-      .text {
-        h3 {
-          color: #000000;
-          font-family: ttTravel-bold;
-          font-size: 18px;
-        }
-        p {
-          display: flex;
-          align-items: center;
-          span {
-            padding-left: 5px;
-            font-size: 30px;
-            font-family: ttTravel-bold;
-            color: #6858DC;
-          }
-        }
-      }
-      .btn {
-        position: relative;
-        left: 20%;
-        display: flex;
-        align-items: end;
-        padding-bottom: 20px;
-        button {
-          border-radius: 15px;
-          width: 120px;
-          height: 50px;
-          background-color: #6858DC;
-        }
-      }
+.wrapper-view {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 240px;
+  min-height: max(60vh, 400px);
+  position: relative;
+}
 
-    }
+.title {
+  color: #6858dc;
+  font-family: ttTravel-bold;
+  font-size: 32px;
+  line-height: 12px;
+}
+
+.header {
+
+  & .row {
+    display: flex;
+    align-items: center;
   }
+}
+
+.booking {
+  &-item-header {
+    background-color: #c8c4e8;
+  }
+
+  &-show {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+.logout-btn {
+  margin-left: auto;
+}
+
+.avatar-img {
+  height: 360px;
+  position: absolute;
+  bottom: 0;
+  right: -60px;
+  object-fit: contain;
 }
