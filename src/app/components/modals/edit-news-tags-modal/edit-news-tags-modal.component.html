@@ -1,0 +1,22 @@
+<div class="wrapper">
+	<h1>Изменение интересов</h1>
+
+	<div [formGroup]="form">
+		<h2>Выберите интересы:</h2>
+		<div class="tags-list" formArrayName="tags">
+			<label 
+			[formGroupName]="i"
+			*ngFor="let tag of form.controls.tags.controls; let i = index" 
+			class="tag-item">
+				<mat-checkbox formControlName="checked">
+					{{ tag.value.name }}
+				</mat-checkbox>
+			</label>
+		</div>
+	</div>
+
+	<div class="footer">
+		<button (click)="cancel()">Отмена</button>
+		<button (click)="submit()">Сохранить</button>
+	</div>
+</div>

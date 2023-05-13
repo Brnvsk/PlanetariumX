@@ -19,6 +19,8 @@ import { LoginComponent } from '../components/login/login.component';
 import { PersonalAreaComponent } from '../components/personal-area/personal-area.component';
 import { RegistrationComponent } from '../components/registration/registration.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { EditNewsTagsModalComponent } from '../components/modals/edit-news-tags-modal/edit-news-tags-modal.component';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     FooterComponent,
     LoginComponent,
     RegistrationComponent,
+    EditNewsTagsModalComponent,
     PersonalAreaComponent,
   ],
   imports: [
@@ -43,6 +46,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatSidenavModule,
     MatChipsModule,
     MatIconModule,
+    MatCheckboxModule,
     MatExpansionModule,
   ]
 })

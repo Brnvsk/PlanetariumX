@@ -17,8 +17,20 @@
       <div class="tags"></div>
     </div>
 
+    <div class="tags">
+        <h2 class="section-title">Мои интересы</h2>
+        <div class="tags-list">
+            <span *ngFor="let tag of user.tags" class="tag-item">
+                {{ tag.name }}
+            </span>
+            <button (click)="editTags(user.tags)" class="tag-item-add">
+                Изменить
+            </button>
+        </div>
+    </div>  
+
     <div class="bookings">
-      <h2>Мои билеты</h2>
+      <h2 class="section-title">Мои билеты</h2>
 
       <mat-accordion class="bookings-list">
 

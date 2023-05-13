@@ -1,3 +1,4 @@
+import { INewsTag } from "src/app/types/news.types";
 import { News } from "./news.type";
 import { RoleUsers } from "./role-users.enum";
 
@@ -10,7 +11,7 @@ export interface User {
   email: string,
   role: UserRole,
   avatarId: number | null,
-  interested: News[],
+  tags: INewsTag[],
   discount: number
 }
 

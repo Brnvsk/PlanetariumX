@@ -14,6 +14,42 @@
   position: relative;
 }
 
+.section-title {
+  color: #6858dc;
+}
+
+.tags-list {
+  display: flex;
+  gap: 10px;
+}
+.tag-item {
+  padding: 10px 18px;
+  background-color: #8e47f9;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 2px solid #8e47f9;
+  transition: .3s;
+  
+  &:hover {
+    background-color: transparent;
+    color: #8e47f9;
+  }
+}
+.tag-item-add {
+  padding: 10px 18px;
+  border: 2px solid #8e47f9;
+  border-radius: 20px;
+  color: #8e47f9;
+  background-color: transparent;
+  cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    color: #fff;
+    background-color: #8e47f9;
+  }
+}
+
 .title {
   color: #6858dc;
   font-family: ttTravel-bold;
