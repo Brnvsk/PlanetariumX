@@ -81,7 +81,7 @@
 
       <div class="news-list">
 
-        <div *ngFor="let item of news" class="news-item">
+        <div (click)="openNewsModal(item)" *ngFor="let item of news" class="news-item">
             <img class="news-item-photo" [src]="'http://localhost:5050/news/' + item.photo" alt="">
             <div class="news-item-content">
               <h3>{{ item.title }}</h3>

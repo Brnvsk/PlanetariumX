@@ -11,6 +11,7 @@ import { INews, INewsTag } from 'src/app/types/news.types';
 import { EditNewsTagsModalComponent } from '../modals/edit-news-tags-modal/edit-news-tags-modal.component';
 import { HttpClient } from '@angular/common/http';
 import { ApiRoutes } from 'src/app/config/network.config';
+import { NewsContentModalComponent } from '../modals/news-content-modal/news-content-modal.component';
 
 
 @Component({
@@ -96,6 +97,10 @@ export class PersonalAreaComponent implements OnInit {
         })
       }
     })
+  }
+
+  public openNewsModal(item: INews) {    
+    this.dialog.open(NewsContentModalComponent, { data: item })
   }
 
 }
