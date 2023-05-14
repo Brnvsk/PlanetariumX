@@ -75,12 +75,11 @@ export class UpdateNewsModalComponent {
     }
     
     const tags = this.form.value.tags
-    const tagsStr = tags && tags.length > 0 ? tags.join('-') : ''
 
     this.http.patch<{ updated: INews }>(`${ApiRoutes.news}/${this.data.item.id}`, {
       update: {
         ...this.form.value,
-        tags: tagsStr,
+        tags,
       }
     })
       .subscribe({

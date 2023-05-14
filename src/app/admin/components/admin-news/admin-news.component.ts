@@ -67,7 +67,6 @@ export class AdminNewsComponent {
         const { item } = res
 
         const newItems = this.news.slice()
-        item.tags = item.tags && item.tags !== '' ? item.tags.split('-').map((tagId: string) => this.tags.find(t => t.id === Number(tagId))) : []
 
         newItems.splice(indexUpdated, 1, item)
 

@@ -22,6 +22,7 @@ export class PersonalAreaComponent implements OnInit {
   private user$$ = new BehaviorSubject<User | null>(null)
   
   public user$ = this.user$$.asObservable()
+  public news = []
 
   public bookings: IUserBooking[] = []
 

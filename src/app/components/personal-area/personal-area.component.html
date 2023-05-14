@@ -31,8 +31,8 @@
         </div>
     </div>  
 
-    <div class="bookings">
-      <h2 class="section-title">Мои билеты</h2>
+    <div class="booking">
+      <h2 class="section-title">Ваши билеты</h2>
 
       <mat-accordion class="bookings-list">
 
@@ -72,8 +72,21 @@
         </mat-expansion-panel>
       </mat-accordion>
 
+      <img *ngIf="bookings.length > 0" class="avatar-img" [src]="getAvatar(user)" />
+
     </div>
 
-    <img class="avatar-img" [src]="getAvatar(user)" />
+    <div class="news">
+      <h2 class="section-title">Новости для вас</h2>
+
+      <div class="news-list">
+
+        <div *ngFor="let item of news" class="news-item">
+          
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </div>

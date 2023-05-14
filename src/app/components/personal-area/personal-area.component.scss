@@ -9,9 +9,7 @@
 .wrapper-view {
   max-width: 1400px;
   margin: 0 auto;
-  padding-bottom: 240px;
   min-height: max(60vh, 400px);
-  position: relative;
 }
 
 .section-title {
@@ -65,7 +63,11 @@
   }
 }
 
+
 .booking {
+  position: relative;
+  padding-bottom: 200px;
+
   &-item-header {
     background-color: #c8c4e8;
   }
@@ -81,7 +83,7 @@
 }
 
 .avatar-img {
-  height: 360px;
+  height: 260px;
   position: absolute;
   bottom: 0;
   right: -60px;

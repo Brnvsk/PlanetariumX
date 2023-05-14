@@ -78,15 +78,11 @@ export class CreateNewsModalComponent {
 
     this.http.post<{ created: INews }>(`${ApiRoutes.news}`, {
       title, text, photo,
-      tags: tags?.join('-')
+      tags,
     })
       .subscribe({
         next: res => {
-          const item = {
-            ...res.created,
-            tags: tags?.map(tagId => this.tags.find(tag => tag.id === Number(tagId)))
-          }
-          this.dialogRef.close({ result: 'success', news: item })
+          this.dialogRef.close({ result: 'success', news: res.created })
         },
         error: err => {
           console.error(err);
