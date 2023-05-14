@@ -32,31 +32,6 @@ export class BookingPageComponent implements OnInit {
   private seatmapSvgEl: SVGSVGElement | null = null
   
   public filtersForm;
-  public selectedSession!: Ticket;
-  public allDate: DATE[] = [];
-  public month: string[] = [
-    'Январь',
-    'Февраль',
-    'Март',
-    'Апрель',
-    'Май',
-    'Июнь',
-    'Июль',
-    'Август',
-    'Сентябрь',
-    'Октябрь',
-    'Ноябрь',
-    'Декабрь'
-  ]
-  public day: string[] = [
-    'Понедельник',
-    'Вторник',
-    'Среда',
-    'Четверг',
-    'Пятница',
-    'Суббота',
-    'Воскресенье'
-  ]
 
   @ViewChild('seatMapContainer') public set seatMapContainer(el: ElementRef<SVGSVGElement>) {
     this.seatmapSvgEl = el && el.nativeElement ? el.nativeElement : null

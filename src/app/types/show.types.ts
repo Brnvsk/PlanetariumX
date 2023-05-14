@@ -6,7 +6,8 @@ export interface IShow {
     tags: string
     poster_src: string
     price: number
-    // timeSlots: IShowTimeslot[]
+    director?: string
+    country?: string
 }
 
 export interface IShowSession {

@@ -6,17 +6,13 @@
                 <h4>Описание</h4>
                 <span>{{ show.descr }}</span>
             </div>
-            <div class="text">
+            <div class="text" *ngIf="show.director">
                 <h4>Режиссер</h4>
-                <span>Кристофер Нолан</span>
+                <span>{{ show.director }}</span>
             </div>
-            <div class="text">
-                <h4>Жанр</h4>
-                <span>{{show.tags}}</span>
-            </div>
-            <div class="text">
+            <div class="text" *ngIf="show.country">
                 <h4>Страна</h4>
-                <span>США, Великобритания, Канада</span>
+                <span>{{ show.country }}</span>
             </div>
         </div>
     </div>
@@ -25,13 +21,6 @@
         <div class="rightside-header">
             <span class="title">{{show.title}}</span>
             <div class="header-info">
-                <div class="time">
-                    <img src="assets/images/clock.png" alt="">
-                    <span>169 мин.</span>
-                </div>
-                <div class="room">
-                    <span>зал 1</span>
-                </div>
             </div>
         </div>
 

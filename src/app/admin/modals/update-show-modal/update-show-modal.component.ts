@@ -29,8 +29,8 @@ export class UpdateShowModalComponent {
       descr: [show.descr, Validators.required],
       price: [show.price, Validators.required],
       posterPath: [show.poster_src, Validators.required],
-      director: [''],
-      country: [''],
+      director: [show.director ?? ''],
+      country: [show.country ?? ''],
     });
   }
 
