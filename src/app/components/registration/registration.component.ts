@@ -73,7 +73,7 @@ export class RegistrationComponent {
         this.activeAvatarIndex = avatarIndex !== -1 ? avatarIndex : 0;
     }
 
-    news(event: any): void {
+    changeNews(event: any): void {
         this.tempUser!.interested.find(el => el === event.source.value) ? this.isSelected = false : this.isSelected = true;
         if (this.isSelected) {
             this.tempUser!.interested.push(event.source.value);

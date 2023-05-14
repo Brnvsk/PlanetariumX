@@ -22,7 +22,7 @@
     <div class="logIn">
 
         <ng-container *ngIf="user$ | async as user; else noUser">
-            <a class="login-button" routerLink="./personal">
+            <a *ngIf="user.role === 'user'" class="login-button" routerLink="./personal">
                 Кабинет
             </a>
             <a *ngIf="user.role === 'admin'" routerLink="/admin/shows">

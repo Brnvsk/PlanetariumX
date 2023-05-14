@@ -23,8 +23,9 @@ export class CreateShowModalComponent implements OnInit {
       title: ['', Validators.required],
       descr: ['', Validators.required],
       price: ['', Validators.required],
-      // add multiselect for tags
       posterPath: ['', Validators.required],
+      director: [''],
+      country: [''],
     });
   }
 

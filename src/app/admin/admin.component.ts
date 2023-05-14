@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,9 +12,16 @@ export class AdminComponent {
 
   constructor(
     private location: Location,
+    private userService: UserService,
+    private router: Router,
   ) {}
 
   public goBack() {
     this.location.back()
+  }
+
+  public logout() {
+    this.userService.logout()
+    this.router.navigateByUrl('/main/app')
   }
 }

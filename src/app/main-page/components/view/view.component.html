@@ -4,7 +4,7 @@
         <div class="leftside">
             <h3>Мобильный планетарий<br/> в <span>Минске</span></h3>
             <span>Полет к звездам — реальность</span>
-            <button mat-flat-button color="primary" (click)="forwardSession()">Выбрать сеанс</button>
+            <a mat-flat-button color="primary" routerLink="../sessions">Выбрать сеанс</a>
         </div>
 
         <div class="rightside">
@@ -46,29 +46,11 @@
             <span>Расписание сеансов</span>
         </div>
         <div class="rental-slides">
-            <div class="rental-slide">
-                <img src="assets/images/interstellarPict.png" alt="">
-                <h3>Интерстеллар</h3>
-                <span>Фантастика, драма, приключения</span>
-                <button mat-flat-button color="primary">Купить билет</button>
-            </div>
-            <div class="rental-slide">
-                <img src="assets/images/starWarsPict.png" alt="">
-                <h3>Интерстеллар</h3>
-                <span>Фантастика, драма, приключения</span>
-                <button mat-flat-button color="primary">Купить билет</button>
-            </div>
-            <div class="rental-slide">
-                <img src="assets/images/oblivionPict.png" alt="">
-                <h3>Интерстеллар</h3>
-                <span>Фантастика, драма, приключения</span>
-                <button mat-flat-button color="primary">Купить билет</button>
-            </div>
-            <div class="rental-slide">
-                <img src="assets/images/littlePrincePict.png" alt="">
-                <h3>Интерстеллар</h3>
-                <span>Фантастика, драма, приключения</span>
-                <button mat-flat-button color="primary">Купить билет</button>
+            <div class="rental-slide" *ngFor="let show of shows">
+                <img [src]="'http://localhost:5050/news/' + show.poster_src" alt="">
+                <h3>{{ show.title }}</h3>
+                <span>{{ show.descr }}</span>
+                <a mat-flat-button color="primary" routerLink="../sessions">Купить билет</a>
             </div>
         </div>
     </div>
@@ -77,9 +59,24 @@
 <section>
     <div class="news-wrapper">
         <span class="news-wrapper-title">Новости планетария</span>
-        <div class="news"></div>
+        <div class="news">
+            <div *ngFor="let item of news" class="news-item">
+                <img [src]="'http://localhost:5050/news/' + item.photo" alt="">
+                <h1>
+                    {{ item.title }}
+                </h1>
+                <p>
+                    {{ item.text[0] }}
+                </p>
+                <div class="news-item-tags" *ngIf="item.tags.length > 0">
+                    <span *ngFor="let tag of item.tags" class="tag-item">
+                        {{ tag.name }}
+                    </span>
+                </div>
+            </div>
+        </div>
         <div class="more-news">
-            <a (click)="news()">Больше новостей</a>
+            <a routerLink="../news">Больше новостей</a>
         </div>
     </div>
 </section>
@@ -110,7 +107,7 @@
 </section>
 
 
-<section>
+<!-- <section>
     <div class="wrapper-customQuestion">
         <div class="customQuestion-content">
             <h3>Остались вопросы?</h3>
@@ -129,4 +126,4 @@
             <button mat-flat-button color="primary">Отправить</button>
         </div>
     </div>
-</section>
+</section> -->

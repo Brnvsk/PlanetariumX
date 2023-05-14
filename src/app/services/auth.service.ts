@@ -15,16 +15,6 @@ import { UserService } from './user.service';
 })
 export class AuthService {
 
-  private _logTitle$: BehaviorSubject<RoleUsers> = new BehaviorSubject<RoleUsers>(localStorage.getItem('userEmail') ? RoleUsers.USER : RoleUsers.NONAME);
-
-  get logTitle$() {
-    return this._logTitle$.asObservable();
-  }
-
-  changeRoles(role: RoleUsers) {
-    this._logTitle$.next(role);
-  }
-
   constructor(
     private router: Router,
     private http: HttpClient
@@ -52,7 +42,7 @@ export class AuthService {
       email,
       login,
       password,
-      newsTags: interested.join('%'),
+      tags: interested,
       avatarId
     }
 

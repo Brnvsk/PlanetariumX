@@ -8,11 +8,13 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { NewsContentModalComponent } from './components/modals/news-content-modal/news-content-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    NewsContentModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
 
   public user$ = this.userService.user$;
   public userRoles!: RoleUsers;
-  public title$: Observable<RoleUsers> = this.authService.logTitle$;
 
   public get roleUsers(): typeof RoleUsers {
     return RoleUsers;
@@ -35,15 +34,7 @@ export class HeaderComponent implements OnInit {
     private forwards: ForwardsService,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-  ) {
-    authService.logTitle$.subscribe(value => {
-
-      this.userRoles = value;
-
-    });
-
-
-  }
+  ) { }
 
   ngOnInit(): void {
 

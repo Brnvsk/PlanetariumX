@@ -28,8 +28,9 @@ export class UpdateShowModalComponent {
       title: [show.title, Validators.required],
       descr: [show.descr, Validators.required],
       price: [show.price, Validators.required],
-      // add multiselect for tags
       posterPath: [show.poster_src, Validators.required],
+      director: [''],
+      country: [''],
     });
   }
 

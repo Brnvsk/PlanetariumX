@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, filter, map, of, shareReplay } from 'rxjs';
 import { User } from '../shared/types/user.type';
 import { ApiRoutes } from '../config/network.config';
+import { INews } from '../types/news.types';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,13 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.user$ = this.userStore$.asObservable().pipe(shareReplay(1))
+  }
+
+  public getNews(id: number) {
+    return this.http.get<{ data: INews[] }>(`${ApiRoutes.users}/${id}/news`)
+      .pipe(
+        map(res => res.data)
+      )
   }
 
   public getUserByToken(token: string | null) {

@@ -64,25 +64,32 @@
                     }
                 }
             }
-            .newsA {
+            .news-container {
                 display: flex;
                 flex-direction: row;
-                gap: 2%;
+                gap: 15px;
                 padding-bottom: 40px;
                 flex-wrap: wrap;
-                .new {
+                .news-item {
                     width: 23%;
                     display: flex;
                     flex-direction: column;
                     padding-bottom: 50px;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    background-color: #fff;
+                    color: #131617;
                     .new-tags {
                         padding: 10px 0;
                         span {
                             padding-left: 5px;
-                            color: #E7D795;
+                            font-size: 18px;
+                            color: #6858DC;
                         }
                     }
                     img {
+                        height: 240px;
+                        object-fit: cover;
                         cursor: pointer;
                     }
                 }

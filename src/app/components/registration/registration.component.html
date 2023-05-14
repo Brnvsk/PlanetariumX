@@ -75,8 +75,8 @@
             <span>Какие новости о космосе вам интересны?</span>
             <div class="news">
                 <ng-container *ngFor="let tag of tags$ | async">
-                    <mat-chip-listbox aria-label="Fish selection">
-                        <mat-chip-option [value]="tag.tag" (selectionChange)="news($event)">{{tag.name}}</mat-chip-option>
+                    <mat-chip-listbox>
+                        <mat-chip-option [value]="tag.id" (selectionChange)="changeNews($event)">{{tag.name}}</mat-chip-option>
                     </mat-chip-listbox>
                 </ng-container>
             </div>

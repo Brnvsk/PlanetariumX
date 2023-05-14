@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { BehaviorSubject, of, switchMap } from 'rxjs';
+import { BehaviorSubject, forkJoin, of, switchMap } from 'rxjs';
 import { AvatarsMap } from 'src/app/config/avatars.config';
 import { BookingService } from 'src/app/services/booking.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/types/user.type';
 import { IUserBooking } from 'src/app/types/booking.types';
-import { INewsTag } from 'src/app/types/news.types';
+import { INews, INewsTag } from 'src/app/types/news.types';
 import { EditNewsTagsModalComponent } from '../modals/edit-news-tags-modal/edit-news-tags-modal.component';
 import { HttpClient } from '@angular/common/http';
 import { ApiRoutes } from 'src/app/config/network.config';
@@ -22,7 +22,7 @@ export class PersonalAreaComponent implements OnInit {
   private user$$ = new BehaviorSubject<User | null>(null)
   
   public user$ = this.user$$.asObservable()
-  public news = []
+  public news: INews[] = []
 
   public bookings: IUserBooking[] = []
 
@@ -45,15 +45,23 @@ export class PersonalAreaComponent implements OnInit {
       this.user$$.next(user)
     ])
 
-    this.user$.pipe(
+    this.user$
+    .pipe(
       switchMap(user => {
         if (user) {
-          return this.bookingService.getUserBookings(user?.id)
+          return forkJoin({
+            bookings: this.bookingService.getUserBookings(user.id),
+            news: this.userService.getNews(user.id),
+          })
         }
         return of(null)
       })
-    ).subscribe(res => {
-      this.bookings = res ? res : []
+    )
+    .subscribe(res => {
+      if (res) {
+        this.bookings = res.bookings ?? []
+        this.news = res.news ?? []
+      }
     })
 
   }
@@ -77,11 +85,11 @@ export class PersonalAreaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res?: { result: 'cancel' | 'success' | 'error', tags?: ( INewsTag & { checked: boolean } )[] }) => {
       if (res && res.result === 'success' && res.tags != null) {
-        const tagsStr = res.tags.length > 0 ? res.tags.filter(t => t.checked).map(t => t.id).join('-') : ''
+        const tags = res.tags.length > 0 ? res.tags.filter(t => t.checked).map(t => t.id) : []
 
         this.http.patch<{ updated: User }>(`${ApiRoutes.users}/${user.id}`, {
           update: {
-            news_tags: tagsStr
+            tags,
           }
         }).subscribe(res => {
           this.user$$.next(res.updated)

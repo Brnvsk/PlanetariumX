@@ -1,50 +1,42 @@
-import { AfterContentInit, Component, Input } from '@angular/core';
+import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NewsContentModalComponent } from 'src/app/components/modals/news-content-modal/news-content-modal.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { NewsService } from 'src/app/services/news.service';
 import { News, OneNews } from 'src/app/shared/types/news.type';
 import { news } from 'src/app/types/mocData';
+import { INews } from 'src/app/types/news.types';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })
-export class NewsComponent implements AfterContentInit {
+export class NewsComponent implements OnInit {
 
-  @Input() viewNews: News[] = news;
+  public news: INews[] = [];
+
   public isMoreNews: boolean = false;
-  public oneNews: OneNews[] = [];
-  public selectedNews!: OneNews;
+
 
   constructor(
-    private authService: AuthService
+    private newsService: NewsService,
+    private dialog: MatDialog
   ) {
-    for(let i = 0; i < this.viewNews.length; i++) {
-      if(this.viewNews[i].content) {
-        for(let j = 0; j < this.viewNews[i].content!.length; j++) {
-          this.oneNews.push(
-            {content: this.viewNews[i].content![j], header: this.viewNews[i].header, picture: this.viewNews[i].picture![j]}
-          )
-        }
-      }
-    }
-    this.selectedNews = this.oneNews[0];
-  }
-
-
-  ngAfterContentInit(): void {
 
   }
 
+  ngOnInit(): void {
+      this.newsService.getNews().subscribe(res => {
+        this.news = res.data
+      })
+  }
 
-
-  readMore(event: any) {
-
-    this.oneNews.forEach(val => {
-      if(event.target.getAttribute('src') === val.picture) {
-        this.selectedNews = val;
-      }
+  openNewsModal(item: INews) {
+    console.log(item);
+    this.dialog.open(NewsContentModalComponent, {
+      data: item
     })
-    this.isMoreNews = true;
   }
 
   exit() {
