@@ -3,62 +3,52 @@
   <p>Selected date: {{selected}}</p> -->
     <h3>/ Сеансы</h3>
     <div class="sessions-content">
-        <div class="filter-sessions">
-            <span>Дата</span>
-            <div class="filter-sessions-calendar">
-                <div class="calendar-content">
-                    <ul class="filter-list">
-                        <li>ПН</li>
-                        <li>ВТ</li>
-                        <li>СР</li>
-                        <li>ЧТ</li>
-                        <li>ПТ</li>
-                        <li>СБ</li>
-                        <li>ВС</li>
-                    </ul>
-                    <ul class="filter-list number" (click)="chooseDay($event)">
-                        <li>19</li>
-                        <li>20</li>
-                        <li>21</li>
-                        <li>22</li>
-                        <li>23</li>
-                        <li>24</li>
-                        <li>25</li>
-                    </ul>
-                </div>
-                <img src="assets/images/ArrowDown.png" alt="" [matMenuTriggerFor]="menu">
-
-                <mat-menu #menu="matMenu" overlapTrigger="false">
-                    <mat-card class="demo-inline-calendar-card" (click)="$event.stopPropagation()">
-                        <mat-calendar></mat-calendar>
-                    </mat-card>
-                </mat-menu>
-
-            </div>
-            <div class="filter-sessions-time" *ngIf="chooseSessions.length !== 0">
-                <span>Время</span>
-
-                <ng-container *ngFor="let date of allDate">
-                    <mat-checkbox (change)="choiceTime($event)">
-                        {{date.item.toLocaleTimeString([], {hour: 'numeric' , minute: '2-digit'})}}
-                    </mat-checkbox>
-                </ng-container>
+        <form class="filter-sessions" [formGroup]="filtersForm">
+            <mat-form-field>
+                <mat-label>Название</mat-label>
+                <input matInput 
+                formControlName="title"
+                placeholder="Название">
+            </mat-form-field>
 
 
-            </div>
+            <mat-form-field appearance="fill">
+                <mat-label>Дата</mat-label>
+                <mat-date-range-input [rangePicker]="picker" [min]="now" [max]="maxFiltersDate">
+                  <input
+                  formControlName="from"
+                  matStartDate placeholder="Start date">
+                  <input 
+                  formControlName="to"
+                  matEndDate placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
 
-        </div>
+            <mat-form-field appearance="fill">
+                <mat-label>Время</mat-label>
+                <mat-select formControlName="time" multiple>
+                    <mat-option *ngFor="let time of times" [value]="time">{{ time }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
         <div class="choice-sessions">
 
             <div class="rental-slides">
-                <ng-container *ngFor="let show of shows$ | async">
-                    <div class="rental-slide">
-                        <img [src]="'http://localhost:5050/posters/' + show.poster_src" alt="Poster picture">
-                        <span class="title">{{show.title}}</span>
-                        <span>{{show.tags}}</span>
-                        <a [routerLink]="['show', show.id]" mat-flat-button color="primary">Купить билет</a>
+                <ng-container *ngIf="sessions.length > 0; else noSessions">
+                    <div class="rental-slide" *ngFor="let session of sessions">
+                        <img [src]="'http://localhost:5050/posters/' + session.showPoster" alt="Poster picture">
+                        <span class="title">{{session.showTitle}}</span>
+                        <a [routerLink]="['show', session.showId]" mat-flat-button color="primary">Купить билет</a>
+                        <!-- <p>
+                            {{ session | json }}
+                        </p> -->
                     </div>
                 </ng-container>
+                <ng-template #noSessions>
+                    <p>По выбранным параметрам нет сеансов.</p>
+                </ng-template>
             </div>
 
         </div>

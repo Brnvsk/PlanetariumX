@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { DATE, Ticket } from 'src/app/shared/types/ticket.type';
-import { ChooseSessionsService } from '../../services/choose-sessions.service';
 import { BookingService } from 'src/app/services/booking.service';
-import { IShow } from 'src/app/types/show.types';
-import { Observable } from 'rxjs';
+import { IShowSession } from 'src/app/types/show.types';
+import { FormBuilder } from '@angular/forms';
+import { debounceTime } from 'rxjs';
+import { isEqualDates } from 'src/app/helpers/time.helper';
+import { add, addWeeks } from 'date-fns';
+import { addMonths } from 'date-fns/esm';
 
 @Component({
   selector: 'app-sessions',
@@ -14,49 +13,119 @@ import { Observable } from 'rxjs';
   styleUrls: ['./sessions.component.scss']
 })
 export class SessionsComponent {
+  private _sessions: IShowSession[] = []
+  private allSessions: IShowSession[] = []
 
-  public shows$: Observable<IShow[]>;
+  public times: string[] = []
 
-  public chooseSessions: Ticket[] = [];
-  public chooseDaySessions: Ticket[] = [];
-  public allDate: DATE[] = [];
+  public filtersForm;
 
-  public day!: string;
+  public get now() {
+    return new Date()
+  }
+
+  public get maxFiltersDate() {
+    return addMonths(new Date(), 1)
+  }
+
+  public set sessions(value: IShowSession[]) {
+    const filtered = new Array<IShowSession>()
+    
+    value.forEach((s, i, arr) => {
+      if (filtered.findIndex(it => it.showId === s.showId) === -1) {
+        filtered.push(s)
+      }
+    })
+    this._sessions = filtered
+  }
+
+  public get sessions() {
+    return this._sessions
+  }
+
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private choose: ChooseSessionsService,
+    private fb: FormBuilder,
     private bookingService: BookingService
   ) {
-    this.shows$ = this.bookingService.shows$;
+    this.bookingService.getAllSessions().subscribe(sessions => {
+      this.allSessions = sessions
+      this.sessions = sessions
+      const { times } = this.createFiltersForm(sessions)
+      this.times = times
+    })
+
+    this.filtersForm = this.fb.group({
+      title: '',
+      from: new Date(),
+      to: addWeeks(new Date(), 1),
+      time: [new Array<string>()],
+      address: '',
+    })
+
+    this.filtersForm.valueChanges
+    .pipe(
+      debounceTime(300),
+    )
+    .subscribe(form => {      
+      this.sessions = this.filterSessions(form, this.allSessions)
+    })
   }
 
-  booking(session: Ticket, allDate: DATE[]) : void {
+  private createFiltersForm(sessions: IShowSession[]) {
+    const times = sessions.map(s => s.time).filter((s, i, arr) => arr.indexOf(s) === i).slice().sort((a, b) => {
+      // hours + minutes / 60 - (hours + minutes / 60)
+      return Number(a.split(':')[0]) + Number(a.split(':')[1]) / 60 - (Number(b.split(':')[0]) + Number(b.split(':')[1]) / 60)
+    })
 
-    this.choose.booking(session, allDate);
-
-    this.router.navigate(['booking'], {relativeTo: this.activatedRoute})
+    return {
+      times
+    }
   }
 
+  private filterSessions(filters: typeof this.filtersForm.value, allSessions: IShowSession[]) {
+    const { time, from, to, title } = filters
 
+    let result = allSessions.slice()
+    if (time && time.length > 0) {
+      result = result.filter(s => {
+        return time.includes(s.time)
+      })
+    }
 
-  chooseDay(event: any): void {
-   this.choose.chooseDay(event);
-   this.allDate = Array.from(this.choose.allDate);
-   this.chooseSessions = Array.from(this.choose.chooseSessions);
-   this.chooseDaySessions = Array.from(this.choose.chooseDaySessions);
+    if (from) {      
+      result = result.filter(s => {
+        const sessionDate = new Date(s.date)
+        sessionDate.setMilliseconds(0)
+        sessionDate.setSeconds(0)
+        sessionDate.setMinutes(0)
+        sessionDate.setHours(0)
+        const fromUTC = new Date(from.getUTCFullYear(), from.getUTCMonth(), from.getUTCDate())
 
+        return sessionDate > fromUTC || isEqualDates(sessionDate, fromUTC)
+      })
+    }
+
+    if (to) {      
+      result = result.filter(s => {
+        const sessionDate = new Date(s.date)
+        sessionDate.setMilliseconds(0)
+        sessionDate.setSeconds(0)
+        sessionDate.setMinutes(0)
+        sessionDate.setHours(0)
+        const toUTC = new Date(to.getUTCFullYear(), to.getUTCMonth(), to.getUTCDate())
+
+        return sessionDate < toUTC || isEqualDates(sessionDate, toUTC)
+      })
+    }
+
+    if (title) {
+      result = result.filter(s => {
+        return s.showTitle?.toLowerCase()?.includes(title.toLowerCase())
+      })
+    }
+
+    return result
   }
-
-  choiceTime(event: any): void {
-    this.choose.choiceTime(event);
-    this.allDate = Array.from(this.choose.allDate);
-    this.chooseSessions = Array.from(this.choose.chooseSessions);
-    this.chooseDaySessions = Array.from(this.choose.chooseDaySessions);
-    console.log(typeof event.source._elementRef.nativeElement.lastChild.lastChild.innerHTML.split(':')[0])
-  }
-
-
 
 }

@@ -10,6 +10,11 @@
                 <span class="content">
                     {{ item.text[0] }}
                 </span>
+                <div class="news-item-tags" *ngIf="item.tags.length > 0">
+                    <span *ngFor="let tag of item.tags" class="news-item-tag">
+                        {{ tag.name }}
+                    </span>
+                </div>
             </div>
         </div>
     </div>

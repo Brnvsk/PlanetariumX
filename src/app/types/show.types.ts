@@ -17,4 +17,5 @@ export interface IShowSession {
     time: string,
     address: string
     showTitle?: string
+    showPoster?: string
 }
