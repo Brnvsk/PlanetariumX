@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ApiRoutes } from 'src/app/config/network.config';
+import { ApiRoutes, apiUrl } from 'src/app/config/network.config';
 import { IShow } from 'src/app/types/show.types';
 
 
@@ -12,6 +12,7 @@ import { IShow } from 'src/app/types/show.types';
   styleUrls: ['./create-show-modal.component.scss'],
 })
 export class CreateShowModalComponent implements OnInit {
+  public api = apiUrl
   public form;
 
   constructor(
@@ -49,9 +50,9 @@ export class CreateShowModalComponent implements OnInit {
       return;
     }
    
-    this.http.post<{ filename: string }>(`${ApiRoutes.upload}`, formData)
+    this.http.post<{ filename?: string, secureUrl: string }>(`${ApiRoutes.upload}`, formData)
       .subscribe(res => {
-        this.form.controls.posterPath.setValue(res.filename)
+        this.form.controls.posterPath.setValue(res.secureUrl)
       })
   }
 

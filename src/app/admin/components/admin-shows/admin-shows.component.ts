@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BookingService } from 'src/app/services/booking.service';
 import { IShow } from 'src/app/types/show.types';
 import { CreateShowModalComponent } from '../../modals/create-show-modal/create-show-modal.component';
-import { ApiRoutes } from 'src/app/config/network.config';
+import { ApiRoutes, apiUrl } from 'src/app/config/network.config';
 import { HttpClient } from '@angular/common/http';
 import { UpdateShowModalComponent } from '../../modals/update-show-modal/update-show-modal.component';
 
@@ -13,7 +13,7 @@ import { UpdateShowModalComponent } from '../../modals/update-show-modal/update-
   styleUrls: ['./admin-shows.component.scss']
 })
 export class AdminShowsComponent implements OnInit {
-
+  public api = apiUrl
   public shows: IShow[] = []
   public columns = ['id', 'poster', 'title', 'price', 'actions']
 

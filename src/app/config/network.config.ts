@@ -1,4 +1,7 @@
-const baseUrl = 'http://localhost:5050'
+// export const apiUrl = 'http://localhost:5050' //local
+export const apiUrl = 'https://pleasant-underwear-goat.cyclic.app' //remote
+
+const baseUrl = apiUrl
 
 export const ApiRoutes = {
     users: {

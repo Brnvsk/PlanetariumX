@@ -8,10 +8,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSelectModule } from '@angular/material/select'
+import { SafeUrlPipe } from "../pipes/safe-url.pipe";
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SafeUrlPipe,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -31,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select'
     MatDatepickerModule,
     MatRadioModule,
     MatSelectModule,
+    SafeUrlPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { SolarRoutingModule } from './solar-routing.module';
 import { SolarComponent } from './solar.component';
+import { DetailsPopupComponent } from './components/details-popup/details-popup.component';
 
 
 @NgModule({
   declarations: [
-    SolarComponent
+    SolarComponent,
+    DetailsPopupComponent
   ],
   imports: [
     CommonModule,

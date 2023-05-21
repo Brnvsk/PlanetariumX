@@ -76,9 +76,7 @@
                     flex-direction: column;
                     padding-bottom: 50px;
                     border-radius: 20px;
-                    overflow: hidden;
-                    background-color: #fff;
-                    color: #131617;
+                    color: #e2e2e2;
                     &-tags {
                         display: flex;
                         gap: 10px;
@@ -95,15 +93,18 @@
                         height: 240px;
                         object-fit: cover;
                         cursor: pointer;
+                        border-radius: 4px;
                     }
                 }
             }
         }
     }
     .new-tags {
-        color: #E7D795;
+        color: #e2e2e2;
+        height: 50px;
         padding: 10px 0;
-        font-size: 12px;
+        font-size: 16px;
+        font-weight: 600;
         img {
             padding-right: 5px;
         }
@@ -113,6 +114,11 @@
             cursor: pointer;
         }
     }
+}
+
+.content {
+    height: 100px;
+    overflow: clip;
 }
 
 @media (max-width: 950px) {

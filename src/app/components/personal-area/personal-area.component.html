@@ -1,102 +1,98 @@
 <div class="wrapper" *ngIf="user$ | async as user">
-  <div class="wrapper-view">
-    <h3>/ Личный кабинет</h3>
+    <div class="wrapper-view">
+        <h3>/ Личный кабинет</h3>
 
-    <div class="header">
-      <div class="row">
-        <h2 class="title">Добро пожаловать, {{ user.login }} !</h2>
-        <button
-          mat-flat-button
-          color="primary"
-          (click)="logout()"
-          class="logout-btn"
-        >
+        <div class="header">
+            <div class="row">
+                <h2 class="title">Добро пожаловать, {{ user.login }} !</h2>
+                <button mat-flat-button color="primary" (click)="logout()" class="logout-btn">
           Выйти
         </button>
-      </div>
-      <div class="tags"></div>
-    </div>
+            </div>
+            <div class="tags"></div>
+        </div>
 
-    <div class="tags">
-        <h2 class="section-title">Мои интересы</h2>
-        <div class="tags-list">
-            <ng-container *ngIf="user.tags.length > 0">
-              <span *ngFor="let tag of user.tags" class="tag-item">
+        <div class="tags">
+            <h2 class="section-title">Мои интересы</h2>
+            <div class="tags-list">
+                <ng-container *ngIf="user.tags.length > 0">
+                    <span *ngFor="let tag of user.tags" class="tag-item">
                 {{ tag.name }}
               </span>
-            </ng-container>
-            <button (click)="editTags(user)" class="tag-item-add">
+                </ng-container>
+                <button (click)="editTags(user)" class="tag-item-add">
                 Изменить
             </button>
+            </div>
         </div>
-    </div>  
 
-    <div class="booking">
-      <h2 class="section-title">Мои билеты</h2>
+        <div class="booking">
+            <h2 class="section-title">Мои билеты</h2>
 
-      <mat-accordion class="bookings-list">
+            <mat-accordion class="bookings-list">
 
-        <mat-expansion-panel *ngFor="let booking of bookings">
-            <mat-expansion-panel-header class="booking-item-header">
-                <mat-panel-title>Билет #{{ booking.booking_id }}</mat-panel-title>
+                <mat-expansion-panel *ngFor="let booking of bookings">
+                    <mat-expansion-panel-header class="booking-item-header">
+                        <mat-panel-title>Билет #{{ booking.booking_id }}</mat-panel-title>
 
-                <mat-panel-description>
+                        <mat-panel-description>
 
-                </mat-panel-description>
-            </mat-expansion-panel-header>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
 
-            <h4 class="booking-show">{{ booking.title }}</h4>
+                    <h4 class="booking-show">{{ booking.title }}</h4>
 
-            <div class="booking-details">
-                <p>
-                    Дата: {{ booking.date | date : 'dd.MM.yyyy' }}
-                </p>
-                <p>
-                    Адрес: {{ booking.address }}
-                </p>
-                <p>
-                    Время: {{ booking.time }}
-                </p>
-                <p>
-                    Билет отправлен: {{ booking.email ?? booking.user_email }}
-                </p>
-            </div>
+                    <div class="booking-details">
+                        <p>
+                            Дата: {{ booking.date | date : 'dd.MM.yyyy' }}
+                        </p>
+                        <p>
+                            Адрес: {{ booking.address }}
+                        </p>
+                        <p>
+                            Время: {{ booking.time }}
+                        </p>
+                        <p>
+                            Билет отправлен: {{ booking.email ?? booking.user_email }}
+                        </p>
+                    </div>
 
-            <div class="booking-places">
-                <p>Места:</p>
-                <p *ngFor="let place of booking.places">
-                    {{ place.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{ place.row }}, место {{ place.place }}
-                </p>
-            </div>
-          
-        </mat-expansion-panel>
-      </mat-accordion>
+                    <div class="booking-places">
+                        <p>Места:</p>
+                        <p *ngFor="let place of booking.places">
+                            {{ place.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{ place.row }}, место {{ place.place }}
+                        </p>
+                    </div>
 
-      <img *ngIf="bookings.length > 0" class="avatar-img" [src]="getAvatar(user)" />
+                </mat-expansion-panel>
+            </mat-accordion>
 
-    </div>
+            <img *ngIf="bookings.length > 0" class="avatar-img" [src]="getAvatar(user)" />
 
-    <div class="news">
-      <h2 class="section-title">Новости</h2>
+        </div>
 
-      <div class="news-list">
+        <div class="news">
+            <h2 class="section-title">Новости</h2>
 
-        <div (click)="openNewsModal(item)" *ngFor="let item of news" class="news-item">
-            <img class="news-item-photo" [src]="'http://localhost:5050/news/' + item.photo" alt="">
-            <div class="news-item-content">
-              <h3>{{ item.title }}</h3>
-              <p class="news-item-text">{{ item.text[0] || '' }}</p>
+            <div class="news-list">
 
-              <div class="news-item-tags">
-                <span *ngFor="let tag of item.tags" class="news-item-tag">
+                <div (click)="openNewsModal(item)" *ngFor="let item of news" class="news-item">
+                    <img class="news-item-photo" [src]="item.photo" alt="">
+                    <!-- <img class="news-item-photo" [src]="(api + '/news/' + item.photo) | safeUrl" alt=""> -->
+                    <div class="news-item-content">
+                        <h3>{{ item.title }}</h3>
+                        <p class="news-item-text">{{ item.text[0] || '' }}</p>
+
+                        <div class="news-item-tags">
+                            <span *ngFor="let tag of item.tags" class="news-item-tag">
                   {{ tag.name }}
                 </span>
-              </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-      </div>
     </div>
-
-  </div>
 </div>

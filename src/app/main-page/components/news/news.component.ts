@@ -1,10 +1,8 @@
-import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewsContentModalComponent } from 'src/app/components/modals/news-content-modal/news-content-modal.component';
-import { AuthService } from 'src/app/services/auth.service';
+import { apiUrl } from 'src/app/config/network.config';
 import { NewsService } from 'src/app/services/news.service';
-import { News, OneNews } from 'src/app/shared/types/news.type';
-import { news } from 'src/app/types/mocData';
 import { INews } from 'src/app/types/news.types';
 
 @Component({
@@ -13,7 +11,7 @@ import { INews } from 'src/app/types/news.types';
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit {
-
+  public api = apiUrl
   public news: INews[] = [];
 
   public isMoreNews: boolean = false;

@@ -1,380 +1,368 @@
 :host {
-
-  section {
-    font-family: "ttTravel" !important;
-  }
-  .view-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 80%;
-    margin: 0 auto;
-    padding-bottom: 75px;
-    .rightside {
-      text-align: center;
-      width: 50%;
-      img {
-        z-index: 10;
-        width: 100%;
-      }
+    section {
+        font-family: "ttTravel" !important;
     }
-
-    .leftside {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      width: 50%;
-      h3 {
-      font-size: 90px;
-      margin: 0;
-      padding: 50px 0 20px 0 ;
-      line-height: 0.9;
-        span {
-          background-image: linear-gradient(-90deg, #9793EF, #F3A299, #F4E39C);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-
-        }
-      }
-      span {
-        padding-bottom: 30px;
-      }
-      button {
-        border-radius: 40px;
-        width: 200px;
-        height: 50px;
-        margin-top: 30px;
-      }
-
-
-    }
-  }
-
-  .info-wrapper, .rental-wrapper, .news-wrapper, .questions-wrapper {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .info-wrapper-title, .rental-wrapper-title, .news-wrapper-title, .questions-wrapper-title {
-      font-size: 24px;
-    }
-    .info-cards {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin-top: 100px;
-      height: 550px;
-      .info-card {
-        width: 32%;
-        height: 80%;
-        background-color: #171921;
-        border-radius: 20px;
+    .view-wrapper {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        span {
-          left: 0;
-          padding: 0 20px;
-          font-size: 18px;
-        }
-
-      }
-      .Human {
-        position: relative;
-        display: flex;
+        flex-direction: row;
         justify-content: center;
-        background-color: #E7D795;
-        color: #000000;
-        font-family: "ttTravel-medium";
-        #RunningHuman {
-          position: absolute;
-          bottom: 40%;
-
+        width: 80%;
+        margin: 0 auto;
+        padding-bottom: 75px;
+        .rightside {
+            text-align: center;
+            width: 50%;
+            img {
+                z-index: 10;
+                width: 100%;
+            }
         }
-        span {
-          position: absolute;
-          top: 65%;
-          font-family: "ttTravel-medium";
+        .leftside {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            width: 50%;
+            h3 {
+                font-size: 90px;
+                margin: 0;
+                padding: 50px 0 20px 0;
+                line-height: 0.9;
+                span {
+                    background-image: linear-gradient(-90deg, #9793EF, #F3A299, #F4E39C);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+            }
+            span {
+                padding-bottom: 30px;
+            }
+            button {
+                border-radius: 40px;
+                width: 200px;
+                height: 50px;
+                margin-top: 30px;
+            }
         }
-      }
-      .UFO, .Telescope {
-        position: relative;
+    }
+    .videos {
         display: flex;
-        justify-content: start;
-
-        img {
-          width: 100%;
+        justify-content: space-between;
+    }
+    .video {
+        video {
+            width: 400px;
         }
-        span {
-          position: absolute;
-          top: 65%;
-        }
-      }
-      .Telescope > img {
-        padding-top: 15px;
-      }
     }
-  }
-
-  .rental-wrapper {
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    padding-bottom: 100px;
-    .rental-wrapper-title {
-      padding-bottom: 50px;
-    }
-    .rental-more {
-      display: flex;
-      justify-content: end;
-      span {
-        display: flex;
-        text-align: center;
-        align-items: center;
-        padding: 0 10px;
-        font-weight: 500;
-      }
-      padding-bottom: 20px;
-    }
-
-    .rental-slides {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding-top: 10px;
-      height: 70vh;
-      .rental-slide {
-        width: 20%;
+    .info-wrapper,
+    .rental-wrapper,
+    .news-wrapper,
+    .questions-wrapper,
+    .videos-wrapper {
+        width: 80%;
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        img {
-          width: 100%;
+        justify-content: space-between;
+        .info-wrapper-title,
+        .rental-wrapper-title,
+        .news-wrapper-title,
+        .questions-wrapper-title,
+        .video-wrapper-title {
+            font-size: 24px;
         }
-        span {
-          margin-bottom: 15px;
-          font-size: 12px;
-        }
-        button {
-          width: 150px;
-          height: 30px;
-          border-radius: 5px;
-        }
-      }
-    }
-  }
-
-  .questions-wrapper {
-    height: 700px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    .questions-wrapper-title {
-      margin: 40px 0;
-    }
-
-    .questions-content {
-      display: flex;
-      margin-bottom: 50px;
-
-      .nearAccordion {
-        width: 50%;
-        padding-left: 50px;
-        height: 500px;
-        img {
-
-          width: 100%;
-        }
-      }
-      .questions-content-accordion {
-        display: flex;
-        justify-content: flex-start;
-        width: 50%;
-
-        mat-expansion-panel {
-          background-color: #1F232E;
-          box-shadow: none;
-          color: #ffffff;
-          border-bottom: solid 1px #535353;
-          p {
-            color: #ffffff;
-          }
-          mat-expansion-panel-header {
+        .info-cards {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-
-
-            mat-panel-title {
-              color: #ffffff;
+            margin-top: 100px;
+            height: 550px;
+            .info-card {
+                width: 32%;
+                height: 80%;
+                background-color: #171921;
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                span {
+                    left: 0;
+                    padding: 0 20px;
+                    font-size: 18px;
+                }
             }
-          }
+            .Human {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                background-color: #E7D795;
+                color: #000000;
+                font-family: "ttTravel-medium";
+                #RunningHuman {
+                    position: absolute;
+                    bottom: 40%;
+                }
+                span {
+                    position: absolute;
+                    top: 65%;
+                    font-family: "ttTravel-medium";
+                }
+            }
+            .UFO,
+            .Telescope {
+                position: relative;
+                display: flex;
+                justify-content: start;
+                img {
+                    width: 100%;
+                }
+                span {
+                    position: absolute;
+                    top: 65%;
+                }
+            }
+            .Telescope>img {
+                padding-top: 15px;
+            }
         }
-      }
-
     }
-  }
-
-  .wrapper-customQuestion {
-    height: 400px;
-    background-color: #E7D795;
-    border-radius: 80px 80px 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 30px;
-    .customQuestion-content {
-      display: flex;
-      flex-direction: column;
-      width: 25%;
-      h3 {
-        color: #000000;
-        font-size: 24px;
-        font-family: "ttTravel";
-      }
-      button {
-        width: 200px;
-        height: 50px;
-        border-radius: 20px;
-      }
-
+    .rental-wrapper {
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        padding-bottom: 100px;
+        .rental-wrapper-title {
+            padding-bottom: 50px;
+        }
+        .rental-more {
+            display: flex;
+            justify-content: end;
+            span {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                padding: 0 10px;
+                font-weight: 500;
+            }
+            padding-bottom: 20px;
+        }
+        .rental-slides {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-top: 10px;
+            height: 70vh;
+            .rental-slide {
+                width: 20%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                img {
+                    width: 100%;
+                }
+                span {
+                    margin-bottom: 15px;
+                    font-size: 12px;
+                }
+                button {
+                    width: 150px;
+                    height: 30px;
+                    border-radius: 5px;
+                }
+            }
+        }
     }
-  }
-
-  button {
-    background-color: #6858DC;
-  }
+    .questions-wrapper {
+        height: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        .questions-wrapper-title {
+            margin: 40px 0;
+        }
+        .questions-content {
+            display: flex;
+            margin-bottom: 50px;
+            .nearAccordion {
+                width: 50%;
+                padding-left: 50px;
+                height: 500px;
+                img {
+                    width: 100%;
+                }
+            }
+            .questions-content-accordion {
+                display: flex;
+                justify-content: flex-start;
+                width: 50%;
+                mat-expansion-panel {
+                    background-color: #1F232E;
+                    box-shadow: none;
+                    color: #ffffff;
+                    border-bottom: solid 1px #535353;
+                    p {
+                        color: #ffffff;
+                    }
+                    mat-expansion-panel-header {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        mat-panel-title {
+                            color: #ffffff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .wrapper-customQuestion {
+        height: 400px;
+        background-color: #E7D795;
+        border-radius: 80px 80px 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 30px;
+        .customQuestion-content {
+            display: flex;
+            flex-direction: column;
+            width: 25%;
+            h3 {
+                color: #000000;
+                font-size: 24px;
+                font-family: "ttTravel";
+            }
+            button {
+                width: 200px;
+                height: 50px;
+                border-radius: 20px;
+            }
+        }
+    }
+    button {
+        background-color: #6858DC;
+    }
 }
 
 @media (max-width: 1200px) {
-  .leftside {
-
-    h3 {
-      font-size: 50px !important;
+    .leftside {
+        h3 {
+            font-size: 50px !important;
+        }
     }
-  }
-  .rental-wrapper {
-    height: 550px !important;
-    padding-bottom: 50px !important;
-  }
+    .rental-wrapper {
+        height: 550px !important;
+        padding-bottom: 50px !important;
+    }
 }
 
 @media (max-width: 1250px) {
-  .nearAccordion {
-    max-width: 400px !important;
-    width: 30% !important;
-  }
-  .questions-content-accordion {
-    width: 70% !important;
-  }
+    .nearAccordion {
+        max-width: 400px !important;
+        width: 30% !important;
+    }
+    .questions-content-accordion {
+        width: 70% !important;
+    }
 }
+
 @media (max-width: 800px) {
-  .nearAccordion {
-    display: none;
-  }
-  .questions-content-accordion {
-    width: 100% !important;
-  }
+    .nearAccordion {
+        display: none;
+    }
+    .questions-content-accordion {
+        width: 100% !important;
+    }
 }
+
 @media (max-width: 1000px) {
-  .info-cards {
-    height: 300px !important;
-  }
-  #RunningHuman {
-
-    height: 200px;
-  }
+    .info-cards {
+        height: 300px !important;
+    }
+    #RunningHuman {
+        height: 200px;
+    }
 }
+
 @media (max-width: 900px) {
-  .customQuestion-content {
-    width: 40% !important;
-  }
+    .customQuestion-content {
+        width: 40% !important;
+    }
 }
+
 @media (max-width: 721px) {
-  .rightside {
-
-    img {
-      display: none !important;
+    .rightside {
+        img {
+            display: none !important;
+        }
     }
-  }
-
-  .info-wrapper {
-    display: none !important;
-  }
-
-  .rental-wrapper {
-    padding-top: 20px !important;
-  }
-
-  .rental-slide {
-
-    button {
-      width: 120px !important;
-      height: 20px !important;
-      font-size: 10px;
-
+    .info-wrapper {
+        display: none !important;
     }
-  }
+    .rental-wrapper {
+        padding-top: 20px !important;
+    }
+    .rental-slide {
+        button {
+            width: 120px !important;
+            height: 20px !important;
+            font-size: 10px;
+        }
+    }
 }
 
 .news-wrapper {
-
-  .news-wrapper-title {
-    padding-bottom: 60px;
-  }
-
-  .news {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 40px;
-    .news-item{
-      img{
-        width: 300px;
-        cursor: pointer;
-
-      }
-
+    .news-wrapper-title {
+        padding-bottom: 60px;
     }
-  }
-
-  .more-news {
-    display: flex;
-    justify-content: end;
-    color: #6858DC;
-    a {
-      cursor: pointer;
+    .news {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: 10px;
+        .news-item {
+            img {
+                object-fit: cover;
+                height: 200px;
+                width: 300px;
+                cursor: pointer;
+            }
+        }
     }
-    a:hover {
-      border-bottom: 1px solid #6858DC;
+    .more-news {
+        display: flex;
+        justify-content: end;
+        color: #6858DC;
+        a {
+            cursor: pointer;
+        }
+        a:hover {
+            border-bottom: 1px solid #6858DC;
+        }
     }
-  }
 }
 
 .news-item-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
-.tag {
- 
-  &-item {
-    padding-left: 12px;
-    position: relative;
 
-    &::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 4px;
-      width: 8px;
-      height: 8px;
-      border-radius: 10px;
-      background-color: #ffe642;
+.tag {
+    &-item {
+        padding-left: 12px;
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 10px;
+            background-color: #ffe642;
+        }
     }
-  }
 }

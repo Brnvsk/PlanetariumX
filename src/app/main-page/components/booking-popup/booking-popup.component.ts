@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { format } from 'date-fns/esm';
+import { apiUrl } from 'src/app/config/network.config';
 import { IBooking, IBookingCreate } from 'src/app/types/booking.types';
 
 export interface BookingDialogData {
@@ -14,6 +15,7 @@ export interface BookingDialogData {
   styleUrls: ['./booking-popup.component.scss']
 })
 export class BookingPopupComponent implements OnInit {
+  public api = apiUrl
   public booking!: IBookingCreate
   
   public get datetime() {

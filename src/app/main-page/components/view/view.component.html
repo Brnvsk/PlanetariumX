@@ -47,7 +47,8 @@
         </div>
         <div class="rental-slides">
             <div class="rental-slide" *ngFor="let show of shows">
-                <img [src]="'http://localhost:5050/news/' + show.poster_src" alt="">
+                <img [src]="show.poster_src" alt="">
+                <!-- <img [src]="(api + '/news/' + show.poster_src) | safeUrl" alt=""> -->
                 <h3>{{ show.title }}</h3>
                 <span>{{ show.descr }}</span>
                 <a mat-flat-button color="primary" routerLink="../sessions">Купить билет</a>
@@ -61,7 +62,8 @@
         <span class="news-wrapper-title">Новости планетария</span>
         <div class="news">
             <div *ngFor="let item of news" class="news-item">
-                <img [src]="'http://localhost:5050/news/' + item.photo" alt="">
+                <img [src]="item.photo" alt="">
+                <!-- <img [src]="(api + '/news/' + item.photo) | safeUrl" alt=""> -->
                 <h1>
                     {{ item.title }}
                 </h1>
@@ -80,7 +82,28 @@
         </div>
     </div>
 </section>
-
+<section>
+    <div class="videos-wrapper">
+        <span class="video-wrapper-title">Интересное о космосе</span>
+        <div class="videos">
+            <div class="video">
+                <video controls="controls">
+                    <source src="assets/video/video2.mp4">
+                   </video>
+            </div>
+            <div class="video">
+                <video controls="controls">
+                    <source src="assets/video/video1.mp4">
+                   </video>
+            </div>
+            <div class="video">
+                <video controls="controls">
+                    <source src="assets/video/video3.mp4">
+                   </video>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section>
     <div class="questions-wrapper">

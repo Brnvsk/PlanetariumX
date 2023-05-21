@@ -6,21 +6,15 @@
         <form class="filter-sessions" [formGroup]="filtersForm">
             <mat-form-field>
                 <mat-label>Название</mat-label>
-                <input matInput 
-                formControlName="title"
-                placeholder="Название">
+                <input matInput formControlName="title" placeholder="Название">
             </mat-form-field>
 
 
             <mat-form-field appearance="fill">
                 <mat-label>Дата</mat-label>
                 <mat-date-range-input [rangePicker]="picker" [min]="now" [max]="maxFiltersDate">
-                  <input
-                  formControlName="from"
-                  matStartDate placeholder="Start date">
-                  <input 
-                  formControlName="to"
-                  matEndDate placeholder="End date">
+                    <input formControlName="from" matStartDate placeholder="Start date">
+                    <input formControlName="to" matEndDate placeholder="End date">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker></mat-date-range-picker>
@@ -38,7 +32,8 @@
             <div class="rental-slides">
                 <ng-container *ngIf="sessions.length > 0; else noSessions">
                     <div class="rental-slide" *ngFor="let session of sessions">
-                        <img [src]="'http://localhost:5050/posters/' + session.showPoster" alt="Poster picture">
+                        <img [src]="session.showPoster" alt="Poster picture">
+                        <!-- <img [src]="(api + '/posters/' + session.showPoster) | safeUrl" alt="Poster picture"> -->
                         <span class="title">{{session.showTitle}}</span>
                         <a [routerLink]="['show', session.showId]" mat-flat-button color="primary">Купить билет</a>
                         <!-- <p>

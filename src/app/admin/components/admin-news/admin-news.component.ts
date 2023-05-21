@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ApiRoutes } from 'src/app/config/network.config';
+import { ApiRoutes, apiUrl } from 'src/app/config/network.config';
 import { NewsService } from 'src/app/services/news.service';
 import { INews } from 'src/app/types/news.types';
 import { UpdateNewsModalComponent } from '../../modals/update-news-modal/update-news-modal.component';
@@ -13,6 +13,7 @@ import { CreateNewsModalComponent } from '../../modals/create-news-modal/create-
   styleUrls: ['./admin-news.component.scss']
 })
 export class AdminNewsComponent {
+  public api = apiUrl
   public news: INews[] = []
   public columns = ['id', 'title', 'tags', 'photo', 'actions']
   public tags = this.newsService.tags

@@ -1,9 +1,4 @@
 <div id="container" #canvasContainer>
-    <div id="details-popup" class="details-popup">
-        <button class="close-btn">Close</button>
-        <div class="content"></div>
-    </div>
-
+    <app-details-popup class="details-popup" *ngIf="detailsData != null" (close)="onDetailsClose()" [data]="detailsData"></app-details-popup>
     <button class="back-btn" (click)="goBack()">Back</button>
 </div>
-<!-- <canvas id="canvas" #canvas></canvas> -->

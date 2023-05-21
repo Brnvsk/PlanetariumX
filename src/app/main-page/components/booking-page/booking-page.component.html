@@ -1,6 +1,7 @@
 <div class="wrapper" *ngIf="show$ | async as show">
     <div class="leftside">
-        <img [src]="'http://localhost:5050/posters/' + show.poster_src" alt="">
+        <img [src]="show.poster_src" alt="">
+        <!-- <img [src]="(api + '/posters/' + show.poster_src) | safeUrl" alt=""> -->
         <div class="leftside-description">
             <div class="text">
                 <h4>Описание</h4>
@@ -29,9 +30,9 @@
             <mat-form-field class="address-select" appearance="fill">
                 <mat-label>Адрес</mat-label>
                 <mat-select formControlName="address">
-                  <mat-option *ngFor="let addr of showAddresses" [value]="addr">
-                    {{ addr }}
-                  </mat-option>
+                    <mat-option *ngFor="let addr of showAddresses" [value]="addr">
+                        {{ addr }}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
 
@@ -43,23 +44,25 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
+
             <mat-radio-group class="timeslots" formControlName="time" *ngIf="availableTimeslots.length > 0">
-                <mat-radio-button class="timeslot" *ngFor="let timeslot of availableTimeslots" [value]="timeslot.time">
-                    {{ timeslot.time }}
-                </mat-radio-button>
+                <ng-container *ngFor="let timeslot of availableTimeslots">
+                    <mat-radio-button class="timeslot" [value]="timeslot.time" [disabled]="isTimeSlotDisabled(timeslot)">
+                        {{ timeslot.time }}
+                    </mat-radio-button>
+                </ng-container>
             </mat-radio-group>
         </div>
 
         <div class="seat-map" [class.blocked]="isMapBlocked">
 
             <svg class="seat-map-svg" #seatMapContainer (click)="onMapClick($event)"></svg>
-            <ng-container *ngIf="!showSeatsMap"
-                [ngTemplateOutlet]="noTimeslots">
+            <ng-container *ngIf="!showSeatsMap" [ngTemplateOutlet]="noTimeslots">
             </ng-container>
         </div>
 
         <div class="booking-submit" *ngIf="showSeatsMap">
-            <div class="seat-examples">    
+            <div class="seat-examples">
             </div>
 
             <div class="price">

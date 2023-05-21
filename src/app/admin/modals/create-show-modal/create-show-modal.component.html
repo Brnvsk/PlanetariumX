@@ -1,39 +1,27 @@
 <form [formGroup]="form" class="form">
 
-	<input 
-	formControlName="title"
-	type="text" placeholder="Название">
+    <input formControlName="title" type="text" placeholder="Название">
 
-	<textarea 
-	formControlName="descr"
-	rows="12" cols="30" placeholder="Описание"></textarea>
+    <textarea formControlName="descr" rows="12" cols="30" placeholder="Описание"></textarea>
 
-	<input 
-	formControlName="price"
-	type="number" placeholder="Цена билета" 
-	step="5"
-	min="0" 
-	max="1000">
+    <input formControlName="price" type="number" placeholder="Цена билета" step="5" min="0" max="1000">
 
-	<ng-container *ngIf="form.value.posterPath">
-		<img class="poster-preview" [src]="'http://localhost:5050/posters/' + form.value.posterPath" alt="">
-	</ng-container>
+    <ng-container *ngIf="form.value.posterPath">
+        <img class="poster-preview" [src]="form.value.posterPath" alt="">
+        <!-- <img class="poster-preview" [src]="(api + '/posters/' + form.value.posterPath) | safeUrl" alt=""> -->
+    </ng-container>
 
-	<div class="file-upload">
-		<p>Drag & drop photos here or <span class="browse">Browse</span></p>
-		<input
-		(change)="onAddImage($event)" 
-		type="file" 
-		class="file-input" 
-		accept="image/jpeg, image/png, image/jpg, image/gif"/>
-	</div>
+    <div class="file-upload">
+        <p>Drag & drop photos here or <span class="browse">Browse</span></p>
+        <input (change)="onAddImage($event)" type="file" class="file-input" accept="image/jpeg, image/png, image/jpg, image/gif" />
+    </div>
 
-	<input formControlName="director" type="text" placeholder="Режиссер">
+    <input formControlName="director" type="text" placeholder="Режиссер">
 
-	<input formControlName="country" type="text" placeholder="Страна">
+    <input formControlName="country" type="text" placeholder="Страна">
 
-	<div class="footer">
-		<button (click)="cancel()">Отмена</button>
-		<button (click)="submit()">Создать</button>
-	</div>
+    <div class="footer">
+        <button (click)="cancel()">Отмена</button>
+        <button (click)="submit()">Создать</button>
+    </div>
 </form>

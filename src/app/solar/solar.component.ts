@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, ViewChil
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { SSConfig } from './config';
+import { SSConfig, SolarPlanet } from './config';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -10,14 +10,8 @@ import { Location } from '@angular/common';
   selector: 'app-solar',
   templateUrl: './solar.component.html',
   styleUrls: ['./solar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SolarComponent implements AfterViewInit {
-  private detailsPopup!: HTMLElement | null
-  private detailsPopupCloseBtn!: HTMLButtonElement | null
-  private detailsPopupContentContainer!: HTMLDivElement | null
-  // private canvasContainer!: HTMLElement | null
-
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
   private renderer!: THREE.WebGLRenderer;
@@ -33,6 +27,7 @@ export class SolarComponent implements AfterViewInit {
   private orbitControl!: OrbitControls;
 
   private inDetailsMode = false;
+  public detailsData: SolarPlanet | null = null
 
   @ViewChild('canvas')
   public canvasRef!: ElementRef<HTMLCanvasElement>
@@ -43,19 +38,22 @@ export class SolarComponent implements AfterViewInit {
   constructor(private location: Location) {}
 
   public ngAfterViewInit(): void {
-    this.detailsPopup = document.getElementById('details-popup')
-    this.detailsPopupCloseBtn = this.detailsPopup ? this.detailsPopup.querySelector('.close-btn') : null
-    this.detailsPopupContentContainer = this.detailsPopup ? this.detailsPopup.querySelector('.content') : null
-
-    this.detailsPopupCloseBtn?.addEventListener('click', () => {
-      this.zoomOutPlanetDetails()
-    })
-
     this.init().then(() => this.render())
   }
 
   public goBack() {
     this.location.back()
+  }
+
+  public onDetailsClose() {
+    this.detailsData = null 
+
+    this.orbitControl.reset()
+    this.orbitControl.enabled = true;
+    this.planetMeshUnderPointer = null;
+    this.raycastPoint = null;
+    this.clickedPlanet = null;
+    this.inDetailsMode = false;   
   }
 
   private render() {
@@ -123,7 +121,7 @@ export class SolarComponent implements AfterViewInit {
       if (this.raycastPoint && this.planetMeshUnderPointer) {
         const planet = this.solarSystemConfig.items.find(it => it._name === this.planetMeshUnderPointer?.name)
         if (planet) {
-          this.disablePlanetHightlight()
+          // this.disablePlanetHightlight()
           this.raycastPoint = null;
           setTimeout(() => {
             this.clickedPlanet = planet
@@ -203,10 +201,8 @@ export class SolarComponent implements AfterViewInit {
     const { x, y, z } = this.worldPos
     this.camera.lookAt(x - 1.4, y, z)
 
-    if (this.detailsPopupContentContainer && this.detailsPopup) {
-      this.detailsPopupContentContainer.innerHTML = this.createPlanetDetailsContent(this.clickedPlanet)
-      this.detailsPopup.classList.add('active')
-    }
+    this.detailsData = this.clickedPlanet
+    this.disablePlanetHightlight()
 
   }
 
@@ -254,33 +250,10 @@ export class SolarComponent implements AfterViewInit {
     })
   }
 
-
-  private zoomOutPlanetDetails() {
-    this.orbitControl.reset()
-    this.orbitControl.enabled = true;
-    this.detailsPopup?.classList.remove('active')
-    this.planetMeshUnderPointer = null;
-    this.raycastPoint = null;
-    this.clickedPlanet = null;
-    this.inDetailsMode = false;
-  }
-
   private disablePlanetHightlight() {
     this.planetMeshUnderPointer.material.emissive.setRGB(0, 0, 0)
     this.planetMeshUnderPointer = null;
     document.body.style.cursor = 'default';
-  }
-
-  private createPlanetDetailsContent(planet: any) {
-    return `
-    <h3>${planet.name}</h3>
-    <p>${planet.text}</p>
-    <p>Радиус: ...</p>
-    <p>Скорость вращения: ...</p>
-    <p>Скорость обращения: ...</p>
-    <p>Магнитное поле: ...</p>
-    <p>Температура поверхности: ...</p>
-    `
   }
 
   private onWindowResize() {

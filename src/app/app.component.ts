@@ -11,6 +11,6 @@ export class AppComponent {
   constructor(private newsService: NewsService, private userService: UserService) {
     newsService.loadTags()
     const token = localStorage.getItem('token')
-    userService.getUserByToken(token)
+    userService.getUserByToken(token);
   }
 }

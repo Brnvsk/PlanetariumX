@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ApiRoutes } from 'src/app/config/network.config';
+import { ApiRoutes, apiUrl } from 'src/app/config/network.config';
 import { INews, INewsTag } from 'src/app/types/news.types';
 import { NewsService } from 'src/app/services/news.service';
 
@@ -17,6 +17,7 @@ interface DialogData {
   styleUrls: ['./update-news-modal.component.scss']
 })
 export class UpdateNewsModalComponent {
+  public api = apiUrl
   public form;
   public tags: INewsTag[] = []
 
@@ -57,9 +58,9 @@ export class UpdateNewsModalComponent {
       return;
     }
    
-    this.http.post<{ filename: string }>(`${ApiRoutes.upload}`, formData)
+    this.http.post<{ filename: string, secureUrl: string }>(`${ApiRoutes.upload}`, formData)
       .subscribe(res => {
-        this.form.controls['photo'].setValue(res.filename)
+        this.form.controls['photo'].setValue(res.secureUrl)
       })
   }
 

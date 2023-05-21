@@ -9,6 +9,7 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { NewsContentModalComponent } from './components/modals/news-content-modal/news-content-modal.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NewsContentModalComponent } from './components/modals/news-content-moda
   imports: [
     BrowserModule,
     CommonModule,
+    SharedModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     AppRoutingModule,

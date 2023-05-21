@@ -6,6 +6,7 @@ import { debounceTime } from 'rxjs';
 import { isEqualDates } from 'src/app/helpers/time.helper';
 import { add, addWeeks } from 'date-fns';
 import { addMonths } from 'date-fns/esm';
+import { apiUrl } from 'src/app/config/network.config';
 
 @Component({
   selector: 'app-sessions',
@@ -16,6 +17,7 @@ export class SessionsComponent {
   private _sessions: IShowSession[] = []
   private allSessions: IShowSession[] = []
 
+  public api = apiUrl
   public times: string[] = []
 
   public filtersForm;

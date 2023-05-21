@@ -1,56 +1,56 @@
-
 <div class="title-wrapper container">
-	<h1 class="title">Новости</h1>
+    <h1 class="title">Новости</h1>
 </div>
 
 <div class="main container">
 
-	<button (click)="create()">Добавить новость</button>
+    <button (click)="create()">Добавить новость</button>
 
-	<table mat-table [dataSource]="news" class="mat-elevation-z8">
-	  
-		<ng-container matColumnDef="id">
-		  <th mat-header-cell *matHeaderCellDef>No.</th>
-		  <td mat-cell *matCellDef="let item"> {{item.id}} </td>
-		</ng-container>
-	  
-		<ng-container matColumnDef="title">
-		  <th mat-header-cell *matHeaderCellDef>Заголовок</th>
-		  <td mat-cell *matCellDef="let item"> {{item.title}} </td>
-		</ng-container>
+    <table mat-table [dataSource]="news" class="mat-elevation-z8">
 
-		<ng-container matColumnDef="tags">
-		  <th mat-header-cell *matHeaderCellDef>Теги</th>
-		  <td mat-cell *matCellDef="let item">
-			<div class="tags-col" *ngIf="item.tags.length > 0; else noTags">
-				<span *ngFor="let tag of item.tags">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>No.</th>
+            <td mat-cell *matCellDef="let item"> {{item.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Заголовок</th>
+            <td mat-cell *matCellDef="let item"> {{item.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tags">
+            <th mat-header-cell *matHeaderCellDef>Теги</th>
+            <td mat-cell *matCellDef="let item">
+                <div class="tags-col" *ngIf="item.tags.length > 0; else noTags">
+                    <span *ngFor="let tag of item.tags">
 					{{tag.name}}
 				</span>
-			</div>
-		</td>
-		</ng-container>
+                </div>
+            </td>
+        </ng-container>
 
-		<ng-container matColumnDef="photo">
-			<th mat-header-cell *matHeaderCellDef>Постер</th>
-			<td mat-cell *matCellDef="let item">
-				<img class="poster-img" [src]="'http://localhost:5050/news/' + item.photo" alt="">
-			</td>
-		</ng-container>
+        <ng-container matColumnDef="photo">
+            <th mat-header-cell *matHeaderCellDef>Постер</th>
+            <td mat-cell *matCellDef="let item">
+                <img class="poster-img" [src]="item.photo" alt="">
+                <!-- <img class="poster-img" [src]="(api + '/news/' + item.photo) | safeUrl" alt=""> -->
+            </td>
+        </ng-container>
 
-		<ng-container matColumnDef="actions">
-		  <th mat-header-cell *matHeaderCellDef class="right">Управление</th>
-		  <td mat-cell *matCellDef="let item" class="right">
-			<button (click)="edit(item)">Редактировать</button>
-			<button (click)="delete(item, $event)">Удалить</button>
-		  </td>
-		</ng-container>
-	  
-		<tr mat-header-row *matHeaderRowDef="columns"></tr>
-		<tr mat-row *matRowDef="let row; columns: columns;"></tr>
-	</table>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="right">Управление</th>
+            <td mat-cell *matCellDef="let item" class="right">
+                <button (click)="edit(item)">Редактировать</button>
+                <button (click)="delete(item, $event)">Удалить</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
 
 </div>
 
 <ng-template #noTags>
-	<span>--</span>
+    <span>--</span>
 </ng-template>

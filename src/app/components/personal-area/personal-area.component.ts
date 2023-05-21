@@ -10,7 +10,7 @@ import { IUserBooking } from 'src/app/types/booking.types';
 import { INews, INewsTag } from 'src/app/types/news.types';
 import { EditNewsTagsModalComponent } from '../modals/edit-news-tags-modal/edit-news-tags-modal.component';
 import { HttpClient } from '@angular/common/http';
-import { ApiRoutes } from 'src/app/config/network.config';
+import { ApiRoutes, apiUrl } from 'src/app/config/network.config';
 import { NewsContentModalComponent } from '../modals/news-content-modal/news-content-modal.component';
 
 
@@ -22,6 +22,7 @@ import { NewsContentModalComponent } from '../modals/news-content-modal/news-con
 export class PersonalAreaComponent implements OnInit {
   private user$$ = new BehaviorSubject<User | null>(null)
   
+  public api = apiUrl
   public user$ = this.user$$.asObservable()
   public news: INews[] = []
 

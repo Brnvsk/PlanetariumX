@@ -1,9 +1,10 @@
 <h1>{{ data.title }}</h1>
 
 <div class="text">
-	<img class="news-photo" [src]="'http://localhost:5050/news/' + data.photo">
-	
-	<p *ngFor="let paragraph of data.text">
-		{{ paragraph }}
-	</p>
+    <img class="news-photo" [src]="data.photo">
+    <!-- <img class="news-photo" [src]="(api + '/news/' + data.photo) | safeUrl"> -->
+
+    <p *ngFor="let paragraph of data.text">
+        {{ paragraph }}
+    </p>
 </div>

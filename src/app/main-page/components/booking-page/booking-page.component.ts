@@ -12,6 +12,7 @@ import { IBooking, IBookingCreate } from 'src/app/types/booking.types';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BookingPopupComponent } from '../booking-popup/booking-popup.component';
+import { apiUrl } from 'src/app/config/network.config';
 
 export interface ISeatOptions {
   side: 'left' | 'right',
@@ -36,6 +37,8 @@ export class BookingPageComponent implements OnInit {
   @ViewChild('seatMapContainer') public set seatMapContainer(el: ElementRef<SVGSVGElement>) {
     this.seatmapSvgEl = el && el.nativeElement ? el.nativeElement : null
   }
+
+  public api = apiUrl
 
   public isMapBlocked = false;
   public hasSession = true;
@@ -327,15 +330,33 @@ export class BookingPageComponent implements OnInit {
     })
   }
 
-  private getTimeOptionsForDate(timeslots: IShowSession[], date: Date, address: string) {    
-    const timeSlots = timeslots.slice()
-      .filter(slot => {
-        return isEqualDates(new Date(slot.date), date) && slot.address === address
-      })
-      .filter((slot, i, arr) => arr.indexOf(slot) === i)
-      .sort((a, b) => Number(a.time.split(':')[0]) - Number(b.time.split(':')[0]))
+  public isTimeSlotDisabled(timeslot: IShowSession): boolean {
+    const currentTime = new Date().getTime();
+    const slotTime = new Date(timeslot.date + ' ' + timeslot.time).getTime();
+    return slotTime < currentTime;
+  }
 
-    return timeSlots
+  private getTimeOptionsForDate(timeslots: IShowSession[], date: Date, address: string) {    
+    const currentTime = new Date();
+
+  const timeSlots = timeslots
+    .filter(slot => {
+      const slotDate = new Date(slot.date);
+      const slotTime = new Date(slot.date + ' ' + slot.time);
+      return (
+        isEqualDates(slotDate, date) &&
+        slot.address === address
+      );
+    })
+    .sort((a, b) => Number(a.time.split(':')[0]) - Number(b.time.split(':')[0]));
+
+  return timeSlots.map(slot => {
+    const slotTime = new Date(slot.date + ' ' + slot.time).getTime();
+    return {
+      ...slot,
+      disabled: slotTime < currentTime.getTime()
+    };
+  });
   }
 
 }

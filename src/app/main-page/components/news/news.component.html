@@ -3,7 +3,8 @@
     <div class="wrapper-content">
         <div class="news-container">
             <div class="news-item" *ngFor="let item of news">
-                <img (click)="openNewsModal(item)" [src]="'http://localhost:5050/news/' + item.photo" alt="">
+                <img (click)="openNewsModal(item)" [src]="item.photo" alt="">
+                <!-- <img (click)="openNewsModal(item)" [src]="(api + '/news/' + item.photo) | safeUrl" alt=""> -->
                 <div class="new-tags">
                     <span>{{item.title}}</span>
                 </div>
