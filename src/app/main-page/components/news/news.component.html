@@ -1,5 +1,24 @@
 <div class="wrapper">
     <h3>/ Новости</h3>
+    <div class="filters">
+        <form [formGroup]="filtersForm">
+            <mat-form-field>
+                <mat-label>Название</mat-label>
+                <input matInput formControlName="search">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Категория</mat-label>
+                <mat-select formControlName="tags" multiple>
+                    <mat-option *ngFor="let tag of tags" [value]="tag">
+                        {{ tag.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button (click)="resetFilters()">Сбросить</button>
+        </form>
+    </div>
     <div class="wrapper-content">
         <div class="news-container">
             <div class="news-item" *ngFor="let item of news">

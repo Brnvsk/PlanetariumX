@@ -24,7 +24,6 @@ export class NewsContentModalComponent {
       arr[i].hasUser = !!this.user?.tags.find(t => t.id === tag.id)
     })
 
-    console.log(data);
   }
 
   public clickTag(tag: INewsTag, e: Event) {
