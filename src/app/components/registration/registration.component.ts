@@ -31,18 +31,22 @@ export class RegistrationComponent {
     public newsItems: News[] = news;
 
     public form = this.fb.group({
-        login: new FormControl<string>('my login', [
+        login: new FormControl<string>('', [
             Validators.required,
             Validators.maxLength(19),
             ValidationService.loginValidator()
         ]),
-        email: new FormControl<string>('qwe@qwe.com', [
+        email: new FormControl<string>('', [
             Validators.required,
         ]),
-        password: new FormControl<string>('qwe@123D', [
+        password: new FormControl<string>('', [
             Validators.required,
-            // Validators.minLength(8),
-            // ValidationService.passwordValidator()
+            Validators.minLength(8),
+            ValidationService.passwordValidator()
+        ]),
+        passwordRepeat: new FormControl<string>('', [
+            Validators.required,
+            ValidationService.passwordRepeatValidator(),
         ])
     });
     public get steps(): typeof StepRegistration {

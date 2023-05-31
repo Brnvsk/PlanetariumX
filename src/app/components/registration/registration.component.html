@@ -19,8 +19,8 @@
             <mat-form-field appearance="fill">
                 <mat-label>Почта</mat-label>
                 <input matInput [formControl]="form.controls.email">
-                <mat-error *ngIf="form.controls.password.hasError('required')">
-                    Password is <strong>required</strong>
+                <mat-error *ngIf="form.controls.email.hasError('required')">
+                    Email is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
@@ -37,6 +37,21 @@
                 </mat-error>
                 <mat-error *ngIf="form.controls.password.hasError('invalid')">
                     Password must include latin letters, numbers and special chars
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Повторите пароль</mat-label>
+                <input matInput [type]="showPaswword ? 'text' : 'password'" [formControl]="form.controls.passwordRepeat" visibility>
+                <mat-icon matSuffix (click)="togglePasswordVisibility()" class="material-symbols-outlined">
+                    {{showPaswword?'visibility_off':'visibility'}}
+                </mat-icon>
+
+                <mat-error *ngIf="form.controls.passwordRepeat.hasError('required')">
+                    Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls.passwordRepeat.hasError('passwordsNotMatch')">
+                    Пароли не совпадают
                 </mat-error>
             </mat-form-field>
 

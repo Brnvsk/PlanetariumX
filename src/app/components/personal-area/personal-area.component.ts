@@ -104,4 +104,12 @@ export class PersonalAreaComponent implements OnInit {
     this.dialog.open(NewsContentModalComponent, { data: item })
   }
 
+  public cancelBooking(id: number) {
+    this.http.delete<{ deleted: unknown }>(`${ApiRoutes.booking}/${id}`).subscribe(res => {
+      if (res.deleted) {
+        this.bookings = this.bookings.filter(b => b.booking_id !== id)
+      }
+    })
+  }
+
 }

@@ -23,4 +23,13 @@ export class ValidationService {
       return !isValidPassword ? {invalid: true} : null;
     };
   }
+
+  static passwordRepeatValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const form = control.parent
+      const password = form?.get('password')?.value
+      const passwordRepeat = control.value;
+      return password === passwordRepeat ? null : {passwordsNotMatch: true};
+    };
+  }
 }

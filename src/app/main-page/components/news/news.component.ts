@@ -31,7 +31,6 @@ export class NewsComponent implements OnInit {
   }
 
   openNewsModal(item: INews) {
-    console.log(item);
     this.dialog.open(NewsContentModalComponent, {
       data: item
     })

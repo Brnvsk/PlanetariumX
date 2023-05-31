@@ -17,6 +17,10 @@ export class UserService {
     this.user$ = this.userStore$.asObservable().pipe(shareReplay(1))
   }
 
+  public get user() {
+    return this.userStore$.value;
+  }
+
   public getNews(id: number) {
     return this.http.get<{ data: INews[] }>(`${ApiRoutes.users}/${id}/news`)
       .pipe(

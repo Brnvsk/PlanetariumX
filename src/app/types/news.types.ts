@@ -9,5 +9,6 @@ export interface INews {
 export interface INewsTag {
     id: number,
     tag: string,
-    name: string
+    name: string,
+    hasUser?: boolean
 }

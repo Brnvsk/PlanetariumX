@@ -2,8 +2,54 @@
     color: #000;
 }
 
+.header {
+    display: flex;
+    align-items: center;
+}
+
 h1 {
     padding-left: 30px;
+}
+
+.tags {
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    &[disabled] {
+        opacity: .5;
+        pointer-events: none;
+    }
+}
+
+.tag-item {
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1px solid #555;
+    cursor: pointer;
+
+    &.user {
+        background-color: #000;
+        color: #fff;
+        position: relative;
+        padding-left: 24px;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            width: 12px;
+            height: 6px;
+            border-radius: 2px;
+            background-color: transparent;
+            border: 2px solid transparent;
+            border-bottom-color: #fff;
+            border-left-color: #fff;
+            transform: rotate(-45deg);
+        }
+    }
 }
 
 .news-photo {

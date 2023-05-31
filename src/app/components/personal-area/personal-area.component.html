@@ -29,7 +29,7 @@
         <div class="booking">
             <h2 class="section-title">Мои билеты</h2>
 
-            <mat-accordion class="bookings-list">
+            <mat-accordion class="bookings-list" *ngIf="bookings.length > 0; else noData">
 
                 <mat-expansion-panel *ngFor="let booking of bookings">
                     <mat-expansion-panel-header class="booking-item-header">
@@ -64,6 +64,12 @@
                         </p>
                     </div>
 
+                    <div class="booking-footer">
+                        <button mat-raised-button 
+                        color="warn"
+                        (click)="cancelBooking(booking.booking_id)">Отменить</button>
+                    </div>
+
                 </mat-expansion-panel>
             </mat-accordion>
 
@@ -74,7 +80,7 @@
         <div class="news">
             <h2 class="section-title">Новости</h2>
 
-            <div class="news-list">
+            <div class="news-list" *ngIf="news.length > 0; else noData">
 
                 <div (click)="openNewsModal(item)" *ngFor="let item of news" class="news-item">
                     <img class="news-item-photo" [src]="item.photo" alt="">
@@ -96,3 +102,7 @@
 
     </div>
 </div>
+
+<ng-template #noData>
+    <p>Нет записей.</p>
+</ng-template>
