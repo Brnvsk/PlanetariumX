@@ -12,25 +12,19 @@
             <a routerLink="/solar" (click)="changeProgress($event)">Солнечная система</a>
             <a routerLink="app/games" id="last" (click)="changeProgress($event)">Игры</a>
         </div>
-        <!-- <div class="header-navigation" >
-      <a id="first" (click)="forwardSession()"  (click)="changeProgress($event)" >Сеансы</a>
-      <a (click)="forwardContacts()" (click)="changeProgress($event)">О нас</a>
-      <a (click)="forwardNews()" (click)="changeProgress($event)">Новости</a>
-      <a (click)="forwardGames()" id="last" (click)="changeProgress($event)">Игры</a>
-    </div> -->
     </div>
     <div class="logIn">
 
         <ng-container *ngIf="user$ | async as user; else noUser">
-            <a *ngIf="user.role === 'user'" class="login-button" routerLink="./personal">
+            <button *ngIf="user.role === 'user'" class="login-button" routerLink="./personal">
                 Кабинет
-            </a>
-            <a *ngIf="user.role === 'admin'" routerLink="/admin/shows">
+            </button>
+            <button class="login-button" *ngIf="user.role === 'admin'" routerLink="/admin/shows">
                 Администрация
-            </a>
+            </button>
         </ng-container>
         <ng-template #noUser>
-            <a class="login-button" routerLink="./login">Вход</a>
+            <button class="login-button" routerLink="./login">Вход</button>
         </ng-template>
 
     </div>
