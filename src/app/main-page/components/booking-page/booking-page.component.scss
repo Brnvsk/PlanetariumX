@@ -1,8 +1,20 @@
 :host {
+    .wrapper[_ngcontent-wji-c65] {
+        width: 350px;
+        height: 450px;
+        background-color: #000000;
+        border-radius: 20px;
+        padding: 20px 65px 20px 65px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        position: relative;
+    }
     .wrapper {
         width: 80%;
         margin: 0 auto;
-        height: 125vh;
+        height: 100%;
+        border-radius: 30px;
         padding-bottom: 100px;
         padding-top: 50px;
         display: flex;
@@ -283,7 +295,7 @@
         border-bottom-color: #6858DC;
     }
      ::ng-deep .mat-mdc-form-field-error {
-        color: var(--mdc-theme-error, #82ED2E);
+        color: var(--mdc-theme-error, #6858DC);
     }
     .material-symbols-outlined {
         cursor: pointer;

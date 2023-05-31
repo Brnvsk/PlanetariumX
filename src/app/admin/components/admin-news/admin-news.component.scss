@@ -1,24 +1,36 @@
 .container {
-	margin: 0 auto;
-	max-width: 1600px;
+    margin: 0 auto;
+    max-width: 70%;
 }
 
 .poster-img {
-	height: 60px;
+    height: 60px;
 }
 
 .right {
-	text-align: right;
+    text-align: right;
+}
+
+button {
+    width: 120px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #6858DC;
+    color: #fff;
+    border: none;
+}
+
+table {
+    margin-top: 10px;
 }
 
 .tags-col {
-	display: flex;
-
-	& span {
-		padding: 5px 8px;
-		margin: 0 6px;
-		background-color: #efefef;
-		border-radius: 10px;
-		cursor: pointer;
-	}
+    display: flex;
+    & span {
+        padding: 5px 8px;
+        margin: 0 6px;
+        background-color: #efefef;
+        border-radius: 10px;
+        cursor: pointer;
+    }
 }
