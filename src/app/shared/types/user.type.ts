@@ -10,7 +10,7 @@ export interface User {
   password: string,
   email: string,
   role: UserRole,
-  avatarId: number | null,
+  avatar_id: number | null,
   tags: INewsTag[],
   discount: number
 }

@@ -1,137 +1,152 @@
 :host {
-  .sessions {
-    width: 80%;
-    margin: 0 auto;
-    h3 {
-      color: #6858DC;
+    .sessions {
+        width: 80%;
+        margin: 0 auto;
+        h3 {
+            color: #6858DC;
+        }
+        .sessions-content {
+            display: flex;
+            flex-direction: row;
+            padding-top: 15px;
+            .choice-sessions {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 70%;
+                .rental-slides {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                    padding: 50px 0 50px 15px;
+                    .rental-slide {
+                        width: 250px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding-bottom: 20px;
+                        .title {
+                            padding-top: 15px;
+                            font-size: 16px;
+                            font-weight: bold;
+                        }
+                        img {
+                            width: 100%;
+                        }
+                        span {
+                            margin-bottom: 15px;
+                            font-size: 12px;
+                        }
+                        button {
+                            width: 150px;
+                            height: 30px;
+                            border-radius: 5px;
+                        }
+                    }
+                }
+            }
+            .filter-sessions {
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding-bottom: 35px;
+                .filter-sessions-calendar {
+                    display: flex;
+                    flex-direction: row;
+                    border-top: 1px solid #636363;
+                    border-bottom: 1px solid #636363;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    padding: 0 0 5px 0;
+                    .calendar-content {
+                        display: flex;
+                        flex-direction: column;
+                        width: 85%;
+                        .filter-list {
+                            display: flex;
+                            flex-direction: row;
+                            list-style-type: none;
+                            justify-content: space-between;
+                            padding: 10px 0 0 0;
+                            margin: 0;
+                        }
+                        .active {
+                            background-color: #6858DC;
+                            border-radius: 25px;
+                        }
+                        .number {
+                            font-size: 12px;
+                            cursor: pointer;
+                        }
+                        .number>li {
+                            padding: 5px;
+                        }
+                        .number>li:hover {
+                            background-color: #6858DC;
+                            border-radius: 25px;
+                        }
+                    }
+                    img {
+                        height: 8px;
+                        width: 15px;
+                        padding: 0 10px 5px 0;
+                        cursor: pointer;
+                    }
+                }
+                .filter-sessions-time {
+                    display: flex;
+                    flex-direction: column;
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    span {
+                        padding-bottom: 10px;
+                    }
+                }
+            }
+        }
     }
-    .sessions-content {
-      display: flex;
-      flex-direction: row;
-      padding-top: 15px;
-      .choice-sessions {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 70%;
-        .rental-slides {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 15px;
-          padding: 50px 0 50px 15px;
-          .rental-slide {
-            width: 250px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 20px;
-            .title {
-              padding-top: 15px;
-              font-size: 16px;
-              font-weight: bold;
-            }
-            img {
-              width: 100%;
-            }
-            span {
-              margin-bottom: 15px;
-              font-size: 12px;
-            }
-            button {
-              width: 150px;
-              height: 30px;
-              border-radius: 5px;
-            }
-          }
-        }
-      }
-      .filter-sessions {
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        padding-bottom: 35px;
-        .filter-sessions-calendar {
-          display: flex;
-          flex-direction: row;
-          border-top: 1px solid #636363;
-          border-bottom: 1px solid #636363;
-          justify-content: space-between;
-          align-items: flex-end;
-          padding: 0 0 5px 0;
-          .calendar-content{
-            display: flex;
-            flex-direction: column;
-            width: 85%;
-            .filter-list {
-              display: flex;
-              flex-direction: row;
-              list-style-type: none;
-              justify-content: space-between;
-              padding: 10px 0 0 0;
-              margin: 0;
-            }
-            .active {
-              background-color: #6858DC;
-              border-radius: 25px;
-            }
-            .number {
-              font-size: 12px;
-              cursor: pointer;
-            }
-            .number > li {
-              padding: 5px;
-            }
-            .number > li:hover {
-              background-color: #6858DC;
-
-              border-radius: 25px;
-            }
-          }
-          img {
-            height: 8px;
-            width: 15px;
-            padding: 0 10px 5px 0;
-            cursor: pointer;
-          }
-        }
-        .filter-sessions-time {
-          display: flex;
-          flex-direction: column;
-          form {
-            display: flex;
-            flex-direction: column;
-          }
-          span {
-            padding-bottom: 10px;
-          }
-        }
-
-      }
+     ::ng-deep .mat-mdc-checkbox label {
+        color: #ffffff;
     }
-  }
-  ::ng-deep .mat-mdc-checkbox label{
-    color: #ffffff;
-  }
-  ::ng-deep .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
-    border-color: #ffffff
-  }
-  ::ng-deep .mat-mdc-checkbox.mat-accent {
-    --mdc-checkbox-selected-focus-icon-color: #6858DC;
-    --mdc-checkbox-selected-hover-icon-color: #6858DC;
-    --mdc-checkbox-selected-icon-color: #6858DC;
-    --mdc-checkbox-selected-pressed-icon-color: #6858DC;
-    --mdc-checkbox-unselected-focus-icon-color: #6858DC;
-    --mdc-checkbox-unselected-hover-icon-color: #6858DC;
-  }
-  /* ::ng-deep .mat-mdc-checkbox .mdc-checkbox {
+     ::ng-deep .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+        border-color: #ffffff
+    }
+     ::ng-deep .mat-mdc-checkbox.mat-accent {
+        --mdc-checkbox-selected-focus-icon-color: #6858DC;
+        --mdc-checkbox-selected-hover-icon-color: #6858DC;
+        --mdc-checkbox-selected-icon-color: #6858DC;
+        --mdc-checkbox-selected-pressed-icon-color: #6858DC;
+        --mdc-checkbox-unselected-focus-icon-color: #6858DC;
+        --mdc-checkbox-unselected-hover-icon-color: #6858DC;
+    }
+    /* ::ng-deep .mat-mdc-checkbox .mdc-checkbox {
     padding-left: 0;
     left: 0;
   } */
-  .demo-inline-calendar-card {
-    width: 250px;
-  }
-
-
+    .demo-inline-calendar-card {
+        width: 250px;
+    }
+    .black-text {
+        color: #000000;
+    }
+     ::ng-deep .filter-sessions mat-form-field.mat-form-field-appearance-fill .mat-select .mat-select-value .mat-select-placeholder {
+        color: #000000;
+        /* Черный цвет текста */
+        /* Другие стили, которые вы хотите применить */
+    }
+     ::ng-deep .filter-sessions mat-form-field.mat-form-field-appearance-fill .mat-select .mat-select-value .mat-select-content {
+        color: #000000;
+        /* Черный цвет текста */
+        /* Другие стили, которые вы хотите применить */
+    }
+    .filter-sessions input[formControlName="from"],
+    .filter-sessions input[formControlName="to"] {
+        color: #000000;
+        /* Черный цвет текста */
+        /* Другие стили, которые вы хотите применить */
+    }
 }

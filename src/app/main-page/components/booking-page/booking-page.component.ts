@@ -37,7 +37,9 @@ export class BookingPageComponent implements OnInit {
   @ViewChild('seatMapContainer') public set seatMapContainer(el: ElementRef<SVGSVGElement>) {
     this.seatmapSvgEl = el && el.nativeElement ? el.nativeElement : null
   }
-
+public get minDate(){
+  return new Date()
+}
   public api = apiUrl
 
   public isMapBlocked = false;

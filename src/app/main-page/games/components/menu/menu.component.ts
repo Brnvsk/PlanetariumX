@@ -55,7 +55,7 @@ export class MenuComponent implements OnInit {
 
   public ngOnInit(): void {
     this.userService.user$.subscribe(user  => {
-      const avatarSrc = AvatarsMap.find(a => a.id === user?.avatarId)?.src || AvatarsMap[0].src
+      const avatarSrc = AvatarsMap.find(a => a.id === user?.avatar_id)?.src || AvatarsMap[0].src
       this.bonstickSrc = `assets/images/user-bonsticks/${avatarSrc}`
     })
   }

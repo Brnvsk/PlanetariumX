@@ -75,7 +75,8 @@ export class PersonalAreaComponent implements OnInit {
   }
 
   public getAvatar(user: User) {
-    const avatar = AvatarsMap.find(avatar => avatar.id === user.avatarId) ?? AvatarsMap[0]
+    const avatar = AvatarsMap.find(avatar => avatar.id === user.avatar_id) ?? AvatarsMap[0]
+
     return `assets/images/user-bonsticks/${avatar.src}`
   }
 

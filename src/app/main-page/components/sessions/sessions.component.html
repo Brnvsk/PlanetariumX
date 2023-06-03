@@ -11,7 +11,7 @@
 
 
             <mat-form-field appearance="fill">
-                <mat-label>Дата</mat-label>
+                <mat-label class="black-text">Дата</mat-label>
                 <mat-date-range-input [rangePicker]="picker" [min]="now" [max]="maxFiltersDate">
                     <input formControlName="from" matStartDate placeholder="Start date">
                     <input formControlName="to" matEndDate placeholder="End date">
@@ -21,7 +21,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>Время</mat-label>
+                <mat-label class="black-text">Время</mat-label>
                 <mat-select formControlName="time" multiple>
                     <mat-option *ngFor="let time of times" [value]="time">{{ time }}</mat-option>
                 </mat-select>
