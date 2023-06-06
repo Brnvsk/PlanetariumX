@@ -9,6 +9,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSelectModule } from '@angular/material/select'
 import { SafeUrlPipe } from "../pipes/safe-url.pipe";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SafeUrlPipe } from "../pipes/safe-url.pipe";
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
+    MatDialogModule,
   ],
   exports: [
     MatProgressBarModule,
@@ -35,6 +37,7 @@ import { SafeUrlPipe } from "../pipes/safe-url.pipe";
     MatRadioModule,
     MatSelectModule,
     SafeUrlPipe,
+    MatDialogModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

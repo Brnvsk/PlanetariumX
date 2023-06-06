@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApiRoutes, apiUrl } from 'src/app/config/network.config';
 import { UserService } from 'src/app/services/user.service';
@@ -11,7 +11,7 @@ import { INews, INewsTag } from 'src/app/types/news.types';
   templateUrl: './news-content-modal.component.html',
   styleUrls: ['./news-content-modal.component.scss']
 })
-export class NewsContentModalComponent {
+export class NewsContentModalComponent implements OnInit {
   public user = this.userService.user;
   public api = apiUrl
   constructor(
@@ -26,10 +26,15 @@ export class NewsContentModalComponent {
 
   }
 
+  ngOnInit(): void {
+    this.userService.user$.subscribe(user => this.user = user)   
+  }
+
   public clickTag(tag: INewsTag, e: Event) {
     if (!tag.hasUser) {
       this.addUserTag(tag, e)
     } else {
+      console.log('remove');
       this.removeUserTag(tag, e)
     }
   }
@@ -42,12 +47,11 @@ export class NewsContentModalComponent {
     this.disableTag(e);
 
     const newTags = [...this.user.tags, tag]
-    const user = {
-      ...this.user,
-      tags: newTags.map(tag => tag.id),
+    const update = {
+      tags: [...new Set(newTags.map(tag => tag.id))],
     }
 
-    this.updateUserTags(this.user, user, e);
+    this.updateUserTags(this.user, update, e);
   }
 
   private removeUserTag(tag: INewsTag, e: Event) {
@@ -55,13 +59,13 @@ export class NewsContentModalComponent {
       return
     }
     
-    const newTags = this.user.tags.filter(t => t.id !== tag.id).map(tag => tag.id)
-    const user = {
-      ...this.user,
-      tags: newTags,
+    const userTags = this.user.tags.map(t => t.id).filter(t => t !== tag.id)
+
+    const update = {
+      tags: userTags,
     }
 
-    this.updateUserTags(this.user, user, e);
+    this.updateUserTags(this.user, update, e);
   }
 
   private updateUserTags(user: User, update: any, e: Event) {

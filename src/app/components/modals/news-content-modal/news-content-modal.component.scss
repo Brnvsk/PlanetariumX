@@ -1,33 +1,17 @@
 :host {
+    display: block;
+    padding: 20px;
     color: #000;
+    max-width: 800px;
 }
 
 .header {
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 80%;
-}
-
-h1 {
-    padding-left: 30px;
-}
-
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin: 0 auto;
-    overflow: scroll;
-    /* Центрирует блок по горизонтали */
-}
-
-::ng-deep .mat-mdc-dialog-container {
-    width: 90%;
 }
 
 .tags {
-    margin-left: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -64,20 +48,15 @@ h1 {
     }
 }
 
-.mdc-dialog__container {
-    width: 80%;
-}
-
 .news-photo {
     width: 400px;
     height: 300px;
     object-fit: cover;
     float: left;
-    padding: 0 30px 30px 0;
+    padding: 0 20px 10px 0;
 }
 
 .text {
-    width: 750px;
     text-align: justify;
-    margin: 30px;
+    margin: 20px 0;
 }
