@@ -50,7 +50,6 @@
                 <img [src]="show.poster_src" alt="">
                 <!-- <img [src]="(api + '/news/' + show.poster_src) | safeUrl" alt=""> -->
                 <h3>{{ show.title }}</h3>
-                <span>{{ show.descr }}</span>
                 <a mat-flat-button color="primary" routerLink="../sessions">Купить билет</a>
             </div>
         </div>
@@ -82,7 +81,7 @@
         </div>
     </div>
 </section>
-<section>
+<section class="sec-videos-wrapper">
     <div class="videos-wrapper">
         <span class="video-wrapper-title">Интересное о космосе</span>
         <div class="videos">

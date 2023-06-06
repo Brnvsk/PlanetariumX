@@ -1,12 +1,15 @@
-.container {
-	margin: 0 auto;
-	max-width: 1600px;
-}
-
-.poster-img {
-	height: 60px;
-}
-
-.right {
-	text-align: right;
+:host {
+    .container {
+        margin: 0 auto;
+        max-width: 1600px;
+    }
+    .poster-img {
+        height: 60px;
+    }
+    .right {
+        text-align: right;
+    }
+     ::ng-deep .mdc-data-table__content:last-child {
+        border-radius: 50px;
+    }
 }

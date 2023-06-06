@@ -15,7 +15,7 @@ const bonstickPositions = {
     top: 20,
   },
   barley: {
-    left: 850,
+    left: 980,
     top: 40,
   },
   memo: {
@@ -23,7 +23,7 @@ const bonstickPositions = {
     top: 300,
   },
   visual: {
-    left: 950,
+    left:1050,
     top: 450,
   },
   learn: {

@@ -121,6 +121,23 @@
     overflow: clip;
 }
 
+.filters form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filters mat-form-field {
+    margin-right: 10px;
+}
+
+.filters button {
+    margin-top: 10px;
+    border-radius: 15px;
+    width: 130px;
+    height: 35px;
+    background-color: #6858DC;
+}
+
 @media (max-width: 950px) {
     .wrapper-content-view {
         display: none !important;

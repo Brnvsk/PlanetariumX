@@ -3,4 +3,20 @@
     border-radius: 20px;
     padding: 10px;
     transition: .3s;
+    img {
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+    }
+    button {
+        background-color: none;
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+    .listen {
+        display: flex;
+        justify-content: center;
+    }
 }

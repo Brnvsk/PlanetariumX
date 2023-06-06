@@ -7,10 +7,54 @@ canvas {
     height: 100%;
 }
 
+#container {
+    margin: 20px;
+}
+
 .back-btn {
     position: absolute;
-    left: 10px;
-    top: 10px;
+    color: #fff;
+    margin: 20px, 20px, 20px, 20px;
+    display: block;
+    background-color: rgba(28, 28, 28, 0);
+    height: 40px;
+    width: 200px;
+    border-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 20%, #6858DC 80%);
+    border-image-slice: 1;
+    cursor: pointer;
+    animation-duration: 2s;
+    font-size: 14px;
+}
+
+.back-btn:hover {
+    color: #ffffff;
+    animation-name: gradientBorder;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes gradientBorder {
+    0% {
+        border-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 20%, #6858DC 80%);
+        border-image-slice: 1;
+    }
+    25% {
+        border-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 20%, #6858DC 80%);
+        border-image-slice: 1;
+    }
+    50% {
+        border-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 20%, #6858DC 80%);
+        border-image-slice: 1;
+    }
+    75% {
+        border-image: linear-gradient(270deg, rgba(255, 255, 255, 0) 20%, #6858DC 80%);
+        border-image-slice: 1;
+    }
+    100% {
+        border-image: linear-gradient(360deg, rgba(255, 255, 255, 0) 20%, #6858DC 80%);
+        border-image-slice: 1;
+    }
 }
 
 #container {

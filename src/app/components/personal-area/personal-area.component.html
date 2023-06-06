@@ -84,9 +84,10 @@
                     <img class="news-item-photo" [src]="item.photo" alt="">
                     <!-- <img class="news-item-photo" [src]="(api + '/news/' + item.photo) | safeUrl" alt=""> -->
                     <div class="news-item-content">
-                        <h3>{{ item.title }}</h3>
-                        <p class="news-item-text">{{ item.text[0] || '' }}</p>
-
+                        <div>
+                            <h3>{{ item.title }}</h3>
+                            <p class="news-item-text">{{ item.text[0] || '' }}</p>
+                        </div>
                         <div class="news-item-tags">
                             <span *ngFor="let tag of item.tags" class="news-item-tag">
                   {{ tag.name }}

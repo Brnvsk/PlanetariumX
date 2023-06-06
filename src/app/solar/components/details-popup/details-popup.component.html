@@ -1,6 +1,6 @@
-<button (click)="onClose()">Close</button>
+<button (click)="onClose()"><img src="assets/images/log-out.png" alt=""></button>
 <h3>{{data.name}}</h3>
 <p>{{data.text}}</p>
 <p>Радиус: {{data.radius}} км</p>
-<p>Температура поверхности: от {{data.temp1}}°C до +{{data.temp2}}°C </p>
-<button (click)="playSound()">Play sound</button>
+<p>Температура поверхности: {{data.temp1}} </p>
+<button (click)="playSound()" class="listen">Прослушать <img src="assets/icons/play.svg" alt=""></button>
