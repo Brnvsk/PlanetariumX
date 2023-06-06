@@ -1,0 +1,84 @@
+$primary-palette: (
+    50 : #ebe2f9,
+    100 : #ccb7f1,
+    200 : #ab87e8,
+    300 : #8957de,
+    400 : #6f33d7,
+    500 : #560fd0,
+    600 : #4f0dcb,
+    700 : #450bc4,
+    800 : #3c08be,
+    900 : #2b04b3,
+    A100 : #e2dcff,
+    A200 : #b8a9ff,
+    A400 : #8e76ff,
+    A700 : #785dff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #ffffff,
+    )
+);
+
+$secondary-palette: (
+  50 : #fcfaf2,
+  100 : #f8f3df,
+  200 : #f3ebca,
+  300 : #eee3b5,
+  400 : #ebdda5,
+  500 : #e7d795,
+  600 : #e4d38d,
+  700 : #e0cd82,
+  800 : #ddc778,
+  900 : #d7be67,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #fff8e2,
+  A700 : #fff3c9,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #000000,
+      800 : #000000,
+      900 : #000000,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+@use '@angular/material' as mat;
+@include mat.core();
+
+$primary: mat.define-palette($primary-palette);
+$accent: mat.define-palette($secondary-palette);
+// The warn palette is optional (defaults to red).
+$warn: mat.define-palette(mat.$red-palette);
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$theme: mat.define-dark-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  )
+));
+
+@include mat.all-component-themes($theme);

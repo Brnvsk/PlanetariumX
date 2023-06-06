@@ -1,8 +1,8 @@
 :host {
+    padding: 0 15px;
     .wrapper[_ngcontent-wji-c65] {
         width: 350px;
         height: 450px;
-        background-color: #000000;
         border-radius: 20px;
         padding: 20px 65px 20px 65px;
         display: flex;
@@ -10,16 +10,18 @@
         justify-content: space-evenly;
         position: relative;
     }
+    .inner {
+        display: flex;
+        justify-content: space-between;
+        background-color: #131617;
+        border-radius: 30px;
+        overflow: hidden;
+    }
     .wrapper {
-        width: 80%;
+        max-width: 1200px;
+        padding-bottom: 40px;
         margin: 0 auto;
         height: 100%;
-        border-radius: 30px;
-        padding-bottom: 100px;
-        padding-top: 50px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         position: relative;
         .leftside {
             height: 100%;
@@ -29,13 +31,10 @@
             img {
                 height: 450px;
                 width: 300px;
-                border-radius: 30px 0 0 0;
             }
             .leftside-description {
-                background-color: #131617;
                 height: 440px;
                 width: 260px;
-                border-radius: 0 0 0 30px;
                 padding: 10px 20px 0 20px;
                 flex-grow: 1;
                 .text {
@@ -45,8 +44,6 @@
         }
         .rightside {
             width: 820px;
-            height: calc(100% - 80px);
-            background-color: #131617;
             border-radius: 0 30px 30px 0;
             display: flex;
             flex-direction: column;
@@ -337,11 +334,10 @@
     }
 }
 
-// .address-select {
-//     margin-left: auto;
-// }
 .filters {
+    padding-top: 10px;
     display: flex;
+    gap: 15px;
 }
 
 .map-message {

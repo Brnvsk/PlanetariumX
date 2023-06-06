@@ -1,56 +1,51 @@
 :host {
     .sessions {
-        width: 80%;
+        max-width: 1200px;
         margin: 0 auto;
+        padding: 0 15px;
         h3 {
             color: #6858DC;
         }
         .sessions-content {
             display: flex;
-            flex-direction: row;
+            gap: 40px;
             padding-top: 15px;
             .choice-sessions {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
-                width: 70%;
+                flex-grow: 1;
                 .rental-slides {
+                    width: 100%;
                     display: flex;
-                    flex-direction: row;
                     flex-wrap: wrap;
                     gap: 15px;
-                    padding: 50px 0 50px 15px;
+                    padding-bottom: 40px;
                     .rental-slide {
-                        width: 250px;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        padding-bottom: 20px;
+                        max-width: 32%;
+                        width: 100%;
+                        text-align: center;
+                        background-color: #000;
+                        border-radius: 10px;
+                        overflow: hidden;
                         .title {
-                            padding-top: 15px;
                             font-size: 16px;
                             font-weight: bold;
                         }
                         img {
-                            width: 100%;
+                            width: 200px;
+                            max-height: 300px;
+                            object-fit: cover;
                         }
-                        span {
-                            margin-bottom: 15px;
-                            font-size: 12px;
-                        }
-                        button {
-                            width: 150px;
-                            height: 30px;
-                            border-radius: 5px;
-                        }
-                        a {
+                        .book-btn {
+                            margin: 8px 0;
                             text-decoration: none;
                         }
                     }
                 }
             }
             .filter-sessions {
-                width: 30%;
+                max-width: 270px;
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
@@ -136,20 +131,23 @@
     .black-text {
         color: #000000;
     }
-     ::ng-deep .filter-sessions mat-form-field.mat-form-field-appearance-fill .mat-select .mat-select-value .mat-select-placeholder {
-        color: #000000;
-        /* Черный цвет текста */
-        /* Другие стили, которые вы хотите применить */
-    }
-     ::ng-deep .filter-sessions mat-form-field.mat-form-field-appearance-fill .mat-select .mat-select-value .mat-select-content {
-        color: #000000;
-        /* Черный цвет текста */
-        /* Другие стили, которые вы хотите применить */
-    }
-    .filter-sessions input[formControlName="from"],
-    .filter-sessions input[formControlName="to"] {
-        color: #000000;
-        /* Черный цвет текста */
-        /* Другие стили, которые вы хотите применить */
-    }
+    // ::ng-deep .filter-sessions mat-form-field.mat-form-field-appearance-fill .mat-select .mat-select-value .mat-select-placeholder {
+    //     color: #000000;
+    //     /* Черный цвет текста */
+    //     /* Другие стили, которые вы хотите применить */
+    // }
+    // ::ng-deep .filter-sessions mat-form-field.mat-form-field-appearance-fill .mat-select .mat-select-value .mat-select-content {
+    //     color: #000000;
+    // }
+    // .filter-sessions input[formControlName="from"],
+    // .filter-sessions input[formControlName="to"] {
+    //     color: #000000;
+    // }
+}
+
+.session-item__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }

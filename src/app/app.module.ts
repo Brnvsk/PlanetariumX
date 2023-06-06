@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { NewsContentModalComponent } from './components/modals/news-content-modal/news-content-modal.component';
 import { SharedModule } from './shared/shared.module';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

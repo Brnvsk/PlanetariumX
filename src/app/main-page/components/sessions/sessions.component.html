@@ -5,23 +5,23 @@
     <div class="sessions-content">
         <form class="filter-sessions" [formGroup]="filtersForm">
             <mat-form-field>
-                <mat-label>Название</mat-label>
-                <input matInput formControlName="title" placeholder="Название">
+                <mat-label class="label">Название</mat-label>
+                <input matInput formControlName="title">
             </mat-form-field>
 
 
-            <mat-form-field appearance="fill">
-                <mat-label class="black-text">Дата</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-label>Дата</mat-label>
                 <mat-date-range-input [rangePicker]="picker" [min]="now" [max]="maxFiltersDate">
-                    <input formControlName="from" matStartDate placeholder="Start date">
-                    <input formControlName="to" matEndDate placeholder="End date">
+                    <input formControlName="from" matStartDate>
+                    <input formControlName="to" matEndDate>
                 </mat-date-range-input>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker></mat-date-range-picker>
             </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <mat-label class="black-text">Время</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-label>Время</mat-label>
                 <mat-select formControlName="time" multiple>
                     <mat-option *ngFor="let time of times" [value]="time">{{ time }}</mat-option>
                 </mat-select>
@@ -34,11 +34,10 @@
                     <div class="rental-slide" *ngFor="let session of sessions">
                         <img [src]="session.showPoster" alt="Poster picture">
                         <!-- <img [src]="(api + '/posters/' + session.showPoster) | safeUrl" alt="Poster picture"> -->
-                        <span class="title">{{session.showTitle}}</span>
-                        <a [routerLink]="['show', session.showId]" mat-flat-button color="primary">Купить билет</a>
-                        <!-- <p>
-                            {{ session | json }}
-                        </p> -->
+                        <div class="session-item__content">
+                            <span class="title">{{session.showTitle}}</span>
+                            <a [routerLink]="['show', session.showId]" mat-flat-button color="primary" class="book-btn">Купить билет</a>
+                        </div>
                     </div>
                 </ng-container>
                 <ng-template #noSessions>

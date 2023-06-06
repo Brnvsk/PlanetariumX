@@ -11,17 +11,18 @@
     </div>
     <div class="add-info">
         <div class="price">
-            <span>БИЛЕТОВ: {{booking.places.length}}</span>
-            <p>{{booking.show.price * booking.places.length}} BYN</p>
+            <span>Кол-во билетов: {{booking.places.length}}</span>
+            <span>Стоимость {{booking.show.price * booking.places.length}} BYN</span>
         </div>
         <div class="check">
+            <p>Места:</p>
             <p *ngFor="let seat of booking.places">
                 {{ seat.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{ seat.row }}, место {{ seat.place }}.
             </p>
         </div>
     </div>
     <form class="create-account-form">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
             <mat-label>Введите вашу почту</mat-label>
             <input (input)="onChangeEmail($event)" matInput visibility>
         </mat-form-field>
@@ -32,8 +33,5 @@
     </form>
     <div class="btn">
         <button type="submit" mat-flat-button color="primary" (click)="makeBooking()">Оформить</button>
-    </div>
-    <div class="exit">
-        <button (click)="onClose()"><img src="assets/images/exit.png" alt=""></button>
-    </div>
+        <button mat-flat-button (click)="cancel()">Отмена</button> </div>
 </div>

@@ -68,4 +68,8 @@ export class BookingPopupComponent implements OnInit {
     });
     this.router.navigate(['/main/login'])
   }
+
+  public cancel() {
+    this.dialogRef.close()
+  }
 }

@@ -1,0 +1,21 @@
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #1b1b1b;
+}
+
+.mdc-menu-surface {
+    background-color: #000;    
+}
+
+body {
+	.mdc-notched-outline .mdc-floating-label {
+		max-width: unset;
+	}
+
+	.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+		color: #fff;
+	}
+
+	.mdc-text-field--outlined.mdc-notched-outline--upgraded .mdc-floating-label--float-above, .mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
+		font-size: 1em;
+	}
+}

@@ -7,7 +7,7 @@
                 <input matInput formControlName="search">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field >
                 <mat-label>Категория</mat-label>
                 <mat-select formControlName="tags" multiple>
                     <mat-option *ngFor="let tag of tags" [value]="tag">
@@ -16,25 +16,27 @@
                 </mat-select>
             </mat-form-field>
 
-            <button mat-raised-button (click)="resetFilters()">Сбросить</button>
+            <button mat-raised-button (click)="resetFilters()" class="reset-btn">Сбросить</button>
         </form>
     </div>
     <div class="wrapper-content">
         <div class="news-container">
-            <div class="news-item" *ngFor="let item of news">
-                <img (click)="openNewsModal(item)" [src]="item.photo" alt="">
+            <div 
+            (click)="openNewsModal(item)"
+            class="news-item" *ngFor="let item of news">
+                <img [src]="item.photo" alt="">
                 <!-- <img (click)="openNewsModal(item)" [src]="(api + '/news/' + item.photo) | safeUrl" alt=""> -->
                 <!-- <img (click)="openNewsModal(item)" [src]="'http://localhost:5050/news/' + item.photo" alt=""> -->
-                <div class="new-tags">
-                    <span>{{item.title}}</span>
-                </div>
-                <span class="content">
-                    {{ item.text[0] }}
-                </span>
-                <div class="news-item-tags" *ngIf="item.tags.length > 0">
-                    <span *ngFor="let tag of item.tags" class="news-item-tag">
-                        {{ tag.name }}
+                <div class="news-item__content">
+                    <span class="title">{{item.title}}</span>
+                    <span class="text">
+                        {{ item.text[0] }}
                     </span>
+                    <div class="news-item-tags" *ngIf="item.tags.length > 0">
+                        <span *ngFor="let tag of item.tags" class="news-item-tag">
+                            {{ tag.name }}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

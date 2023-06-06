@@ -204,7 +204,7 @@ public get minDate(){
       })
 
       ref.afterClosed().subscribe(result => {
-        if (result.booking) {
+        if (result && result.booking) {
           this.saveBooking(result.booking)
         } else {
           this.isMapBlocked = false;

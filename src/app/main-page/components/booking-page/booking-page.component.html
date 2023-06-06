@@ -1,81 +1,90 @@
 <div class="wrapper" *ngIf="show$ | async as show">
-    <div class="leftside">
-        <img [src]="show.poster_src" alt="">
-        <!-- <img [src]="(api + '/posters/' + show.poster_src) | safeUrl" alt=""> -->
-        <div class="leftside-description">
-            <div class="text">
-                <h4>Описание</h4>
-                <span>{{ show.descr }}</span>
-            </div>
-            <div class="text" *ngIf="show.director">
-                <h4>Режиссер</h4>
-                <span>{{ show.director }}</span>
-            </div>
-            <div class="text" *ngIf="show.country">
-                <h4>Страна</h4>
-                <span>{{ show.country }}</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="rightside">
-        <div class="rightside-header">
-            <span class="title">{{show.title}}</span>
-            <div class="header-info">
+    
+    <div class="inner">
+        <div class="leftside">
+            <img [src]="show.poster_src" alt="">
+            <!-- <img [src]="(api + '/posters/' + show.poster_src) | safeUrl" alt=""> -->
+            <div class="leftside-description">
+                <div class="text">
+                    <h4>Описание</h4>
+                    <span>{{ show.descr }}</span>
+                </div>
+                <div class="text" *ngIf="show.director">
+                    <h4>Режиссер</h4>
+                    <span>{{ show.director }}</span>
+                </div>
+                <div class="text" *ngIf="show.country">
+                    <h4>Страна</h4>
+                    <span>{{ show.country }}</span>
+                </div>
             </div>
         </div>
-
-        <div class="filters" [formGroup]="filtersForm">
-
-            <mat-form-field class="address-select" appearance="fill">
-                <mat-label>Адрес</mat-label>
-                <mat-select formControlName="address">
-                    <mat-option *ngFor="let addr of showAddresses" [value]="addr">
-                        {{ addr }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-                <mat-label>Выберите дату</mat-label>
-                <input formControlName="date" [min]="minDate" matInput [matDatepicker]="picker">
-                <mat-hint>ММ/ДД/ГГ</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-
-
-            <mat-radio-group class="timeslots" formControlName="time" *ngIf="availableTimeslots.length > 0">
-                <ng-container *ngFor="let timeslot of availableTimeslots">
-                    <mat-radio-button class="timeslot" [value]="timeslot.time" [disabled]="isTimeSlotDisabled(timeslot)">
-                        {{ timeslot.time }}
-                    </mat-radio-button>
+    
+        <div class="rightside">
+            <div class="rightside-header">
+                <span class="title">{{show.title}}</span>
+                <div class="header-info">
+                </div>
+            </div>
+    
+            <div class="filters" [formGroup]="filtersForm">
+    
+                <mat-form-field class="address-select" appearance="outline">
+                    <mat-label>Адрес</mat-label>
+                    <mat-select formControlName="address">
+                        <mat-option *ngFor="let addr of showAddresses" [value]="addr">
+                            {{ addr }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Выберите дату</mat-label>
+                    <input formControlName="date" [min]="minDate" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+    
+    
+                <mat-radio-group class="timeslots" formControlName="time" *ngIf="availableTimeslots.length > 0">
+                    <ng-container *ngFor="let timeslot of availableTimeslots">
+                        <mat-radio-button class="timeslot" [value]="timeslot.time" [disabled]="isTimeSlotDisabled(timeslot)">
+                            {{ timeslot.time }}
+                        </mat-radio-button>
+                    </ng-container>
+                </mat-radio-group>
+            </div>
+    
+            <div class="seat-map" [class.blocked]="isMapBlocked">
+    
+                <svg class="seat-map-svg" #seatMapContainer (click)="onMapClick($event)"></svg>
+                <ng-container *ngIf="!showSeatsMap" [ngTemplateOutlet]="noTimeslots">
                 </ng-container>
-            </mat-radio-group>
-        </div>
-
-        <div class="seat-map" [class.blocked]="isMapBlocked">
-
-            <svg class="seat-map-svg" #seatMapContainer (click)="onMapClick($event)"></svg>
-            <ng-container *ngIf="!showSeatsMap" [ngTemplateOutlet]="noTimeslots">
-            </ng-container>
-        </div>
-
-        <div class="booking-submit" *ngIf="showSeatsMap">
-            <div class="seat-examples">
             </div>
-
-            <div class="price">
-                <span *ngFor="let seat of pickedSeats">
-                    <span>
-                        {{ seat.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{ seat.row }}, место {{ seat.place }}.
+    
+            <div class="booking-submit" *ngIf="showSeatsMap">
+                <div class="seat-examples">
+                </div>
+    
+                <div class="price">
+                    <span *ngFor="let seat of pickedSeats">
+                        <span>
+                            {{ seat.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{ seat.row }}, место {{ seat.place }}.
+                        </span>
                     </span>
-                </span>
+                    <p *ngIf="pickedSeats.length > 0">
+                        Билетов: {{ pickedSeats.length }} Стоимость: {{ pickedSeats.length * show.price }} BYN
+                    </p>
+                </div>
+    
+                <button 
+                mat-raised-button  
+                (click)="onBook()" 
+                color="primary"
+                [disabled]="pickedSeats.length === 0">Забронировать</button>
             </div>
-
-            <button (click)="onBook()" [disabled]="pickedSeats.length === 0">Забронировать</button>
+    
         </div>
-
     </div>
 
 </div>
