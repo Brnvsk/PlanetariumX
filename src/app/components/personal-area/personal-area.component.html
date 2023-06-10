@@ -31,7 +31,7 @@
 
             <mat-accordion class="bookings-list" *ngIf="bookings.length > 0; else noData">
 
-                <mat-expansion-panel *ngFor="let booking of bookings">
+                <mat-expansion-panel *ngFor="let booking of bookings" class="booking-item">
                     <mat-expansion-panel-header class="booking-item-header">
                         <mat-panel-title>Билет #{{ booking.booking_id }}</mat-panel-title>
 

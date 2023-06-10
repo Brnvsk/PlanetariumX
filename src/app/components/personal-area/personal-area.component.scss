@@ -12,7 +12,7 @@
 }
 
 .section-title {
-    color: #6858dc;
+    color: #fff;
 }
 
 .tags-list {
@@ -22,15 +22,11 @@
 
 .tag-item {
     padding: 10px 18px;
-    background-color: #8e47f9;
+    background-color: #560fd0;
     border-radius: 20px;
     cursor: pointer;
-    border: 2px solid #8e47f9;
+    border: 2px solid #560fd0;
     transition: .3s;
-    &:hover {
-        background-color: transparent;
-        color: #8e47f9;
-    }
 }
 
 .news-item-content {
@@ -40,27 +36,13 @@
 
 .news-item {
     width: 23%;
+    min-width: 270px;
     display: flex;
     flex-direction: column;
     padding-bottom: 10px;
     border-radius: 20px;
-    color: #e2e2e2;
-    &-tags {
-        display: flex;
-        gap: 10px;
-        padding: 10px;
-        span {
-            padding: 5px 10px;
-            font-size: 11px;
-            background-color: #6858DC;
-            color: #fff;
-            border-radius: 15px;
-        }
-    }
-    .news-item-text {
-        height: 100px;
-        overflow: hidden;
-    }
+    color: #fff;
+    background-color: #333;
     img {
         width: 100%;
         height: 240px;
@@ -72,20 +54,20 @@
 
 .tag-item-add {
     padding: 10px 18px;
-    border: 2px solid #8e47f9;
+    border: 2px solid #fff;
     border-radius: 20px;
-    color: #8e47f9;
+    color: #fff;
     background-color: transparent;
     cursor: pointer;
     transition: .3s;
     &:hover {
-        color: #fff;
-        background-color: #8e47f9;
+        border-color: #560fd0;
+        background-color: #560fd0;
     }
 }
 
 .title {
-    color: #6858dc;
+    color: #b492f0;
     font-family: ttTravel-bold;
     font-size: 32px;
     line-height: 12px;
@@ -99,10 +81,13 @@
 }
 
 .booking {
+    &-item.mat-expanded {
+        background-color: #560fd0;
+    }
     position: relative;
     padding-bottom: 200px;
     &-item-header {
-        background-color: #c8c4e8;
+        // background-color: #333;
     }
     &-show {
         font-size: 20px;
@@ -131,10 +116,8 @@
         gap: 20px;
     }
     &-item {
-        background: #fff;
         border-radius: 20px;
         overflow: hidden;
-        color: #333;
         cursor: pointer;
         &-photo {
             width: 300px;
@@ -147,11 +130,22 @@
         &-title {
             color: #8e47f9;
         }
+        &-text {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+        }
         &-tags {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
+            margin-top: 10px;
         }
         &-tag {
+            display: flex;
+            align-items: center;
+            text-align: center;
             padding: 5px 10px;
             background-color: #8e47f9;
             color: #fff;

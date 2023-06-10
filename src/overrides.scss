@@ -1,9 +1,19 @@
+$secondary: #e7d795;
+$bg: #424242;
+
+:host,
+:root {
+    --secondary: #{$secondary};
+    --bg: #{$bg};
+}
+
+
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: #1b1b1b;
 }
 
 .mdc-menu-surface {
-    background-color: #000;    
+    background-color: $bg;    
 }
 
 body {
@@ -18,4 +28,13 @@ body {
 	.mdc-text-field--outlined.mdc-notched-outline--upgraded .mdc-floating-label--float-above, .mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
 		font-size: 1em;
 	}
+}
+
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full, 
+.mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {
+	background: var(--secondary);
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+	color: var(--secondary);
 }

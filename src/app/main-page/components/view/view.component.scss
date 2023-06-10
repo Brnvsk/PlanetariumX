@@ -180,7 +180,6 @@
         }
     }
     .questions-wrapper {
-        height: 700px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -309,13 +308,6 @@
     .rental-wrapper {
         padding-top: 20px !important;
     }
-    .rental-slide {
-        button {
-            width: 120px !important;
-            height: 20px !important;
-            font-size: 10px;
-        }
-    }
 }
 
 .news-wrapper {
@@ -350,10 +342,8 @@
         justify-content: end;
         color: #6858DC;
         a {
+            text-decoration: none;
             cursor: pointer;
-        }
-        a:hover {
-            border-bottom: 1px solid #6858DC;
         }
     }
 }

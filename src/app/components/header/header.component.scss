@@ -17,7 +17,7 @@
     mat-progress-bar {
         width: 100%;
         z-index: 5;
-        height: 1px;
+        height: 2px;
         background-color: #ffffff;
     }
     .header-progress {
@@ -28,31 +28,56 @@
         height: 50px;
     }
     .header-progress-navigation {
-        width: 400px;
+        position: relative;
     }
+        
     .header-navigation {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        font-size: 12px;
-    }
-    .header-navigation>a {
-        cursor: pointer;
-        text-decoration: none;
-    }
-    .header-navigation>a:hover {
-        color: #ffffff;
+        font-size: 16px;
+
+        a {
+            color: #fff;
+            padding: 5px 12px;
+            // margin: 0 10px;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            transition: .2s;
+
+            &:hover {
+                &::after {
+                    left: 0;
+                    width: 100%;
+                }
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 0%;
+                height: 2px;
+                background-color: #ae89ef;
+                border-radius: 10px;
+                transition: .2s;
+                z-index: -1;
+            }
+        }
     }
     .header-progress-navigation:hover .star {
-        display: block;
+        opacity: 1;
+        transform: scale(1.8) rotate(60deg);
     }
     .star {
         width: 15px;
         height: 15px;
         position: absolute;
         z-index: 6;
-        display: none;
         transition: 0.2s;
+        // opacity: 0;
     }
     .logo {
         display: flex;

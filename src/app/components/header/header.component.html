@@ -3,14 +3,14 @@
     <div class="header-progress-navigation">
         <div class="header-progress">
             <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar>
-            <img src="assets/images/Star.png" alt="" class="star" color="#1F232E">
+            <img [style.left.px]="starLeft" src="assets/images/Star.png" alt="" class="star" color="#1F232E">
         </div>
 
         <div class="header-navigation">
-            <a id="first" routerLink="app/sessions" (click)="changeProgress($event)">Сеансы</a>
-            <a routerLink="app/news" (click)="changeProgress($event)">Новости</a>
-            <a routerLink="/solar" (click)="changeProgress($event)">Солнечная система</a>
-            <a routerLink="app/games" id="last" (click)="changeProgress($event)">Игры</a>
+            <a class="header-link progress-link" id="first" routerLink="app/sessions" routerLinkActive="active" (click)="changeProgress($event)">Сеансы</a>
+            <a class="header-link progress-link" routerLink="app/news" routerLinkActive="active" (click)="changeProgress($event)">Новости</a>
+            <a class="header-link progress-link" routerLink="/solar" routerLinkActive="active" (click)="changeProgress($event)">Солнечная система</a>
+            <a class="header-link progress-link" routerLink="app/games" routerLinkActive="active" id="last" (click)="changeProgress($event)">Игры</a>
         </div>
     </div>
     <div class="logIn">

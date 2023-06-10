@@ -1,5 +1,5 @@
 .wrapper {
-	background-color: #8e47f9;
+	padding: 20px 20px 30px;
 }
 
 .tags-list {
@@ -9,4 +9,16 @@
 
 .tag-item {
 	width: 100%;
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 15px;
+	margin-top: 20px;
+}
+
+.cancel-btn {
+	background-color: #fff;
+	color: #333;
 }
