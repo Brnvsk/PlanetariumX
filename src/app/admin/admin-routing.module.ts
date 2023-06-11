@@ -5,6 +5,7 @@ import { AdminShowsComponent } from './components/admin-shows/admin-shows.compon
 import { AdminBookingsComponent } from './components/admin-bookings/admin-bookings.component';
 import { AdminNewsComponent } from './components/admin-news/admin-news.component';
 import { AdminSessionsComponent } from './components/admin-sessions/admin-sessions.component';
+import { AdminTagsComponent } from './components/admin-tags/admin-tags.component';
 
 const routes: Routes = [{ 
   path: '', 
@@ -25,6 +26,10 @@ const routes: Routes = [{
     {
       path: 'news',
       component: AdminNewsComponent,
+    },
+    {
+      path: 'tags',
+      component: AdminTagsComponent,
     },
   ]
 }];

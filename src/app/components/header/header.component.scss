@@ -19,7 +19,7 @@
         width: 100%;
         z-index: 5;
         height: 2px;
-        background-color: #ffffff;
+        background-color: #fff;
     }
     .header-progress {
         align-items: center;
@@ -61,7 +61,7 @@
                 right: 0;
                 width: 0%;
                 height: 2px;
-                background-color: #ae89ef;
+                background-color: var(--secondary);
                 border-radius: 10px;
                 transition: .2s;
                 z-index: -1;

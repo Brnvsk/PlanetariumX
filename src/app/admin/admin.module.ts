@@ -23,6 +23,7 @@ import { CreateNewsModalComponent } from './modals/create-news-modal/create-news
 import { UpdateNewsModalComponent } from './modals/update-news-modal/update-news-modal.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
+import { AdminTagsComponent } from './components/admin-tags/admin-tags.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatButtonModule } from '@angular/material/button';
     CreateSessionModalComponent,
     UpdateSessionModalComponent,
     CreateNewsModalComponent,
-    UpdateNewsModalComponent
+    UpdateNewsModalComponent,
+    AdminTagsComponent
   ],
   imports: [
     CommonModule,

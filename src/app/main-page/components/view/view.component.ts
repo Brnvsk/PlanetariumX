@@ -1,4 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NewsContentModalComponent } from 'src/app/components/modals/news-content-modal/news-content-modal.component';
 import { apiUrl } from 'src/app/config/network.config';
 import { BookingService } from 'src/app/services/booking.service';
 import { NewsService } from 'src/app/services/news.service';
@@ -20,6 +22,7 @@ export class ViewComponent implements OnInit {
   constructor(
     private cdRef: ChangeDetectorRef,
     private newsService: NewsService,
+    private dialog: MatDialog,
     private bookingService: BookingService,
     ) {
 
@@ -36,4 +39,9 @@ export class ViewComponent implements OnInit {
     }) 
   }
 
+  public openNewsDialog(item: INews) {
+    this.dialog.open(NewsContentModalComponent, {
+      data: item
+    })
+  }
 }

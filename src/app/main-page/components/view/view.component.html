@@ -60,19 +60,21 @@
     <div class="news-wrapper">
         <span class="news-wrapper-title">Новости планетария</span>
         <div class="news">
-            <div *ngFor="let item of news" class="news-item">
+            <div *ngFor="let item of news" class="news-item" (click)="openNewsDialog(item)">
                 <img [src]="item.photo" alt="">
                 <!-- <img [src]="(api + '/news/' + item.photo) | safeUrl" alt=""> -->
-                <h1>
-                    {{ item.title }}
-                </h1>
-                <p>
-                    {{ item.text[0] }}
-                </p>
-                <div class="news-item-tags" *ngIf="item.tags.length > 0">
-                    <span *ngFor="let tag of item.tags" class="tag-item">
-                        {{ tag.name }}
-                    </span>
+                <div class="content">
+                    <h1>
+                        {{ item.title }}
+                    </h1>
+                    <p>
+                        {{ item.text[0] }}
+                    </p>
+                    <div class="news-item-tags" *ngIf="item.tags.length > 0">
+                        <span *ngFor="let tag of item.tags" class="tag-item">
+                            {{ tag.name }}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
