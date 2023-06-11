@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CreateNewsModalComponent } from './modals/create-news-modal/create-news-modal.component';
 import { UpdateNewsModalComponent } from './modals/update-news-modal/update-news-modal.component';
 import { SharedModule } from '../shared/shared.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { SharedModule } from '../shared/shared.module';
     MatFormFieldModule,
     MatInputModule,
     SharedModule,
+    MatButtonModule,
   ],
   providers: [  
     MatDatepickerModule,  

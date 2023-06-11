@@ -1,10 +1,14 @@
 <div class="title-wrapper container">
-    <h1 class="title">Представления</h1>
+    <h2 class="title">Представления</h2>
 </div>
 
 <div class="main container">
 
-    <button (click)="createShow()">Добавить представление</button>
+    <div class="row">
+        <button mat-raised-button
+        color="accent"
+        (click)="createShow()">Добавить представление</button>
+    </div>
 
     <table mat-table [dataSource]="shows" class="mat-elevation-z8">
 
@@ -34,8 +38,25 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef class="right">Управление</th>
             <td mat-cell *matCellDef="let show" class="right">
-                <button (click)="editShow(show)">Редактировать</button>
-                <button (click)="deleteShow(show, $event)">Удалить</button>
+                <div class="actions">
+                    <button
+                    mat-flat-button
+                    color="accent"
+                    class="round-btn"
+                    (click)="editShow(show)">
+                        <span class="material-icons-outlined">
+                            mode
+                        </span>
+                    </button>
+                    <button 
+                    mat-flat-button
+                    class="round-btn warn"
+                    (click)="deleteShow(show, $event)">
+                        <span class="material-icons-outlined fix-width">
+                            delete_outlined
+                        </span>
+                    </button>
+                </div>
             </td>
         </ng-container>
 

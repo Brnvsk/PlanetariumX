@@ -2,12 +2,16 @@
 <ng-container *ngIf="shows$ | async as shows; else loader">
 
 	<div class="title-wrapper container">
-		<h1 class="title">Представления</h1>
+		<h2 class="title">Сеансы</h2>
 	</div>
 	
 	<div class="main container">
 	
-		<button (click)="create(shows)">Добавить сеанс</button>
+		<div class="row">
+			<button mat-flat-button
+			color="accent"
+			(click)="create(shows)">Добавить сеанс</button>
+		</div>
 	
 		<table mat-table [dataSource]="sessions" class="mat-elevation-z8">
 		  
@@ -39,8 +43,25 @@
 			<ng-container matColumnDef="actions">
 			  <th mat-header-cell *matHeaderCellDef class="right">Управление</th>
 			  <td mat-cell *matCellDef="let session" class="right">
-				<button [disabled]="disableBtn" (click)="edit(session, shows)">Редактировать</button>
-				<button [disabled]="disableBtn" (click)="delete(session, $event)">Удалить</button>
+				<div class="actions">
+                    <button
+                    mat-flat-button
+                    color="accent"
+                    class="round-btn"
+                    (click)="edit(session, shows)">
+                        <span class="material-icons-outlined">
+                            mode
+                        </span>
+                    </button>
+                    <button 
+                    mat-flat-button
+                    class="round-btn warn"
+                    (click)="delete(session, $event)">
+                        <span class="material-icons-outlined fix-width">
+                            delete_outlined
+                        </span>
+                    </button>
+                </div>
 			  </td>
 			</ng-container>
 		  

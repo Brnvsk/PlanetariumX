@@ -8,6 +8,7 @@
     .wrapper {
         display: flex;
         flex-direction: row;
+        align-items: flex-end;
         justify-content: space-between;
         padding: 20px 20px 40px 20px;
     }
@@ -88,24 +89,23 @@
         }
     }
     .logIn {
-        display: flex;
-        flex-direction: column-reverse;
-        padding-right: 50px;
         .login-button {
             display: block;
             background-color: rgba(28, 28, 28, 0);
-            height: 40px;
-            width: 120px;
+            // height: 40px;
+            // width: 120px;
             border-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 20%, #6858DC 80%);
             border-image-slice: 1;
+            color: #fff;
             cursor: pointer;
             animation-duration: 2s;
-            font-size: 14px;
+            font-size: 16px;
+            padding: 12px 18px;
         }
         .login-button:hover {
-            color: #ffffff;
+            // color: #ffffff;
             animation-name: gradientBorder;
-            animation-duration: 4s;
+            animation-duration: 2s;
             animation-iteration-count: infinite;
             animation-timing-function: linear;
         }
@@ -131,9 +131,6 @@
             border-image: linear-gradient(360deg, rgba(255, 255, 255, 0) 20%, #6858DC 80%);
             border-image-slice: 1;
         }
-    }
-     ::ng-deep .mat-mdc-progress-bar {
-        --mdc-linear-progress-active-indicator-color: #6858DC;
     }
 }
 

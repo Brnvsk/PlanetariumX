@@ -1,23 +1,11 @@
-.container {
-    margin: 0 auto;
-    max-width: 70%;
-}
-
 .poster-img {
-    height: 60px;
+    height: 80px;
+    width: 70px;
+    object-fit: cover;
 }
 
 .right {
     text-align: right;
-}
-
-button {
-    width: 120px;
-    height: 30px;
-    border-radius: 20px;
-    background-color: #6858DC;
-    color: #fff;
-    border: none;
 }
 
 table {
@@ -26,11 +14,35 @@ table {
 
 .tags-col {
     display: flex;
+    gap: 8px;
     & span {
         padding: 5px 8px;
-        margin: 0 6px;
-        background-color: #efefef;
+        color: #000;
+        font-size: 12px;
+        background-color: var(--secondary);
         border-radius: 10px;
         cursor: pointer;
     }
+}
+
+.news-title {
+    display: block;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.row {
+    padding: 10px 0;
+}
+
+.fix-width {
+    width: 24px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
 }

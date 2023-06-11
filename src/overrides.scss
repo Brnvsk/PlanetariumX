@@ -38,3 +38,7 @@ body {
 .mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
 	color: var(--secondary);
 }
+
+::ng-deep .mat-mdc-progress-bar {
+	--mdc-linear-progress-active-indicator-color: #6858DC;
+}

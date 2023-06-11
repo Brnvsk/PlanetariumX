@@ -10,3 +10,17 @@
 .right {
     text-align: right;
 }
+
+.row {
+    padding: 10px 0;
+}
+
+.fix-width {
+    width: 24px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}

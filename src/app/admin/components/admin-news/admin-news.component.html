@@ -1,10 +1,14 @@
 <div class="title-wrapper container">
-    <h1 class="title">Новости</h1>
+    <h2 class="title">Новости</h2>
 </div>
 
 <div class="main container">
 
-    <button (click)="create()">Добавить новость</button>
+    <div class="row">
+        <button mat-flat-button
+        color="accent"
+        (click)="create()">Добавить новость</button>
+    </div>
 
     <table mat-table [dataSource]="news" class="mat-elevation-z8">
 
@@ -15,7 +19,11 @@
 
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef>Заголовок</th>
-            <td mat-cell *matCellDef="let item"> {{item.title}} </td>
+            <td mat-cell *matCellDef="let item" > 
+                <span class="news-title">
+                    {{item.title}}
+                </span>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="tags">
@@ -40,8 +48,25 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef class="right">Управление</th>
             <td mat-cell *matCellDef="let item" class="right">
-                <button (click)="edit(item)">Редактировать</button>
-                <button (click)="delete(item, $event)">Удалить</button>
+                <div class="actions">
+                    <button
+                    mat-flat-button
+                    color="accent"
+                    class="round-btn"
+                    (click)="edit(item)">
+                        <span class="material-icons-outlined">
+                            mode
+                        </span>
+                    </button>
+                    <button 
+                    mat-flat-button
+                    class="round-btn warn"
+                    (click)="delete(item, $event)">
+                        <span class="material-icons-outlined fix-width">
+                            delete_outlined
+                        </span>
+                    </button>
+                </div>
             </td>
         </ng-container>
 
