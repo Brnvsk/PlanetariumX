@@ -28,7 +28,7 @@
         </mat-form-field>
         <p class="error-message" *ngIf="noEmailError">
             <span>Необходимо указать e-mail</span>
-            <button (click)="goToLogin()">либо выполнить вход</button>
+            <span class="login-link" (click)="goToLogin()">либо выполнить вход</span>
         </p>
     </form>
     <div class="btn">

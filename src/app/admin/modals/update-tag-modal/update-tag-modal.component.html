@@ -1,0 +1,9 @@
+<form [formGroup]="form" class="form">
+
+    <input formControlName="name" type="text" placeholder="Тег">
+
+    <div class="footer">
+        <button (click)="cancel()">Отмена</button>
+        <button (click)="submit()">Обновить</button>
+    </div>
+</form>

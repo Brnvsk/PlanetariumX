@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, shareReplay } from 'rxjs';
+import { BehaviorSubject, map, of, shareReplay } from 'rxjs';
 import { IShow, IShowSession } from '../types/show.types';
 import { HttpClient } from '@angular/common/http';
 import { ApiRoutes } from '../config/network.config';

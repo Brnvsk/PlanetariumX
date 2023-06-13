@@ -1,0 +1,33 @@
+:host {
+    .container {
+        margin: 0 auto;
+        max-width: 1600px;
+    }
+    .right {
+        text-align: right;
+    }
+     ::ng-deep .mdc-data-table__content:last-child {
+        border-radius: 50px;
+    }
+}
+
+.table {
+    max-width: 600px;
+    min-width: unset;
+    width: 100%;
+	margin: 0 auto;
+}
+
+.row {
+    padding: 10px 0;
+}
+
+.fix-width {
+    width: 24px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}

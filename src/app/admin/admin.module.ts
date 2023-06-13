@@ -24,6 +24,8 @@ import { UpdateNewsModalComponent } from './modals/update-news-modal/update-news
 import { SharedModule } from '../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { AdminTagsComponent } from './components/admin-tags/admin-tags.component';
+import { CreateTagModalComponent } from './modals/create-tag-modal/create-tag-modal.component';
+import { UpdateTagModalComponent } from './modals/update-tag-modal/update-tag-modal.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { AdminTagsComponent } from './components/admin-tags/admin-tags.component
     UpdateSessionModalComponent,
     CreateNewsModalComponent,
     UpdateNewsModalComponent,
-    AdminTagsComponent
+    AdminTagsComponent,
+    CreateTagModalComponent,
+    UpdateTagModalComponent
   ],
   imports: [
     CommonModule,
