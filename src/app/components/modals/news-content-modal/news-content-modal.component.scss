@@ -26,13 +26,14 @@
 }
 
 .tag-item {
-    padding: 6px 10px;
-    border-radius: 10px;
-    border: 1px solid #555;
+    padding: 4px 12px;
+    border-radius: 16px;
+    background-color: #fff;
     cursor: pointer;
+    font-size: 12px;
     &.user {
-        background-color: #000;
-        color: #fff;
+        background-color: var(--secondary);
+        color: #000;
         position: relative;
         padding-left: 24px;
         &::before {
@@ -40,13 +41,13 @@
             position: absolute;
             left: 6px;
             top: 6px;
-            width: 12px;
-            height: 6px;
+            width: 11px;
+            height: 4px;
             border-radius: 2px;
             background-color: transparent;
             border: 2px solid transparent;
-            border-bottom-color: #fff;
-            border-left-color: #fff;
+            border-bottom-color: #000;
+            border-left-color: #000;
             transform: rotate(-45deg);
         }
     }

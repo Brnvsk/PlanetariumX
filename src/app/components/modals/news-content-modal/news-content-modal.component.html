@@ -1,6 +1,6 @@
 <div class="tags">
     <span class="tag-item" [class.user]="tag?.hasUser" *ngFor="let tag of data.tags" (click)="clickTag(tag, $event)">
-    {{ tag.id }} - {{ tag.name }}
+        {{ tag.name }}
     </span>
 </div>
 <div class="header">

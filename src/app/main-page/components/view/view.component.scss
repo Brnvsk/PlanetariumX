@@ -47,11 +47,13 @@ section {
 .videos {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin-top: 50px;
 }
 .video {
+    max-width: 32%;
     video {
-        width: 400px;
+        width: 100%;
     }
 }
 .sec-videos-wrapper {
