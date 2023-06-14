@@ -47,3 +47,7 @@ table {
     justify-content: flex-end;
     gap: 10px;
 }
+
+.table-scroller {
+    overflow-x: auto;
+}

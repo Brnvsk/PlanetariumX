@@ -13,61 +13,63 @@
 			(click)="create(shows)">Добавить сеанс</button>
 		</div>
 	
-		<table mat-table [dataSource]="sessions" class="mat-elevation-z8">
-		  
-			<ng-container matColumnDef="id">
-			  <th mat-header-cell *matHeaderCellDef>No.</th>
-			  <td mat-cell *matCellDef="let session"> {{session.id}} </td>
-			</ng-container>
-		  
-			<ng-container matColumnDef="showId">
-			  <th mat-header-cell *matHeaderCellDef>Представление</th>
-			  <td mat-cell *matCellDef="let session">{{session.showTitle}}</td>
-			</ng-container>
-		  
-			<ng-container matColumnDef="date">
-			  <th mat-header-cell *matHeaderCellDef>Дата</th>
-			  <td mat-cell *matCellDef="let session"> {{session.date | date : 'dd MM yyyy'}} </td>
-			</ng-container>
-		  
-			<ng-container matColumnDef="time">
-			  <th mat-header-cell *matHeaderCellDef>Время</th>
-			  <td mat-cell *matCellDef="let session"> {{session.time}} </td>
-			</ng-container>
-		  
-			<ng-container matColumnDef="address">
-			  <th mat-header-cell *matHeaderCellDef>Адрес</th>
-			  <td mat-cell *matCellDef="let session">{{session.address}}</td>
-			</ng-container>
-		  
-			<ng-container matColumnDef="actions">
-			  <th mat-header-cell *matHeaderCellDef class="right">Управление</th>
-			  <td mat-cell *matCellDef="let session" class="right">
-				<div class="actions">
-                    <button
-                    mat-flat-button
-                    color="accent"
-                    class="round-btn"
-                    (click)="edit(session, shows)">
-                        <span class="material-icons-outlined">
-                            mode
-                        </span>
-                    </button>
-                    <button 
-                    mat-flat-button
-                    class="round-btn warn"
-                    (click)="delete(session, $event)">
-                        <span class="material-icons-outlined fix-width">
-                            delete_outlined
-                        </span>
-                    </button>
-                </div>
-			  </td>
-			</ng-container>
-		  
-			<tr mat-header-row *matHeaderRowDef="columns"></tr>
-			<tr mat-row *matRowDef="let row; columns: columns;"></tr>
-		</table>
+		<div class="table-scroller">
+			<table mat-table [dataSource]="sessions">
+			  
+				<ng-container matColumnDef="id">
+				  <th mat-header-cell *matHeaderCellDef>No.</th>
+				  <td mat-cell *matCellDef="let session"> {{session.id}} </td>
+				</ng-container>
+			  
+				<ng-container matColumnDef="showId">
+				  <th mat-header-cell *matHeaderCellDef>Представление</th>
+				  <td mat-cell *matCellDef="let session">{{session.showTitle}}</td>
+				</ng-container>
+			  
+				<ng-container matColumnDef="date">
+				  <th mat-header-cell *matHeaderCellDef>Дата</th>
+				  <td mat-cell *matCellDef="let session"> {{session.date | date : 'dd MM yyyy'}} </td>
+				</ng-container>
+			  
+				<ng-container matColumnDef="time">
+				  <th mat-header-cell *matHeaderCellDef>Время</th>
+				  <td mat-cell *matCellDef="let session"> {{session.time}} </td>
+				</ng-container>
+			  
+				<ng-container matColumnDef="address">
+				  <th mat-header-cell *matHeaderCellDef>Адрес</th>
+				  <td mat-cell *matCellDef="let session">{{session.address}}</td>
+				</ng-container>
+			  
+				<ng-container matColumnDef="actions">
+				  <th mat-header-cell *matHeaderCellDef class="right">Управление</th>
+				  <td mat-cell *matCellDef="let session" class="right">
+					<div class="actions">
+						<button
+						mat-flat-button
+						color="accent"
+						class="round-btn"
+						(click)="edit(session, shows)">
+							<span class="material-icons-outlined">
+								mode
+							</span>
+						</button>
+						<button 
+						mat-flat-button
+						class="round-btn warn"
+						(click)="delete(session, $event)">
+							<span class="material-icons-outlined fix-width">
+								delete_outlined
+							</span>
+						</button>
+					</div>
+				  </td>
+				</ng-container>
+			  
+				<tr mat-header-row *matHeaderRowDef="columns"></tr>
+				<tr mat-row *matRowDef="let row; columns: columns;"></tr>
+			</table>
+		</div>
 	
 	</div>
 </ng-container>

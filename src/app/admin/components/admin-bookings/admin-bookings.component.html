@@ -5,51 +5,53 @@
 
 <div class="main container">
 
-	<table mat-table [dataSource]="bookings" class="mat-elevation-z8">
-	  
-		<ng-container matColumnDef="bookingId">
-		  <th mat-header-cell *matHeaderCellDef>No.</th>
-		  <td mat-cell *matCellDef="let booking"> {{booking.booking_id}} </td>
-		</ng-container>
-	  
-		<ng-container matColumnDef="showTitle">
-		  <th mat-header-cell *matHeaderCellDef>Представление</th>
-		  <td mat-cell *matCellDef="let booking"> {{booking.title}} </td>
-		</ng-container>
-	  
-		<ng-container matColumnDef="email">
-		  <th mat-header-cell *matHeaderCellDef>E-mail</th>
-		  <td mat-cell *matCellDef="let booking">{{booking.user_email ?? booking.email}}</td>
-		</ng-container>
-	  
-		<ng-container matColumnDef="places">
-		  <th mat-header-cell *matHeaderCellDef>Места</th>
-		  <td mat-cell *matCellDef="let booking">
-			<div class="places-col">
-				<span *ngFor="let place of booking.places">
-					{{ place.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{place.row}}, место {{place.place }}
-				</span>
-			</div>
-		  </td>
-		</ng-container>
-	  
-		<ng-container matColumnDef="date">
-		  <th mat-header-cell *matHeaderCellDef>Дата</th>
-		  <td mat-cell *matCellDef="let booking">{{booking.date}}</td>
-		</ng-container>
-	  
-		<ng-container matColumnDef="time">
-		  <th mat-header-cell *matHeaderCellDef>Время</th>
-		  <td mat-cell *matCellDef="let booking">{{booking.time}}</td>
-		</ng-container>
-	  
-		<ng-container matColumnDef="address">
-		  <th mat-header-cell *matHeaderCellDef>Адрес</th>
-		  <td mat-cell *matCellDef="let booking">{{booking.address}}</td>
-		</ng-container>
-	  
-		<tr mat-header-row *matHeaderRowDef="columns"></tr>
-		<tr mat-row *matRowDef="let row; columns: columns;"></tr>
-	</table>
+	<div class="table-scroller">
+		<table mat-table [dataSource]="bookings" class="mat-elevation-z8">
+		  
+			<ng-container matColumnDef="bookingId">
+			  <th mat-header-cell *matHeaderCellDef>No.</th>
+			  <td mat-cell *matCellDef="let booking"> {{booking.booking_id}} </td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="showTitle">
+			  <th mat-header-cell *matHeaderCellDef>Представление</th>
+			  <td mat-cell *matCellDef="let booking"> {{booking.title}} </td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="email">
+			  <th mat-header-cell *matHeaderCellDef>E-mail</th>
+			  <td mat-cell *matCellDef="let booking">{{booking.user_email ?? booking.email}}</td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="places">
+			  <th mat-header-cell *matHeaderCellDef>Места</th>
+			  <td mat-cell *matCellDef="let booking">
+				<div class="places-col">
+					<span *ngFor="let place of booking.places">
+						{{ place.side === 'left' ? 'Слева' : 'Справа' }}, ряд {{place.row}}, место {{place.place }}
+					</span>
+				</div>
+			  </td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="date">
+			  <th mat-header-cell *matHeaderCellDef>Дата</th>
+			  <td mat-cell *matCellDef="let booking">{{booking.date}}</td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="time">
+			  <th mat-header-cell *matHeaderCellDef>Время</th>
+			  <td mat-cell *matCellDef="let booking">{{booking.time}}</td>
+			</ng-container>
+		  
+			<ng-container matColumnDef="address">
+			  <th mat-header-cell *matHeaderCellDef>Адрес</th>
+			  <td mat-cell *matCellDef="let booking">{{booking.address}}</td>
+			</ng-container>
+		  
+			<tr mat-header-row *matHeaderRowDef="columns"></tr>
+			<tr mat-row *matRowDef="let row; columns: columns;"></tr>
+		</table>
+	</div>
 
 </div>
