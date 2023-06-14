@@ -1,38 +1,56 @@
-<h1>Создание сеанса</h1>
-<form [formGroup]="form" class="form">
+<div>
+	<h3>Создание сеанса</h3>
+</div>
+<form [formGroup]="form" class="form" mat-dialog-content>
 
-	<mat-form-field appearance="fill">
+	<mat-form-field>
 		<mat-label>Выберите представление</mat-label>
 		<mat-select formControlName="showId">
 		  <mat-option *ngFor="let show of shows" [value]="show.id">
 			{{ show.title }}
 		  </mat-option>
 		</mat-select>
+		<mat-error>
+			<val-errors controlName="showId"></val-errors>
+		</mat-error>
 	</mat-form-field>
 
-	<mat-form-field appearance="fill">
+	<mat-form-field>
 		<mat-label>Укажите дату</mat-label>
 		<input 
-		matInput [min]="today" 
-		[matDatepicker]="picker" 
-		formControlName="date">
+			matInput [min]="today" 
+			[matDatepicker]="picker" 
+			formControlName="date">
 		<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
 		<mat-datepicker #picker></mat-datepicker>
+
+		<mat-error>
+			<val-errors controlName="date"></val-errors>
+		</mat-error>
 	</mat-form-field>
 
-	<mat-form-field appearance="fill">
+	<mat-form-field>
 		<mat-label>Выберите время</mat-label>
 		<mat-select formControlName="time">
 		  <mat-option *ngFor="let time of timeslots" [value]="time">
 			{{ time }}
 		  </mat-option>
 		</mat-select>
+
+		<mat-error>
+			<val-errors controlName="time"></val-errors>
+		</mat-error>
 	</mat-form-field>
 
 	<mat-form-field>
+		<mat-label>Адрес</mat-label>
 		<input 
-		formControlName="address"
-		matInput placeholder="Адрес" value="">
+		matInput
+		formControlName="address">
+
+		<mat-error>
+			<val-errors controlName="address"></val-errors>
+		</mat-error>
 	</mat-form-field>
 
 	<div class="message-box">
@@ -40,7 +58,9 @@
 	</div>
 
 	<div class="footer">
-		<button (click)="cancel()">Отмена</button>
-		<button (click)="submit()">Создать</button>
+		<button mat-flat-button (click)="cancel()">Отмена</button>
+		<button mat-flat-button
+		color="accent"
+		(click)="submit()">Создать</button>
 	</div>
 </form>

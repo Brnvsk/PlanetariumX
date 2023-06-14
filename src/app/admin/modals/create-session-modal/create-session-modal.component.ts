@@ -33,7 +33,6 @@ export class CreateSessionModalComponent {
   ) {
     const { shows } = data
     this.shows = shows
-    console.log(shows);
     
     this.form = this.fb.group({
       showId: ['', Validators.required],
