@@ -42,30 +42,33 @@
 
 
 }
-::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
-  border-radius: 30px !important;
-  width: 550px;
-  height: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-::ng-deep .mat-mdc-dialog-container .mdc-dialog__content {
-  display: flex;
-  justify-content: center;
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
-  letter-spacing: 2px;
-  line-height: 40px;
-  font-size: 30px;
-  padding: 0 40px 0 40px;
-}
-::ng-deep .mat-mdc-raised-button:not(:disabled) {
-  width: 400px;
-  color: #000000 !important;
-  background-color: #6858DC !important;
-  height: 40px;
-  font-weight:bold;
+
+:host {
+  ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 30px !important;
+    width: 550px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  ::ng-deep .mat-mdc-dialog-container .mdc-dialog__content {
+    display: flex;
+    justify-content: center;
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+  ::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
+    letter-spacing: 2px;
+    line-height: 40px;
+    font-size: 30px;
+    padding: 0 40px 0 40px;
+  }
+  ::ng-deep .mat-mdc-raised-button:not(:disabled) {
+    width: 400px;
+    color: #000000 !important;
+    background-color: #6858DC !important;
+    height: 40px;
+    font-weight:bold;
+  }
 }
