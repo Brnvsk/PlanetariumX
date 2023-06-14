@@ -76,62 +76,64 @@ section {
     .video-wrapper-title {
         font-size: 24px;
     }
-    .info-cards {
+}
+
+.info-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 100px;
+    padding-bottom: 100px;
+    .info-card {
+        width: 32%;
+        min-height: 400px;
+        background-color: #171921;
+        border-radius: 20px;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-top: 100px;
-        padding-bottom: 100px;
-        .info-card {
-            width: 32%;
-            min-height: 400px;
-            background-color: #171921;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            span {
-                left: 0;
-                padding: 0 20px;
-                font-size: 18px;
-            }
-        }
-        .Human {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            background-color: #E7D795;
-            color: #000000;
-            font-family: "ttTravel-medium";
-            #RunningHuman {
-                position: absolute;
-                bottom: 40%;
-            }
-            span {
-                position: absolute;
-                top: 65%;
-                font-family: "ttTravel-medium";
-            }
-        }
-        .UFO,
-        .Telescope {
-            position: relative;
-            display: flex;
-            justify-content: start;
-            img {
-                width: 100%;
-            }
-            span {
-                position: absolute;
-                top: 65%;
-            }
-        }
-        .Telescope>img {
-            padding-top: 15px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        span {
+            left: 0;
+            padding: 0 20px;
+            font-size: 18px;
         }
     }
+    .Human {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        background-color: #E7D795;
+        color: #000000;
+        font-family: "ttTravel-medium";
+        #RunningHuman {
+            position: absolute;
+            bottom: 40%;
+        }
+        span {
+            position: absolute;
+            top: 65%;
+            font-family: "ttTravel-medium";
+        }
+    }
+    .UFO,
+    .Telescope {
+        position: relative;
+        display: flex;
+        justify-content: start;
+        img {
+            width: 100%;
+        }
+        span {
+            position: absolute;
+            top: 65%;
+        }
+    }
+    .Telescope>img {
+        padding-top: 15px;
+    }
 }
+
 .rental-wrapper {
     height: 600px;
     display: flex;
@@ -140,6 +142,12 @@ section {
     padding-bottom: 100px;
     .rental-wrapper-title {
         padding-bottom: 30px;
+    }
+    &-link {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        color: #fff;
     }
     .rental-more {
         display: flex;
@@ -328,35 +336,72 @@ button {
     }
 }
 
-// @media all and (max-width: 1250px) {
-//     .nearAccordion {
-//         max-width: 400px;
-//         width: 30%;
-//     }
-//     .questions-content-accordion {
-//         width: 70%;
-//     }
-// }
+// MEDIA
 
-// @media only screen and (max-width: 1200px) {
-//     .leftside {
-//         .title {
-//             font-size: 50px;
-//         }
-//     }
-//     .rental-wrapper {
-//         height: 550px;
-//         padding-bottom: 50px;
-//     }
-
-//     .info-card {
-//         min-height: 300px;
-//     }
-// }
-@media (max-width: 1000px) {
-    body {
-        display: none;
+@media (max-width: 1250px) {
+    .nearAccordion {
+        max-width: 400px;
+        width: 30%;
     }
+
+    .view-wrapper {
+        width: 100%;
+        .leftside {
+            width: 48%;
+            .title {
+                font-size: 64px;
+                line-height: 1;
+            }
+        }
+
+        .rightside {
+            width: 48%;
+        }
+    }
+
+    .rental-wrapper {
+
+        .rental-slides {
+            .rental-slide {
+                width: 24%;
+            }
+        }
+    }
+
+    .news-wrapper {
+
+        .news {
+            justify-content: flex-start;
+            gap: 20px;
+            .news-item {
+                width: calc(33% - 20px);
+                min-width: unset;
+
+                h1 {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .leftside {
+        .title {
+            font-size: 50px;
+        }
+    }
+    .rental-wrapper {
+        height: 550px;
+        padding-bottom: 50px;
+    }
+
+    .info-card {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 1000px) {
     .info-cards {
         min-height: 200px;
     }
@@ -369,39 +414,185 @@ button {
         padding-right: 10px;
     }
 
-    .leftside {
-        .title {
-            font-size: 42px;
+    .view-wrapper {
+        .leftside {
+            .title {
+                font-size: 54px;
+            }
+        }
+    }
+
+    .info-cards {
+        margin-top: 40px;
+
+        .info-card {
+            min-height: 300px;
+        }
+    }
+
+    .news-wrapper {
+
+        .news {
+            gap: 10px;
+            .news-item {
+                width: calc(50% - 10px);
+
+                img {
+                    height: 140px;
+                }
+
+                p {
+                    -webkit-line-clamp: 4;
+                }
+            }
+        }
+    }
+
+    .videos {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+
+        .video {
+            width: 300px;
+            max-width: unset; 
         }
     }
 }
 
+@media (max-width: 900px) {
+    .customQuestion-content {
+        width: 40%;
+    }
+}
 
-// @media (max-width: 900px) {
-//     .customQuestion-content {
-//         width: 40%;
-//     }
-// }
+@media (max-width: 800px) {
+    .nearAccordion {
+        display: none;
+    }
 
-// @media (max-width: 800px) {
-//     .nearAccordion {
-//         display: none;
-//     }
-//     .questions-content-accordion {
-//         width: 100%;
-//     }
-// }
+    .questions-wrapper {
+        .questions-content {
+            .questions-content-accordion {
+                width: 100%;
+            }
+        }
+    }
 
-// @media (max-width: 721px) {
-//     .rightside {
-//         img {
-//             display: none;
-//         }
-//     }
-//     .info-wrapper {
-//         display: none;
-//     }
-//     .rental-wrapper {
-//         padding-top: 20px;
-//     }
-// }
+
+    .rental-wrapper {
+        height: auto;
+        .rental-slides {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            height: auto;
+        
+            .rental-slide {
+                width: 240px;
+            }
+        }
+    }
+}
+
+@media (max-width: 721px) {
+    .rightside {
+       
+    }
+    
+    .rental-wrapper {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .view-wrapper {
+        .leftside {
+            .title {
+                font-size: 42px;
+            }
+        }
+    }
+    
+    .info-cards {
+        margin-top: 30px;
+
+        .info-card {
+            min-height: 240px;
+
+            #RunningHuman {
+                height: 160px;
+            }
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .info-cards {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        
+        .info-card {
+            width: 40%;
+
+            span {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .rental-wrapper {
+        .rental-slides {
+        
+            .rental-slide {
+                width: 200px;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .view-wrapper {
+        .leftside {
+            width: 100%;
+            .title {
+                font-size: 48px;
+            }
+        }
+        .rightside {
+            display: none;
+        }
+    }
+
+    .info-cards {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        
+        .info-card {
+            width: 90%;
+            min-height: 180px;
+
+            img {
+                height: 100px;
+                object-fit: contain;
+            }
+
+            span {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .news-wrapper {
+
+        .news {
+            gap: 10px;
+            .news-item {
+                width: 100%;
+
+            }
+        }
+    }
+}

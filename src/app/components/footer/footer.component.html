@@ -1,12 +1,13 @@
 <footer>
 
     <div class="wrapperContent">
-        <div class="footer-logo"><img src="assets/images/logo.svg" alt=""></div>
+        <a routerLink="/main/app" class="footer-logo">
+            <img src="assets/images/logo.svg" alt="">
+        </a>
         <div class="footer-navigation">
-            <a id="first">Сеансы</a>
-            <a>О нас</a>
-            <a>Новости</a>
-            <a id="last">Игры</a>
+            <a routerLink="/main/app/sessions" id="first">Сеансы</a>
+            <a routerLink="/main/app/news">Новости</a>
+            <a routerLink="/main/app/games" id="last">Игры</a>
         </div>
         <div class="footer-icons">
             <img src="assets/images/facebook.png" alt="#">

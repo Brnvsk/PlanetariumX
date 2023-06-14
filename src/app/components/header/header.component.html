@@ -29,27 +29,24 @@
 
     </div>
     <div class="burger">
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <a mat-menu-item 
+            id="first" 
+            routerLink="/main/app/sessions" >Сеансы</a>
+        
+            <a mat-menu-item 
+            routerLink="/main/app/news">Новости</a>
 
-        <a id="first"  routerLink="/app/sessions" (click)="changeProgress($event)" >Сеансы</a>
-      </button>
-            <button mat-menu-item>
+            <!-- 
+            <div mat-menu-item>
+                <a id="last">Игры</a>
+            </div> -->
 
-        <a routerLink="/app/about" (click)="changeProgress($event)">О нас</a>
-      </button>
-            <button mat-menu-item>
-
-        <a routerLink="/app/news" (click)="changeProgress($event)">Новости</a>
-      </button>
-            <button mat-menu-item>
-
-        <a id="last" (click)="changeProgress($event)">Игры</a>
-      </button>
             <button mat-menu-item *ngIf="userRoles === roleUsers.NONAME; else flagLogin" (click)="login()">Вход</button>
+
             <ng-template #flagLogin>
                 <button mat-menu-item (click)="personal()">Кабинет</button>
             </ng-template>

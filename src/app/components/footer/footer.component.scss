@@ -47,20 +47,16 @@
       width: 100%;
       a {
         cursor: pointer;
-      }
-
-      a:hover {
-        color: #6858DC;
+        color: #fff;
       }
     }
 
   }
-
-
 }
+
 @media (max-width:1000px) {
 
   .wrapperContent {
-    width: 100% !important;
+    width: 100%;
   }
 }

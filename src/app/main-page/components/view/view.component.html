@@ -42,8 +42,10 @@
     <div class="rental-wrapper">
         <span class="rental-wrapper-title">Сейчас в планетарии</span>
         <div class="rental-more">
-            <img src="assets/images/calendar.png" alt="">
-            <span>Расписание сеансов</span>
+            <a routerLink="/main/app/sessions" class="rental-wrapper-link">
+                <img src="assets/images/calendar.png" alt="">
+                <span>Расписание сеансов</span>
+            </a>
         </div>
         <div class="rental-slides">
             <div class="rental-slide" *ngFor="let show of shows">

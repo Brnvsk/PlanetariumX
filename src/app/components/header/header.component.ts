@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   personal(): void {
-    this.router.navigate(['personal']);
+    this.router.navigate(['/main/personal']);
   }
 
 }
