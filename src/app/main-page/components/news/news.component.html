@@ -20,7 +20,7 @@
         </form>
     </div>
     <div class="wrapper-content">
-        <div class="news-container">
+        <div class="news-container" *ngIf="news.length > 0; else noItems">
             <div 
             (click)="openNewsModal(item)"
             class="news-item" *ngFor="let item of news">
@@ -42,3 +42,7 @@
         </div>
     </div>
 </div>
+
+<ng-template #noItems>
+    <p>Нет результатов.</p>
+</ng-template>
