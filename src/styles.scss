@@ -99,3 +99,9 @@ val-errors div {
     display: inline;
     font-size: 12px;
 }
+
+@media (max-width: 480px) {
+    .cdk-overlay-pane {
+        max-width: 98vw !important;
+    }
+}

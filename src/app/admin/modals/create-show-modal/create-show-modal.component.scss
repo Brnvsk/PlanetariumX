@@ -45,3 +45,9 @@ textarea {
 mat-error {
     font-size: 12px;
 }
+
+@media (max-width: 480px) {
+	:host {
+		min-width: 300px;
+	}
+}

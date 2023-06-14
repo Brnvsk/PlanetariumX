@@ -19,3 +19,9 @@
 .show-name {
 	color: #fff;
 }
+
+@media (max-width: 480px) {
+	:host {
+		min-width: 300px;
+	}
+}

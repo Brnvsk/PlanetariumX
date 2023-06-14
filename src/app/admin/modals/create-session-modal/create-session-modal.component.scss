@@ -15,3 +15,9 @@
 	font-size: 12px;
 	color: tomato;
 }
+
+@media (max-width: 480px) {
+	:host {
+		min-width: 300px;
+	}
+}
