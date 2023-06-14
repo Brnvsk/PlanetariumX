@@ -23,6 +23,7 @@
     "cloc": "^1.96.0-cloc",
     "date-fns": "^2.29.3",
     "jquery": "^3.6.4",
+    "ngx-valdemort": "^9.0.0",
     "rxjs": "~7.8.0",
     "three": "^0.152.2",
     "tslib": "^2.3.0",

@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { NewsContentModalComponent } from './components/modals/news-content-modal/news-content-modal.component';
 import { SharedModule } from './shared/shared.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { ValdemortModule } from 'ngx-valdemort';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    ValdemortModule,
   ],
   providers: [
     AuthService,

@@ -1,1 +1,13 @@
 <router-outlet></router-outlet>
+
+<val-default-errors>
+	<ng-template valError="required">
+		Обязательное поле
+	</ng-template>
+	<ng-template valError="min">
+		Выход за минимальное значение
+	</ng-template>
+	<ng-template valError="max">
+		Превышено максимальное значение
+	</ng-template>
+</val-default-errors>

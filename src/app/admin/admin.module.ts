@@ -17,7 +17,7 @@ import { AdminSessionsComponent } from './components/admin-sessions/admin-sessio
 import { CreateSessionModalComponent } from './modals/create-session-modal/create-session-modal.component';
 import { UpdateSessionModalComponent } from './modals/update-session-modal/update-session-modal.component';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateNewsModalComponent } from './modals/create-news-modal/create-news-modal.component';
 import { UpdateNewsModalComponent } from './modals/update-news-modal/update-news-modal.component';
@@ -26,6 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AdminTagsComponent } from './components/admin-tags/admin-tags.component';
 import { CreateTagModalComponent } from './modals/create-tag-modal/create-tag-modal.component';
 import { UpdateTagModalComponent } from './modals/update-tag-modal/update-tag-modal.component';
+import { ValdemortModule } from 'ngx-valdemort';
 
 
 @NgModule({
@@ -56,11 +57,14 @@ import { UpdateTagModalComponent } from './modals/update-tag-modal/update-tag-mo
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatFormFieldModule,
     SharedModule,
     MatButtonModule,
+    ValdemortModule,
   ],
   providers: [  
     MatDatepickerModule,  
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
   ],
 })
 export class AdminModule { }

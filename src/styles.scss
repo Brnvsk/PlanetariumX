@@ -12,9 +12,9 @@ body {
 
 body {
 
-    .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
-        height: 28px;
-    }
+    // .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+    //     height: 28px;
+    // }
 
     .mat-date-range-input-container {
         height: 100%;
@@ -93,4 +93,9 @@ a {
 
 .section-title {
     color: var(--secondary);
+}
+
+val-errors div {
+    display: inline;
+    font-size: 12px;
 }

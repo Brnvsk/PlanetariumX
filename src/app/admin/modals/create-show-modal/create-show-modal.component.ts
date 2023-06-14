@@ -14,6 +14,7 @@ import { IShow } from 'src/app/types/show.types';
 export class CreateShowModalComponent implements OnInit {
   public api = apiUrl
   public form;
+  public posterTouched = false;
 
   constructor(
     private fb: FormBuilder,
@@ -49,10 +50,10 @@ export class CreateShowModalComponent implements OnInit {
       console.warn('No file.');
       return;
     }
-   
     this.http.post<{ filename?: string, secureUrl: string }>(`${ApiRoutes.upload}`, formData)
       .subscribe(res => {
         this.form.controls.posterPath.setValue(res.secureUrl)
+        this.posterTouched = true;
       })
   }
 
