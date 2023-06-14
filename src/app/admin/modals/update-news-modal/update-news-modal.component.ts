@@ -30,6 +30,8 @@ export class UpdateNewsModalComponent {
   ) {    
     const { item, tags } = data;
     this.tags = tags
+    // console.log(tags);
+    
     this.form = this.fb.group({
       title: [item.title, Validators.required],
       text: [item.text.join('\n'), Validators.required],

@@ -14,6 +14,7 @@ table {
 
 .tags-col {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     & span {
         padding: 5px 8px;

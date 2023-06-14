@@ -1,20 +1,22 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiRoutes } from 'src/app/config/network.config';
 import { NewsService } from 'src/app/services/news.service';
 import { INewsTag } from 'src/app/types/news.types';
 import { UpdateTagModalComponent } from '../../modals/update-tag-modal/update-tag-modal.component';
 import { CreateTagModalComponent } from '../../modals/create-tag-modal/create-tag-modal.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-tags',
   templateUrl: './admin-tags.component.html',
   styleUrls: ['./admin-tags.component.scss']
 })
-export class AdminTagsComponent {
+export class AdminTagsComponent implements OnInit, OnDestroy {
   public tags: INewsTag[] = []
   public columns = ['id', 'name', 'actions']
+  public subs: Subscription[] = []
 
   constructor(
     private newsService: NewsService,
@@ -25,9 +27,14 @@ export class AdminTagsComponent {
   }
   
   ngOnInit(): void {
-    this.newsService.tags$.subscribe(tags => {
+    const newsTagsSub = this.newsService.tags$.subscribe(tags => {
       this.tags = tags
     })
+    this.subs.push(newsTagsSub)
+  }
+
+  ngOnDestroy(): void {
+      this.subs.forEach(s => s.unsubscribe())
   }
 
   public create() {
@@ -60,6 +67,7 @@ export class AdminTagsComponent {
         const newItems = this.tags.slice()
         newItems.splice(indexUpdated, 1, res.item)
         this.tags = newItems.slice()
+        this.newsService.loadTags()
       }
     })
   }

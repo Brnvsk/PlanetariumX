@@ -16,8 +16,8 @@ export class AdminComponent {
     private router: Router,
   ) {}
 
-  public goBack() {
-    this.location.back()
+  public exitAdminPanel() {
+    this.router.navigateByUrl('/main/app')
   }
 
   public logout() {

@@ -57,11 +57,12 @@
             &::after {
                 content: '';
                 position: absolute;
-                bottom: 0;
+                bottom: -4px;
                 right: 0;
                 width: 0%;
-                height: 2px;
-                background-color: var(--secondary);
+                height: 3px;
+                background: var(--secondary);
+                background: linear-gradient(45deg, var(--secondary) 0%, #8b57e3 100%);
                 border-radius: 10px;
                 transition: .2s;
                 z-index: -1;

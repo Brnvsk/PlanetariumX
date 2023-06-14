@@ -1,22 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiRoutes, apiUrl } from 'src/app/config/network.config';
 import { NewsService } from 'src/app/services/news.service';
-import { INews } from 'src/app/types/news.types';
+import { INews, INewsTag } from 'src/app/types/news.types';
 import { UpdateNewsModalComponent } from '../../modals/update-news-modal/update-news-modal.component';
 import { CreateNewsModalComponent } from '../../modals/create-news-modal/create-news-modal.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-news',
   templateUrl: './admin-news.component.html',
   styleUrls: ['./admin-news.component.scss']
 })
-export class AdminNewsComponent {
+export class AdminNewsComponent implements OnInit, OnDestroy {
   public api = apiUrl
   public news: INews[] = []
   public columns = ['id', 'title', 'tags', 'photo', 'actions']
-  public tags = this.newsService.tags
+  public tags: INewsTag[] = []
+  public subs: Subscription[] = []
 
   constructor(
     private newsService: NewsService,
@@ -31,9 +33,14 @@ export class AdminNewsComponent {
       this.news = res.data
     })    
 
-    this.newsService.tags$.subscribe(tags => {
+    const newsTagsSub = this.newsService.tags$.subscribe(tags => {
       this.tags = tags
     })  
+    this.subs.push(newsTagsSub);
+  }
+
+  ngOnDestroy(): void {
+      this.subs.forEach(s => s.unsubscribe())
   }
 
   public create() {

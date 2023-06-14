@@ -1,9 +1,11 @@
 $secondary: #e7d795;
+$primary: #560fd0;
 $bg: #424242;
 
 :host,
 :root {
     --secondary: #{$secondary};
+    --primary: #{$primary};
     --bg: #{$bg};
 }
 
