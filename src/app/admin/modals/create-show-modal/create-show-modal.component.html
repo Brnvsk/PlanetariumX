@@ -44,7 +44,9 @@
             <img class="poster-preview" [src]="form.value.posterPath" alt="">
         </div>
         <label class="file-input-wrapper">
-            <input (change)="onAddImage($event)" type="file" class="file-input" accept="image/jpeg, image/png, image/jpg, image/gif" />
+            <input (change)="onAddImage($event)" 
+            type="file" 
+            class="file-input" accept="image/jpeg, image/png, image/jpg, image/gif" />
             <span class="file-input-btn">Выбрать</span>
         </label>
         <mat-error *ngIf="form.get('posterPath')?.hasError('required') && posterTouched">

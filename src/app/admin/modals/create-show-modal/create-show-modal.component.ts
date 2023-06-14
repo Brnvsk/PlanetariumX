@@ -64,6 +64,7 @@ export class CreateShowModalComponent implements OnInit {
   }
 
   public submit() {
+    this.posterTouched = true;
     if (this.form.invalid) {
       return;
     }

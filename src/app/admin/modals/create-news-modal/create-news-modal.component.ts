@@ -19,6 +19,7 @@ interface DialogData {
 export class CreateNewsModalComponent {
   public api = apiUrl
   public form;
+  public posterTouched = false;
 
   public tags: INewsTag[]
 
@@ -61,6 +62,7 @@ export class CreateNewsModalComponent {
     this.http.post<{ filename?: string, secureUrl: string }>(`${ApiRoutes.upload}`, formData)
       .subscribe(res => {
         this.form.controls.photo.setValue(res.secureUrl)
+        this.posterTouched = true;
         // this.form.controls.photo.setValue(res.filename)
       })
   }
@@ -72,15 +74,17 @@ export class CreateNewsModalComponent {
   }
 
   public submit() {
+    this.form.markAllAsTouched();
+    this.posterTouched = true;
     if (this.form.invalid) {
       return;
     }
 
-    const { title, text, photo, tags } = this.form.value
-
+    const { title, text, photo } = this.form.value
+    let { tags } = this.form.value
+    tags = tags?.filter(Boolean) 
     this.http.post<{ created: INews }>(`${ApiRoutes.news}`, {
-      title, text, photo,
-      tags,
+      title, text, photo, tags,
     })
       .subscribe({
         next: res => {

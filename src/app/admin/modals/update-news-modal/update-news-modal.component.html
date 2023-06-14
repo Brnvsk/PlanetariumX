@@ -1,31 +1,59 @@
-<form [formGroup]="form" class="form">
+<div>
+    <h3>Обновление новости</h3>
+</div>
+<form [formGroup]="form" class="form" mat-dialog-content>
 
-    <input formControlName="title" type="text" placeholder="Заголовок">
+    <mat-form-field>
+        <mat-label>Заголовок</mat-label>
+        <input
+        matInput
+        formControlName="title" type="text">
+        <mat-error>
+            <val-errors controlName="title"></val-errors>
+        </mat-error>
+    </mat-form-field>
 
-    <textarea formControlName="text" rows="12" cols="30" placeholder="Текст">
-	</textarea>
+    <mat-form-field>
+        <mat-label>Текст</mat-label>
+        <textarea 
+        matInput
+        formControlName="text" rows="12" cols="30">
+        </textarea>
+        <mat-error>
+            <val-errors controlName="text"></val-errors>
+        </mat-error>
+    </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field>
         <mat-label>Теги</mat-label>
         <mat-select formControlName="tags" multiple>
-            <mat-option *ngFor="let tag of tags" [value]="tag.id">
+            <mat-option *ngFor="let tag of tags " [value]="tag.id">
                 {{ tag.name }}
             </mat-option>
         </mat-select>
     </mat-form-field>
 
-    <ng-container *ngIf="form.value.photo">
-        <img class="poster-preview" [src]="form.value.photo" alt="">
-        <!-- <img class="poster-preview" [src]="(api + '/news/' + form.value.photo) | safeUrl" alt=""> -->
-    </ng-container>
-
     <div class="file-upload">
-        <p>Drag & drop photos here or <span class="browse">Browse</span></p>
-        <input (change)="onAddImage($event)" type="file" class="file-input" accept="image/jpeg, image/png, image/jpg, image/gif" />
+        <span>Обложка к новости</span>
+        <ng-container *ngIf="form.value.photo">
+            <img class="poster-preview" [src]="form.value.photo" alt="">
+            <!-- <img class="poster-preview" [src]="(api + '/news/' + form.value.photo) | safeUrl" alt=""> -->
+        </ng-container>    
+        <label class="file-input-wrapper">
+            <input (change)="onAddImage($event)" type="file" 
+            class="file-input" 
+            accept="image/jpeg, image/png, image/jpg, image/gif" />
+            <span class="file-input-btn">Выбрать</span>
+        </label>
+        <mat-error *ngIf="form.get('photo')?.hasError('required') && posterTouched">
+            Необходимо загрузить обложку
+        </mat-error>
     </div>
 
     <div class="footer">
-        <button (click)="cancel()">Отмена</button>
-        <button (click)="submit()">Обновить</button>
+        <button mat-flat-button (click)="cancel()">Отмена</button>
+        <button mat-flat-button
+        color="accent"
+        (click)="submit()">Обновить</button>
     </div>
 </form>

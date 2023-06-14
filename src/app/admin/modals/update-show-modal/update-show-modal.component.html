@@ -1,27 +1,91 @@
-<form [formGroup]="form" class="form">
+<h3>
+    Обновление представления
+</h3>
+<form [formGroup]="form" class="form" mat-dialog-content>
 
-    <input formControlName="title" type="text" placeholder="Название">
+    <mat-form-field appearance="fill">
+        <mat-label>Название</mat-label>
+        <input 
+            matInput 
+            formControlName="title" 
+            required
+            type="text">
+        <mat-error>
+            <val-errors controlName="title"></val-errors>
+        </mat-error>
+    </mat-form-field>
 
-    <textarea formControlName="descr" rows="12" cols="30" placeholder="Описание"></textarea>
+    <mat-form-field>
+        <mat-label>Описание</mat-label>
+        <textarea matInput 
+        formControlName="descr" 
+        rows="5" 
+        cols="30" 
+        required></textarea>
+        <mat-error>
+            <val-errors controlName="descr"></val-errors>
+        </mat-error>
+    </mat-form-field>
 
-    <input formControlName="price" type="number" placeholder="Цена билета" step="5" min="0" max="1000">
-
-    <ng-container *ngIf="form.value.posterPath">
-        <img class="poster-preview" [src]="form.value.posterPath" alt="">
-        <!-- <img class="poster-preview" [src]="(api + '/posters/' + form.value.posterPath) | safeUrl" alt=""> -->
-    </ng-container>
+    <mat-form-field>
+        <mat-label>Цена билета</mat-label>
+        <input 
+        matInput
+        required
+        formControlName="price" type="number" step="5" min="0" max="500">
+        <mat-error>
+            <val-errors controlName="price"></val-errors>
+        </mat-error>
+    </mat-form-field>
 
     <div class="file-upload">
-        <p>Drag & drop photos here or <span class="browse">Browse</span></p>
-        <input (change)="onAddImage($event)" type="file" class="file-input" accept="image/jpeg, image/png, image/jpg, image/gif" />
+        <span>Выберите обложку</span>
+        <div *ngIf="form.value.posterPath">
+            <img class="poster-preview" [src]="form.value.posterPath" alt="">
+        </div>
+        <label class="file-input-wrapper">
+            <input (change)="onAddImage($event)" type="file" class="file-input" accept="image/jpeg, image/png, image/jpg, image/gif" />
+            <span class="file-input-btn">Выбрать</span>
+        </label>
+        <mat-error *ngIf="form.get('posterPath')?.hasError('required')">
+            Необходимо загрузить обложку
+        </mat-error>
     </div>
 
-    <input formControlName="director" type="text" placeholder="Режиссер">
+    <mat-form-field>
+        <mat-label>
+            Режиссер
+        </mat-label>
+        <input 
+        matInput
+        required
+        formControlName="director" type="text">
+        <mat-error>
+            <val-errors controlName="director"></val-errors>
+        </mat-error>
+    </mat-form-field>
+    
 
-    <input formControlName="country" type="text" placeholder="Страна">
+    <mat-form-field>
+        <mat-label>
+            Страна
+        </mat-label>
+        <input 
+        matInput
+        required
+        formControlName="country" type="text">
+        <mat-error>
+            <val-errors controlName="country"></val-errors>
+        </mat-error>
+    </mat-form-field>
 
     <div class="footer">
-        <button (click)="cancel()">Отмена</button>
-        <button (click)="submit()">Обновить</button>
+        <button 
+        mat-flat-button
+        (click)="cancel()">Отмена</button>
+        <button 
+        mat-flat-button
+        color="accent"
+        (click)="submit()">Обновить</button>
     </div>
 </form>
